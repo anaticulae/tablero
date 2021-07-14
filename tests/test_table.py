@@ -119,13 +119,9 @@ def test_table_extract_negative():
         id='bachelor63_singletable',
     ),
 ])
-@utilatest.requires(power.BACHELOR056_PDF)  # TODO: MERGE LATER
-@utilatest.requires(power.BACHELOR063_PDF)
-@utilatest.requires(power.BACHELOR090_PDF)
-@utilatest.requires(power.DOCU07_PDF)
-@utilatest.requires(power.DOCU13_PDF)
 @utilatest.longrun
 def test_detect_table_single(source, pages, expected, testdir, monkeypatch):
+    utilatest.fixture_requires(source)
     utila.file_copy(source, os.path.join(testdir.tmpdir, 'table'))
     source = power.link(source)
     with monkeypatch.context() as context:
