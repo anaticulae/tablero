@@ -7,23 +7,22 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import functools
-
-import utilatest
+import utila
 
 import tablero
-import tablero.cli
 
-run = functools.partial(  # pylint:disable=C0103
-    utilatest.run_command,
-    main=tablero.cli.main,
-    process=tablero.PROCESS,
-    success=True,
-)
 
-failure = functools.partial(  # pylint:disable=C0103
-    utilatest.run_command,
-    main=tablero.cli.main,
-    process=tablero.PROCESS,
-    success=False,
-)
+def table(path: str, prefix: str = '') -> str:
+    """Path to extraction result of tablero --table step.
+    >>> table('/data/resources')
+    '/data/resources/tablero__table_table.yaml'
+    """
+    return utila.pathconnector(path, tablero.PROCESS, 'table_table', prefix)
+
+
+def figure(path: str, prefix: str = '') -> str:
+    """Path to extraction result of tablero --figure step.
+    >>> figure('/data/resources')
+    '/data/resources/tablero__figure_figure.yaml'
+    """
+    return utila.pathconnector(path, tablero.PROCESS, 'figure_figure', prefix)

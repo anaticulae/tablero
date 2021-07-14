@@ -7,23 +7,12 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import functools
+import operator
 
-import utilatest
 
-import tablero
-import tablero.cli
-
-run = functools.partial(  # pylint:disable=C0103
-    utilatest.run_command,
-    main=tablero.cli.main,
-    process=tablero.PROCESS,
-    success=True,
-)
-
-failure = functools.partial(  # pylint:disable=C0103
-    utilatest.run_command,
-    main=tablero.cli.main,
-    process=tablero.PROCESS,
-    success=False,
-)
+def sort_leftright_topdown(items):
+    # left to right
+    items = sorted(items, key=operator.itemgetter(0))
+    # top down
+    items = sorted(items, key=operator.itemgetter(3))
+    return items

@@ -7,23 +7,22 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import functools
+import sys
 
-import utilatest
+import camelot.handlers
 
-import tablero
-import tablero.cli
 
-run = functools.partial(  # pylint:disable=C0103
-    utilatest.run_command,
-    main=tablero.cli.main,
-    process=tablero.PROCESS,
-    success=True,
-)
+def __init__(self, filepath, pages="1", password=None):
+    self.filepath = filepath
 
-failure = functools.partial(  # pylint:disable=C0103
-    utilatest.run_command,
-    main=tablero.cli.main,
-    process=tablero.PROCESS,
-    success=False,
-)
+    if password is None:
+        self.password = ""
+    else:
+        self.password = password
+        if sys.version_info[0] < 3:
+            self.password = self.password.encode("ascii")
+    self.pages = self._get_pages(self.filepath, pages)  # pylint:disable=W0212
+
+
+# disable path check, we know what we do.
+camelot.handlers.PDFHandler.__init__ = __init__

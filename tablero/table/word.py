@@ -1,0 +1,81 @@
+# =============================================================================
+# C O P Y R I G H T
+# -----------------------------------------------------------------------------
+# Copyright (c) 2020-2021 by Helmut Konrad Fahrendholz. All rights reserved.
+# This file is property of Helmut Konrad Fahrendholz. Any unauthorized copy,
+# use or distribution is an offensive act against international law and may
+# be prosecuted under federal law. Its content is company confidential.
+# =============================================================================
+
+import configo
+import iamraw
+import utila
+
+import tablero.cluster
+import tablero.lines
+import tablero.table
+
+# a table must have at least this amount of lines
+TABLE_MIN_LINE_COUNT = configo.HV_INT_PLUS(10)
+
+# tables are build out of vertical and horizontal lines, but only a few
+# cross lines.
+TABLE_MIN_HORIZONTAL_VERTICAL_LINE = configo.HV_PERCENT_PLUS(0.9)
+
+
+@utila.profile('strategy:word')
+def run(lines):
+    grouped = locate_tables(lines)
+    result = judge_tables(grouped)
+    return result
+
+
+def locate_tables(lines):
+    result = []
+    for page in lines:
+        content = page.content
+        # TODO: profile only on --profile
+        # with utila.profile():
+        # #  clustered = divide(content)
+        clustered = divide(content)
+        result.append((page.page, clustered))
+    return result
+
+
+def judge_tables(grouped):
+    """This approach handles only very simple word tables, beautiful
+    "latex" tables are not supported because there are build out of
+    single horizontal lines."""
+    result = []
+    for page, clusters in grouped:
+        pageresult = iamraw.PageContentTableBounding(page=page)
+        for item in clusters:
+            if len(item) < TABLE_MIN_LINE_COUNT:
+                continue
+            percentage = tablero.lines.horiverti_percentage(item)
+            if percentage < TABLE_MIN_HORIZONTAL_VERTICAL_LINE:
+                continue
+            avg = tablero.lines.length_avg(item)
+            if avg < tablero.table.TABLE_MIN_AVG_LINE_LENGTH:
+                continue
+            bounding = utila.rectangle_max(item)
+            pageresult.append(
+                iamraw.TableBounding(
+                    bounding=bounding,
+                    lines=item,
+                ))
+        result.append(pageresult)
+    # remove empty pages
+    result = [item for item in result if item.content]
+    return result
+
+
+def divide(items):
+    chunk_size = 50
+    splitted = utila.chunks(items, chunk_size)
+    pre = []
+    for chunk in splitted:
+        clustered = tablero.cluster.run(chunk)
+        pre.extend(clustered)
+    result = tablero.cluster.run(pre)
+    return result

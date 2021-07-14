@@ -7,23 +7,11 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import functools
+import configo
 
-import utilatest
+TABLE_HORIZONTAL_MAX_DIFF = configo.HV_FLOAT_PLUS(default=4.0).value
+TABLE_VERTICAL_MAX_DIFF = configo.HV_FLOAT_PLUS(default=4.0).value
 
-import tablero
-import tablero.cli
-
-run = functools.partial(  # pylint:disable=C0103
-    utilatest.run_command,
-    main=tablero.cli.main,
-    process=tablero.PROCESS,
-    success=True,
-)
-
-failure = functools.partial(  # pylint:disable=C0103
-    utilatest.run_command,
-    main=tablero.cli.main,
-    process=tablero.PROCESS,
-    success=False,
-)
+# tables are buld ouf long lines. The average line length is used to
+# exclude figures etc.
+TABLE_MIN_AVG_LINE_LENGTH = configo.HV_FLOAT_PLUS(40.0)

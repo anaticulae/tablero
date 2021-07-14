@@ -1,29 +1,20 @@
 # =============================================================================
 # C O P Y R I G H T
 # -----------------------------------------------------------------------------
-# Copyright (c) 2020-2021 by Helmut Konrad Fahrendholz. All rights reserved.
+# Copyright (c) 2019-2021 by Helmut Konrad Fahrendholz. All rights reserved.
 # This file is property of Helmut Konrad Fahrendholz. Any unauthorized copy,
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import functools
+import pytest
 
-import utilatest
+import tests
 
-import tablero
-import tablero.cli
 
-run = functools.partial(  # pylint:disable=C0103
-    utilatest.run_command,
-    main=tablero.cli.main,
-    process=tablero.PROCESS,
-    success=True,
-)
-
-failure = functools.partial(  # pylint:disable=C0103
-    utilatest.run_command,
-    main=tablero.cli.main,
-    process=tablero.PROCESS,
-    success=False,
-)
+@pytest.mark.parametrize('command', [
+    '--help',
+])
+def test_tablero_cli_run(command, testdir, monkeypatch):  #pylint: disable=W0613
+    """Run help and version and format command to reach basic test coverage"""
+    tests.run(command, monkeypatch=monkeypatch)

@@ -9,7 +9,15 @@
 
 import os
 
+import tablero.__patch__
+
 __version__ = '0.0.0'
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 PROCESS = 'tablero'
+
+DESCRIPTION = """\
+tablero converts a bunch of lines to the following possible features:
+
+* tables
+"""
