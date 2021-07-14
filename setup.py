@@ -48,4 +48,7 @@ if __name__ == "__main__":
             'tablero.features',
             'tablero.table',
         ],
+        entry_points={
+            'console_scripts': ['tablero = tablero.cli:main'],
+        },
     )
