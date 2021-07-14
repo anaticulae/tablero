@@ -7,8 +7,5 @@
 # be prosecuted under federal law. Its content is company confidential.
 #==============================================================================
 
-utila>=2.40.4<3.0.0
-rawmaker>=2.21.0<3.0.0
-
-# Table Extractor
-camelot_py[cv]>=0.8.2<0.9.0
+utilatest==0.7.1
+power==1.6.0
