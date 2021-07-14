@@ -7,4 +7,43 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import genex
+import power
+import pytest
+
+import tablero
+
 pytest_plugins = ['pytester', 'xdist']  # pylint: disable=invalid-name
+
+PACKAGE = tablero.PROCESS
+WORKER = 6
+
+power.setup(tablero.ROOT)
+
+RESOURCES = [
+    (power.BACHELOR056_PDF, '0:34'),
+    (power.BACHELOR090_PDF, '76:81'),
+    (power.MASTER098_PDF, '53:61'),
+    (power.DOCU13_PDF, None),
+    (power.BOOK007_PDF, None),
+    (power.DOCU07_PDF, None),
+    (power.BACHELOR063_PDF, '24:28'),
+    (power.MASTER112_PDF, '110'),
+]
+
+
+@pytest.mark.usefixtures('session')
+def pytest_sessionstart():
+    power.run()
+
+
+def extract(resources):
+    genex.extract(
+        files=resources,
+        destination=power.generated(),
+        oneline=None,
+        pdfinfo=False,
+        linero=False,
+        worker=WORKER,
+        base=power.REPOSITORY,
+    )
