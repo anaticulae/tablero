@@ -10,6 +10,7 @@
 import power
 import pytest
 import utila
+import utilatest
 
 import tablero.camelox.fork
 import tablero.table.camelox
@@ -22,6 +23,7 @@ def test_camelot_run():
 
 
 @pytest.mark.xfail(reason='adjust camelot strategy')
+@utilatest.longrun
 def test_camelot_forked():
     source = power.DOCU13_PDF
     parsed = tablero.camelox.fork.run(source, worker=4)
