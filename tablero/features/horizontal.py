@@ -80,7 +80,7 @@ def cluster_page(navigator, lines) -> iamraw.TableBoundings:
         return []
 
     boundings = [item.bounding for item in navigator]
-    boundings = sort_leftright_topdown(boundings)
+    boundings = utila.sort_leftright_topdown(boundings)
 
     result = []
     grouped_horizontals = tablero.utils.group_horizontals(horizontals)
@@ -157,11 +157,3 @@ def extract_potential_table(boundings, horizontals, min_elements=2):
         table = utila.rectangle_max((topline, bottomline))
         tables.append(table)
     return tables
-
-
-def sort_leftright_topdown(items):
-    # left to right
-    items = sorted(items, key=operator.itemgetter(0))
-    # top down
-    items = sorted(items, key=operator.itemgetter(3))
-    return items
