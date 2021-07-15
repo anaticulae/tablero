@@ -9,68 +9,15 @@
 
 import os
 
-import iamraw.path
 import power
 import pytest
 import serializeraw
 import utila
 import utilatest
 
-import tablero.cluster
 import tablero.features
-import tablero.features.crossed
-import tablero.features.word
 import tablero.path
 import tests
-
-
-@pytest.mark.parametrize('source, expected', [
-    pytest.param(
-        power.DOCU13_PDF,
-        [1, 3, 3, 5, 2, 5, 6, 4, 5, 3, 1],
-        id='vim',
-    ),
-])
-@utilatest.requires(power.DOCU13_PDF)
-def test_table_extract(source, expected):
-    source = power.link(source)
-    source = iamraw.path.line(source)
-    loaded = serializeraw.load_lines(source)
-    # add empty lines, cause pages without lines will be ignored, we
-    # require this to check extraction result properly.
-    loaded.insert(0, iamraw.PageContentLine(page=0, content=[]))
-    tables = tablero.features.crossed.run(loaded)
-
-    flat = [len(item.content) for item in tables]
-    assert flat == expected
-
-
-@utilatest.requires(power.DOCU13_PDF)
-def test_table_dump_and_load():
-    source = iamraw.path.line(power.link(power.DOCU13_PDF))
-    loaded = serializeraw.load_lines(source, pages=(0, 1, 2))
-    grouped = tablero.features.word.locate_tables(loaded)
-    tables = tablero.features.word.judge_tables(grouped)
-
-    dumped = serializeraw.dump_tables(tables)
-    loaded = serializeraw.load_tables(dumped)
-    assert loaded == tables
-
-
-@utilatest.longrun
-@utilatest.requires(power.BOOK007_PDF)
-def test_table_extract_negative(testdir, monkeypatch):
-    book = power.BOOK007_PDF
-    # copy pdffile
-    source = power.link(book)
-    utila.file_copy(book, os.path.join(testdir.tmpdir, 'table'))
-    # run cli
-    tests.run(f'-i {source} -i {testdir.tmpdir}', monkeypatch=monkeypatch)
-    # load result
-    tables = tablero.path.decide(testdir.tmpdir)
-    loaded = serializeraw.load_tables(tables)
-    loaded = [item for item in loaded if item.content]
-    assert not loaded, str(loaded)
 
 
 @pytest.mark.parametrize('source, pages, expected', [
@@ -151,7 +98,6 @@ def test_detect_table_bachelor90_page80(testdir, monkeypatch):
 
     tables = tablero.path.decide(testdir.tmpdir)
     loaded = serializeraw.load_tables(tables)[0].content
-
     assert len(loaded) == 1
 
 
@@ -159,13 +105,9 @@ def test_detect_table_bachelor90_page80(testdir, monkeypatch):
 def test_detect_table_master98_page54_60(testdir, monkeypatch):
     source = power.link(power.MASTER098_PDF)
     pages = '54:62'
-    tests.run(
-        f'-i {source} --pages={pages}',
-        monkeypatch=monkeypatch,
-    )
+    tests.run(f'-i {source} --pages={pages}', monkeypatch=monkeypatch)
 
     tables = tablero.path.decide(testdir.tmpdir)
-
     loaded = serializeraw.load_tables(tables)
 
     assert len(utila.select_content(loaded, 54)) == 1
