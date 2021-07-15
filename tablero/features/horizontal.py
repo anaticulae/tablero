@@ -21,14 +21,18 @@ import tablero.utils
 def work(
     text: str,
     textposition: str,
+    sizeandborder: str,
+    headerfooter: str,
     lines: str,
     pages: tuple = None,
 ) -> str:
     lines = serializeraw.load_lines(lines, pages=pages)
     lines = tablero.utils.limit_lines(lines)
-    navigators = serializeraw.create_pagetextnavigators_fromfile(
+    navigators = serializeraw.create_pagetextcontentnavigators_fromfile(
         text,
         textposition,
+        sizeandborderpath=sizeandborder,
+        headerfooterpath=headerfooter,
         pages=pages,
     )
     # run strategy
