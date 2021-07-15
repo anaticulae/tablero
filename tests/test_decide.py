@@ -13,8 +13,8 @@ import serializeraw
 import utila
 import utilatest
 
-import tablero.features
 import tablero.path
+import tablero.utils
 import tests
 
 
@@ -72,7 +72,7 @@ def test_detect_table_single(source, pages, expected, testdir, monkeypatch):
     source = power.link(source)
     with monkeypatch.context() as context:
         # TODO: REMOVE AFTER UPGRADING CLUSTER STRATEGY
-        context.setattr(tablero.features, 'LINES_PER_PAGE_MAX', 180)
+        context.setattr(tablero.utils, 'LINES_PER_PAGE_MAX', 180)
         tests.run(
             f'-i {source} -i {testdir.tmpdir} --pages={pages}',
             monkeypatch=monkeypatch,

@@ -8,33 +8,26 @@
 # =============================================================================
 
 import math
-import operator
 
-import configo
+import iamraw
 import utila
 
+import tablero.config
 import tablero.lines
 
-TABLE_MIN_HEIGHT = 50  # TODO: HOLY VALUE
-# TODO: USE TABLE APROACH
-MAX_SINGLE_LINE_QUOTE = 0.4  # TODO: HOLY VALUE
-
-TABLE_MERGE_DISTANCE = 20  # TODO: HOLY VALUE
-
-TABLE_HORIZONTAL_MAX_DIFF = configo.HV_FLOAT_PLUS(default=4.0).value
-TABLE_VERTICAL_MAX_DIFF = configo.HV_FLOAT_PLUS(default=4.0).value
-
-# tables are buld ouf long lines. The average line length is used to
-# exclude figures etc.
-TABLE_MIN_AVG_LINE_LENGTH = configo.HV_FLOAT_PLUS(40.0)
+LINES_PER_PAGE_MAX = 1000
 
 
-def sort_leftright_topdown(items):
-    # left to right
-    items = sorted(items, key=operator.itemgetter(0))
-    # top down
-    items = sorted(items, key=operator.itemgetter(3))
-    return items
+def limit_lines(lines):
+    # TODO: DISABLE AFTER HAVING BETTER CLUSTER STRATEGY
+    result = []
+    for page in lines:
+        content = page.content
+        if len(page.content) > LINES_PER_PAGE_MAX:
+            # too many lines on this page
+            content = []
+        result.append(iamraw.PageContentLine(page=page.page, content=content))
+    return result
 
 
 def valid_table(bounding, navigator) -> bool:
@@ -42,7 +35,7 @@ def valid_table(bounding, navigator) -> bool:
     utila.debug(f'validate table: {bounding} on page {navigator.page}')
 
     height = utila.roundme(bottom - top)
-    if height < TABLE_MIN_HEIGHT:
+    if height < tablero.config.TABLE_MIN_HEIGHT:
         # remove to small tables
         utila.debug(f'table to small: {height}')
         return False
@@ -64,7 +57,7 @@ def valid_table(bounding, navigator) -> bool:
     singles = len([item for item in clustered if len(item) == 1])
     single_quote = utila.roundme(singles / len(clustered))
 
-    if singles >= 2 and single_quote > MAX_SINGLE_LINE_QUOTE:
+    if singles >= 2 and single_quote > tablero.config.MAX_SINGLE_LINE_QUOTE:
         # invalid table content
         utila.debug(f'single quote: {single_quote}')
         return False
@@ -80,7 +73,7 @@ def merge_tables(boundings):
     for bounding in boundings[1:]:
         tabledistance = utila.roundme(math.fabs(result[-1][3] - bounding[1]))
         utila.debug(tabledistance)
-        if tabledistance < TABLE_MERGE_DISTANCE:
+        if tabledistance < tablero.config.TABLE_MERGE_DISTANCE:
             result[-1] = utila.rectangle_max((result[-1], bounding))
         else:
             result.append(bounding)
@@ -120,7 +113,7 @@ def determine_verticals(lines):
     result = [
         item for item in lines if tablero.lines.vertical(
             item,
-            maxdiff=TABLE_VERTICAL_MAX_DIFF,
+            maxdiff=tablero.config.TABLE_VERTICAL_MAX_DIFF,
         )
     ]
     return result
@@ -130,7 +123,7 @@ def determine_horizontals(lines):
     result = [
         item for item in lines if tablero.lines.horizontal(
             item,
-            maxdiff=TABLE_HORIZONTAL_MAX_DIFF,
+            maxdiff=tablero.config.TABLE_HORIZONTAL_MAX_DIFF,
         )
     ]
     return result

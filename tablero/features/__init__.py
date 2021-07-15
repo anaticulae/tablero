@@ -6,19 +6,3 @@
 # use or distribution is an offensive act against international law and may
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
-
-import iamraw
-
-LINES_PER_PAGE_MAX = 1000
-
-
-def limit_lines(lines):
-    # TODO: DISABLE AFTER HAVING BETTER CLUSTER STRATEGY
-    result = []
-    for page in lines:
-        content = page.content
-        if len(page.content) > LINES_PER_PAGE_MAX:
-            # too many lines on this page
-            content = []
-        result.append(iamraw.PageContentLine(page=page.page, content=content))
-    return result

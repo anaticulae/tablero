@@ -25,7 +25,6 @@ import iamraw
 import serializeraw
 import utila
 
-import tablero.features
 import tablero.lines
 import tablero.utils
 
@@ -33,7 +32,7 @@ import tablero.utils
 def work(lines: str, pages: tuple = None) -> str:
     # prepare data
     lines = serializeraw.load_lines(lines, pages=pages)
-    lines = tablero.features.limit_lines(lines)
+    lines = tablero.utils.limit_lines(lines)
     # run strategy
     result = run(lines)
     dumped = serializeraw.dump_tables(result)
@@ -79,7 +78,7 @@ def cluster_page(lines) -> iamraw.TableBoundings:
 
     result = [
         item for item in result if tablero.lines.length_avg(item.lines) >=
-        tablero.utils.TABLE_MIN_AVG_LINE_LENGTH
+        tablero.config.TABLE_MIN_AVG_LINE_LENGTH
     ]
     return result
 

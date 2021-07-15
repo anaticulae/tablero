@@ -14,7 +14,6 @@ import iamraw
 import serializeraw
 import utila
 
-import tablero.features
 import tablero.lines
 import tablero.utils
 
@@ -26,7 +25,7 @@ def work(
     pages: tuple = None,
 ) -> str:
     lines = serializeraw.load_lines(lines, pages=pages)
-    lines = tablero.features.limit_lines(lines)
+    lines = tablero.utils.limit_lines(lines)
     navigators = serializeraw.create_pagetextnavigators_fromfile(
         text,
         textposition,
@@ -72,7 +71,7 @@ def cluster_page(navigator, lines) -> iamraw.TableBoundings:
     horizontals = [
         item for item in lines if tablero.lines.horizontal(
             item,
-            maxdiff=tablero.utils.TABLE_HORIZONTAL_MAX_DIFF,
+            maxdiff=tablero.config.TABLE_HORIZONTAL_MAX_DIFF,
         )
     ]
 
@@ -81,7 +80,7 @@ def cluster_page(navigator, lines) -> iamraw.TableBoundings:
         return []
 
     boundings = [item.bounding for item in navigator]
-    boundings = tablero.utils.sort_leftright_topdown(boundings)
+    boundings = sort_leftright_topdown(boundings)
 
     result = []
     grouped_horizontals = tablero.utils.group_horizontals(horizontals)
@@ -158,3 +157,11 @@ def extract_potential_table(boundings, horizontals, min_elements=2):
         table = utila.rectangle_max((topline, bottomline))
         tables.append(table)
     return tables
+
+
+def sort_leftright_topdown(items):
+    # left to right
+    items = sorted(items, key=operator.itemgetter(0))
+    # top down
+    items = sorted(items, key=operator.itemgetter(3))
+    return items
