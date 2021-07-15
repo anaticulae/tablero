@@ -122,7 +122,7 @@ def test_detect_table_bachelor56(testdir, monkeypatch):
     tests.run(f'-i {source} ', monkeypatch=monkeypatch)
     loaded = serializeraw.load_tables(tablero.path.decide(testdir.tmpdir))
 
-    tables = utila.flatten([item.content for item in loaded])
+    tables = utila.flatten_content(loaded)
     assert len(tables) == 5  # VALIDATED
 
 
