@@ -13,43 +13,8 @@ TODO: Add optimal table extraction selector for every single page, cause
 table style can change in document.
 """
 
-import functools
-
 import iamraw
 import utila
-
-import tablero.camelox.fork
-import tablero.table.crossed
-import tablero.table.horizontal
-import tablero.table.word
-
-
-def run(lines, navigators, pdffile: str = None, pages: tuple = None):
-    crossed = functools.partial(tablero.table.crossed.run, lines)
-    latex = functools.partial(tablero.table.horizontal.run, lines, navigators)
-    word = functools.partial(tablero.table.word.run, lines)
-    camelot = functools.partial(tablero.camelox.fork.run, pdffile, pages)
-
-    crossed, latex, word, camelot = utila.fork(
-        crossed,
-        latex,
-        word,
-        camelot,
-        process=True,
-    )
-
-    latex_detected = sum([len(item.content) for item in latex])
-    word_detected = sum([len(item.content) for item in word])
-    crossed_detected = sum([len(item.content) for item in crossed])
-    camelot_detected = sum([len(item.content) for item in camelot])
-
-    utila.log(f'latex:   {latex_detected}')
-    utila.log(f'word:    {word_detected}')
-    utila.log(f'crossed: {crossed_detected}')
-    utila.log(f'camelot: {camelot_detected}')
-
-    result = select_best(latex, word, crossed, camelot)
-    return result
 
 
 def select_best(
@@ -58,6 +23,7 @@ def select_best(
     crosseds,
     camelots,
 ) -> iamraw.PageContentTableBoundings:
+    present(latexs, words, crosseds, camelots)
     result = []
     synced = utila.sync_pages(
         [
@@ -93,3 +59,15 @@ def select_page(latex, word, crossed, camelot):
     if latex_detected > word_detected and latex_detected > crossed_detected:
         result = latex
     return result
+
+
+def present(latex, word, crossed, camelot):
+    latex_detected = sum([len(item.content) for item in latex])
+    word_detected = sum([len(item.content) for item in word])
+    crossed_detected = sum([len(item.content) for item in crossed])
+    camelot_detected = sum([len(item.content) for item in camelot])
+
+    utila.log(f'latex:   {latex_detected}')
+    utila.log(f'word:    {word_detected}')
+    utila.log(f'crossed: {crossed_detected}')
+    utila.log(f'camelot: {camelot_detected}')

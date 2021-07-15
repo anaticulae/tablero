@@ -9,9 +9,11 @@
 
 import configo
 import iamraw
+import serializeraw
 import utila
 
 import tablero.cluster
+import tablero.features
 import tablero.lines
 import tablero.table
 
@@ -21,6 +23,16 @@ TABLE_MIN_LINE_COUNT = configo.HV_INT_PLUS(10)
 # tables are build out of vertical and horizontal lines, but only a few
 # cross lines.
 TABLE_MIN_HORIZONTAL_VERTICAL_LINE = configo.HV_PERCENT_PLUS(0.9)
+
+
+def work(lines: str, pages: tuple = None) -> str:
+    # prepare data
+    lines = serializeraw.load_lines(lines, pages=pages)
+    lines = tablero.features.limit_lines(lines)
+    # run strategy
+    result = run(lines)
+    dumped = serializeraw.dump_tables(result)
+    return dumped
 
 
 @utila.profile('strategy:word')

@@ -21,45 +21,32 @@ Example:
 
 """
 
-import iamraw
 import serializeraw
-import utila
 
 import tablero.table.strategy
 
-LINES_PER_PAGE_MAX = 1000
-
 
 def work(
-    text: str,
-    textposition: str,
-    lines: str,
-    pdffile: str = None,
+    camelox: str,
+    crossed: str,
+    horizontal: str,
+    word: str,
     pages: tuple = None,
 ) -> str:
-    lines = serializeraw.load_lines(lines, pages=pages)
-    lines = limit_lines(lines)
-
-    navigators = serializeraw.create_pagetextnavigators_fromfile(
-        text,
-        textposition,
-        pages=pages,
+    # prepare data
+    camelox = serializeraw.load_tables(camelox, pages=pages)
+    crossed = serializeraw.load_tables(crossed, pages=pages)
+    horizontal = serializeraw.load_tables(horizontal, pages=pages)
+    word = serializeraw.load_tables(word, pages=pages)
+    # decide
+    result = tablero.table.strategy.select_best(
+        horizontal,
+        word,
+        crossed,
+        camelox,
     )
-
-    pdffile = pdffile if utila.exists(pdffile) else None
-    result = tablero.table.strategy.run(lines, navigators, pdffile, pages)
-
+    # prepare result
     # remove empty pages
     result = [item for item in result if item.content]
-
     dumped = serializeraw.dump_tables(result)
     return dumped
-
-
-def limit_lines(lines):
-    # TODO: DISABLE AFTER HAVING BETTER CLUSTER STRATEGY
-    result = []
-    for page in lines:
-        content = [] if len(page.content) > LINES_PER_PAGE_MAX else page.content
-        result.append(iamraw.PageContentLine(page=page.page, content=content))
-    return result

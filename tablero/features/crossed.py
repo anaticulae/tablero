@@ -22,12 +22,22 @@ Strategy:
 import operator
 
 import iamraw
+import serializeraw
 import utila
 
+import tablero.features
 import tablero.lines
 import tablero.table.utils
-import tablero.table.word
-import tablero.utils
+
+
+def work(lines: str, pages: tuple = None) -> str:
+    # prepare data
+    lines = serializeraw.load_lines(lines, pages=pages)
+    lines = tablero.features.limit_lines(lines)
+    # run strategy
+    result = run(lines)
+    dumped = serializeraw.dump_tables(result)
+    return dumped
 
 
 @utila.profile('strategy:crossed')

@@ -11,12 +11,33 @@ import functools
 import operator
 
 import iamraw
+import serializeraw
 import utila
 
+import tablero.features
 import tablero.lines
 import tablero.table
 import tablero.table.utils
 import tablero.utils
+
+
+def work(
+    text: str,
+    textposition: str,
+    lines: str,
+    pages: tuple = None,
+) -> str:
+    lines = serializeraw.load_lines(lines, pages=pages)
+    lines = tablero.features.limit_lines(lines)
+    navigators = serializeraw.create_pagetextnavigators_fromfile(
+        text,
+        textposition,
+        pages=pages,
+    )
+    # run strategy
+    result = run(lines, navigators)
+    dumped = serializeraw.dump_tables(result)
+    return dumped
 
 
 @utila.profile('strategy:horizontal')

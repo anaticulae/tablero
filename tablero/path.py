@@ -12,12 +12,12 @@ import utila
 import tablero
 
 
-def table(path: str, prefix: str = '') -> str:
-    """Path to extraction result of tablero --table step.
-    >>> table('/data/resources')
-    '/data/resources/tablero__table_table.yaml'
+def decide(path: str, prefix: str = '') -> str:
+    """Path to extraction result of tablero --decide step.
+    >>> decide('/data/resources')
+    '/data/resources/tablero__decide_decide.yaml'
     """
-    return utila.pathconnector(path, tablero.PROCESS, 'table_table', prefix)
+    return utila.pathconnector(path, tablero.PROCESS, 'decide_decide', prefix)
 
 
 def figure(path: str, prefix: str = '') -> str:

@@ -13,21 +13,44 @@ import tablero
 
 WORKPLAN = [
     utila.create_step(
-        'table',
-        [
-            utila.ResultFile('rawmaker', 'text_text'),
-            utila.ResultFile('rawmaker', 'text_positions'),
-            utila.ResultFile('rawmaker', 'line_line'),
-            utila.ResultFile('table', name=None, ext=None, optional=True),
-        ],
-        ('table',),
-    ),
-    utila.create_step(
         'camelox',
         [
             utila.ResultFile('table', name=None, ext=None, optional=True),
         ],
         ('camelox',),
+    ),
+    utila.create_step(
+        'crossed',
+        [
+            utila.ResultFile('rawmaker', 'line_line'),
+        ],
+        ('crossed',),
+    ),
+    utila.create_step(
+        'word',
+        [
+            utila.ResultFile('rawmaker', 'line_line'),
+        ],
+        ('word',),
+    ),
+    utila.create_step(
+        'horizontal',
+        [
+            utila.ResultFile('rawmaker', 'text_text'),
+            utila.ResultFile('rawmaker', 'text_positions'),
+            utila.ResultFile('rawmaker', 'line_line'),
+        ],
+        ('horizontal',),
+    ),
+    utila.create_step(
+        'decide',
+        [
+            utila.ResultFile('tablero', 'camelox_camelox'),
+            utila.ResultFile('tablero', 'crossed_crossed'),
+            utila.ResultFile('tablero', 'horizontal_horizontal'),
+            utila.ResultFile('tablero', 'word_word'),
+        ],
+        ('decide',),
     ),
 ]
 

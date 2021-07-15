@@ -13,8 +13,7 @@ import pytest
 import serializeraw
 import utilatest
 
-import tablero.features.table
-import tablero.table.horizontal
+import tablero.features.horizontal
 
 
 def extract_tables(source, page):
@@ -27,7 +26,7 @@ def extract_tables(source, page):
         pages=(page,),
     )
     lines = lines[0].content
-    tables = tablero.table.horizontal.cluster_page(ptn, lines)
+    tables = tablero.features.horizontal.cluster_page(ptn, lines)
     return tables
 
 
