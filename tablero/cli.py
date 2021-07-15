@@ -22,6 +22,13 @@ WORKPLAN = [
         ],
         ('table',),
     ),
+    utila.create_step(
+        'camelox',
+        [
+            utila.ResultFile('table', name=None, ext=None, optional=True),
+        ],
+        ('camelox',),
+    ),
 ]
 
 
