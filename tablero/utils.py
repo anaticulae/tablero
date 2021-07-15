@@ -10,6 +10,7 @@
 import math
 
 import iamraw
+import texmex
 import utila
 
 import tablero.config
@@ -30,7 +31,7 @@ def limit_lines(lines):
     return result
 
 
-def valid_table(bounding, navigator) -> bool:
+def valid_table(bounding, navigator: texmex.PageTextContentNavigator) -> bool:
     top, bottom = bounding[1], bounding[3]
     utila.debug(f'validate table: {bounding} on page {navigator.page}')
 
@@ -39,10 +40,9 @@ def valid_table(bounding, navigator) -> bool:
         # remove to small tables
         utila.debug(f'table to small: {height}')
         return False
-
     table_content = navigator.between(
-        top / navigator.height,
-        bottom / navigator.height,
+        top / navigator.pagesize[1],
+        bottom / navigator.pagesize[1],
     )
     if not table_content:
         # no content in table
