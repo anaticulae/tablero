@@ -68,6 +68,8 @@ def judge_tables(grouped):
             if avg < tablero.config.TABLE_MIN_AVG_LINE_LENGTH:
                 continue
             bounding = utila.rectangle_max(item)
+            # convert cluster to list
+            item = list(item)
             pageresult.append(
                 iamraw.TableBounding(
                     bounding=bounding,
