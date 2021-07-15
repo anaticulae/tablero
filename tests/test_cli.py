@@ -7,14 +7,9 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import pytest
-
 import tests
 
 
-@pytest.mark.parametrize('command', [
-    '--help',
-])
-def test_tablero_cli_run(command, testdir, monkeypatch):  #pylint: disable=W0613
-    """Run help and version and format command to reach basic test coverage"""
-    tests.run(command, monkeypatch=monkeypatch)
+def test_tablero_cli_help(monkeypatch):
+    """Run help and version and format command to reach basic test coverage."""
+    tests.run('--help', monkeypatch=monkeypatch)
