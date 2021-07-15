@@ -74,14 +74,11 @@ def cluster_page(navigator, lines) -> iamraw.TableBoundings:
             maxdiff=tablero.config.TABLE_HORIZONTAL_MAX_DIFF,
         )
     ]
-
     if len(horizontals) <= 2:
         # TODO: SINGLE LINE TABLE?
         return []
-
     boundings = [item.bounding for item in navigator]
     boundings = utila.sort_leftright_topdown(boundings)
-
     result = []
     grouped_horizontals = tablero.utils.group_horizontals(horizontals)
     for group in grouped_horizontals:
@@ -92,29 +89,23 @@ def cluster_page(navigator, lines) -> iamraw.TableBoundings:
             group,
             min_elements=2,
         )
-
         single_table = extract_potential_table(
             boundings,
             group,
             min_elements=1,
         )
-
         tables = double_table
         if len(single_table) > len(double_table):
             tables = single_table
-
         tables = [
             # judge tables
             item
             for item in tables
             if tablero.utils.valid_table(item, navigator)
         ]
-
         # merge connected tables
         tables = tablero.utils.merge_tables(tables)
-
         result.extend(tables)
-
     # TODO: ADD LINES
     result = [iamraw.TableBounding(bounding=item) for item in result]
     return result
