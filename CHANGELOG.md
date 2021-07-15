@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.2.0
+
+### Feature
+
+* add separate extraction step (bd72db3b1c1b)
+
 ## v0.1.0
 
 ### Feature
