@@ -12,7 +12,6 @@ import iamraw
 import serializeraw
 import utila
 
-import tablero.cluster
 import tablero.lines
 
 # a table must have at least this amount of lines
@@ -46,7 +45,7 @@ def locate_tables(lines):
         content = page.content
         # TODO: profile only on --profile
         # with utila.profile():
-        clustered = tablero.cluster.run(content)
+        clustered = utila.intersecting_line_cluster(content, max_diff=5.0)
         result.append((page.page, clustered))
     return result
 
