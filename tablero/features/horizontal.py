@@ -16,8 +16,6 @@ import utila
 
 import tablero.features
 import tablero.lines
-import tablero.table
-import tablero.table.utils
 import tablero.utils
 
 
@@ -74,7 +72,7 @@ def cluster_page(navigator, lines) -> iamraw.TableBoundings:
     horizontals = [
         item for item in lines if tablero.lines.horizontal(
             item,
-            maxdiff=tablero.table.TABLE_HORIZONTAL_MAX_DIFF,
+            maxdiff=tablero.utils.TABLE_HORIZONTAL_MAX_DIFF,
         )
     ]
 
@@ -86,7 +84,7 @@ def cluster_page(navigator, lines) -> iamraw.TableBoundings:
     boundings = tablero.utils.sort_leftright_topdown(boundings)
 
     result = []
-    grouped_horizontals = tablero.table.utils.group_horizontals(horizontals)
+    grouped_horizontals = tablero.utils.group_horizontals(horizontals)
     for group in grouped_horizontals:
         if len(group) <= 1:
             continue
@@ -110,11 +108,11 @@ def cluster_page(navigator, lines) -> iamraw.TableBoundings:
             # judge tables
             item
             for item in tables
-            if tablero.table.utils.valid_table(item, navigator)
+            if tablero.utils.valid_table(item, navigator)
         ]
 
         # merge connected tables
-        tables = tablero.table.utils.merge_tables(tables)
+        tables = tablero.utils.merge_tables(tables)
 
         result.extend(tables)
 

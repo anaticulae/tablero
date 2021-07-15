@@ -12,12 +12,12 @@ import sys
 import serializeraw
 import utila
 
-import tablero.table.camelox
+import tablero.features.camelox
 
 if __name__ == "__main__":
     FILE, PAGES = sys.argv[1], sys.argv[2]
     # TODO: REPLACE AFTER UPGRADING UTILA
     PAGES = utila.parse_numbers(PAGES.replace('_', ' '))
-    result = tablero.table.camelox.run(FILE, PAGES)
+    result = tablero.features.camelox.run(FILE, PAGES)
     dumped = serializeraw.dump_tables(result)
     utila.log(dumped)

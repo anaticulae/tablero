@@ -27,7 +27,7 @@ import utila
 
 import tablero.features
 import tablero.lines
-import tablero.table.utils
+import tablero.utils
 
 
 def work(lines: str, pages: tuple = None) -> str:
@@ -56,15 +56,15 @@ def run(lines):
 
 
 def cluster_page(lines) -> iamraw.TableBoundings:
-    horizontals = tablero.table.utils.determine_horizontals(lines)
-    verticals = tablero.table.utils.determine_verticals(lines)
+    horizontals = tablero.utils.determine_horizontals(lines)
+    verticals = tablero.utils.determine_verticals(lines)
 
     result = extract_potential_table(verticals, horizontals)
 
     result = [
         iamraw.TableBounding(
             bounding=item,
-            lines=tablero.table.utils.between(
+            lines=tablero.utils.between(
                 lines=verticals + horizontals,
                 bounding=item,
             ),
@@ -74,12 +74,12 @@ def cluster_page(lines) -> iamraw.TableBoundings:
     # exclude bounding box, which has two vertical lines
     result = [
         item for item in result
-        if len(tablero.table.utils.determine_verticals(item.lines)) >= 3
+        if len(tablero.utils.determine_verticals(item.lines)) >= 3
     ]
 
     result = [
         item for item in result if tablero.lines.length_avg(item.lines) >=
-        tablero.table.TABLE_MIN_AVG_LINE_LENGTH
+        tablero.utils.TABLE_MIN_AVG_LINE_LENGTH
     ]
     return result
 
@@ -108,5 +108,5 @@ def extract_potential_table(verticals, horizontals):
 
         table = utila.rectangle_max((topline, bottomline))
         tables.append(table)
-    tables = tablero.table.utils.merge_tables(tables)
+    tables = tablero.utils.merge_tables(tables)
     return tables

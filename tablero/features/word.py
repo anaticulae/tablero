@@ -15,7 +15,7 @@ import utila
 import tablero.cluster
 import tablero.features
 import tablero.lines
-import tablero.table
+import tablero.utils
 
 # a table must have at least this amount of lines
 TABLE_MIN_LINE_COUNT = configo.HV_INT_PLUS(10)
@@ -68,7 +68,7 @@ def judge_tables(grouped):
             if percentage < TABLE_MIN_HORIZONTAL_VERTICAL_LINE:
                 continue
             avg = tablero.lines.length_avg(item)
-            if avg < tablero.table.TABLE_MIN_AVG_LINE_LENGTH:
+            if avg < tablero.utils.TABLE_MIN_AVG_LINE_LENGTH:
                 continue
             bounding = utila.rectangle_max(item)
             pageresult.append(

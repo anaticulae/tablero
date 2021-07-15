@@ -13,12 +13,12 @@ import utila
 import utilatest
 
 import tablero.camelox.fork
-import tablero.table.camelox
+import tablero.features.camelox
 
 
 def test_camelot_run():
     source = power.DOCU13_PDF
-    parsed = tablero.table.camelox.run(source, pages=2)
+    parsed = tablero.features.camelox.run(source, pages=2)
     assert len(parsed) == 1
 
 
@@ -33,5 +33,5 @@ def test_camelot_forked():
 
 def test_camelot_latex():
     source = power.BACHELOR090_PDF
-    parsed = tablero.table.camelox.run(source, pages=76)
+    parsed = tablero.features.camelox.run(source, pages=76)
     assert len(parsed) == 1

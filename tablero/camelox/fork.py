@@ -15,7 +15,6 @@ import serializeraw
 import utila
 
 import tablero
-import tablero.table.camelox
 
 RUNTIME = os.path.join(tablero.ROOT, 'tablero/camelox/runtime.py')
 utila.exists_assert(RUNTIME)
