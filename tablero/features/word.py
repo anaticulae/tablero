@@ -46,8 +46,7 @@ def locate_tables(lines):
         content = page.content
         # TODO: profile only on --profile
         # with utila.profile():
-        # #  clustered = divide(content)
-        clustered = divide(content)
+        clustered = tablero.cluster.run(content)
         result.append((page.page, clustered))
     return result
 
@@ -77,15 +76,4 @@ def judge_tables(grouped):
         result.append(pageresult)
     # remove empty pages
     result = [item for item in result if item.content]
-    return result
-
-
-def divide(items):
-    chunk_size = 50
-    splitted = utila.chunks(items, chunk_size)
-    pre = []
-    for chunk in splitted:
-        clustered = tablero.cluster.run(chunk)
-        pre.extend(clustered)
-    result = tablero.cluster.run(pre)
     return result
