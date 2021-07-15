@@ -8,7 +8,9 @@
 # =============================================================================
 
 import functools
+import os
 
+import utila
 import utilatest
 
 import tablero
@@ -27,3 +29,8 @@ failure = functools.partial(  # pylint:disable=C0103
     process=tablero.PROCESS,
     success=False,
 )
+
+
+def copy_pdf(source, dest):
+    utilatest.fixture_requires(source)
+    utila.file_copy(source, os.path.join(dest, 'table'))

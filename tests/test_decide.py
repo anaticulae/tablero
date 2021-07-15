@@ -7,8 +7,6 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import os
-
 import power
 import pytest
 import serializeraw
@@ -70,7 +68,7 @@ import tests
 @utilatest.longrun
 def test_detect_table_single(source, pages, expected, testdir, monkeypatch):
     utilatest.fixture_requires(source)
-    utila.file_copy(source, os.path.join(testdir.tmpdir, 'table'))
+    tests.copy_pdf(source, testdir.tmpdir)
     source = power.link(source)
     with monkeypatch.context() as context:
         # TODO: REMOVE AFTER UPGRADING CLUSTER STRATEGY

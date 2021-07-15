@@ -7,11 +7,8 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import os
-
 import power
 import serializeraw
-import utila
 import utilatest
 
 import tablero.path
@@ -23,9 +20,9 @@ import tests
 def test_table_extract_negative(testdir, monkeypatch):
     book = power.BOOK007_PDF
     # copy pdffile
-    source = power.link(book)
-    utila.file_copy(book, os.path.join(testdir.tmpdir, 'table'))
+    tests.copy_pdf(power.BOOK007_PDF, testdir.tmpdir)
     # run cli
+    source = power.link(book)
     tests.run(f'-i {source} -i {testdir.tmpdir}', monkeypatch=monkeypatch)
     # load result
     tables = tablero.path.decide(testdir.tmpdir)
