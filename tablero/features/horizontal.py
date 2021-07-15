@@ -35,6 +35,7 @@ def work(
         headerfooterpath=headerfooter,
         pages=pages,
     )
+    lines = contentlines(lines, navigators)
     # run strategy
     result = run(lines, navigators)
     dumped = serializeraw.dump_tables(result)
@@ -64,6 +65,22 @@ def run(lines, navigators):
     ]
     # remove empty pages
     result = [item for item in result if item.content]
+    return result
+
+
+def contentlines(lines, navigators) -> list:
+    result = []
+    for lino, navi in utila.sync_pages((lines, navigators), numbers=False):
+        if not lino:
+            continue
+        top, bottom = navi.content.top, navi.content.bottom
+        # y0 is inside pagetextcontentnavigator
+        line = [
+            item for item in lino.content
+            if utila.isinside(item[1], top, bottom) and
+            utila.isinside(item[3], top, bottom)
+        ]
+        result.append(iamraw.PageContentLine(page=navi.page, content=line))
     return result
 
 
