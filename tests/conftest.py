@@ -29,6 +29,7 @@ RESOURCES = [
     (power.DOCU07_PDF, None),
     (power.BACHELOR063_PDF, '24:28'),
     (power.MASTER112_PDF, '110'),
+    (power.ORDER050_PDF, None),
 ]
 
 RESOURCES_NOTABLE = [
