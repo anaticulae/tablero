@@ -23,6 +23,9 @@ def render_tables(
     outdir: str,
 ):
     pages = [item.page for item in tables if item.content]
+    if not pages:
+        # do not render all pages
+        return
     ghost_small(pdf, outdir, pages=pages)
     index = 1
     for tablepage in tables:
