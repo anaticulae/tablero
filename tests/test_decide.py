@@ -62,6 +62,12 @@ import tests
         [1],
         id='bachelor63_singletable',
     ),
+    pytest.param(
+        power.ORDER050_PDF,
+        ':',
+        [1],
+        id='order50',
+    ),
 ])
 @utilatest.longrun
 def test_detect_table_single(source, pages, expected, testdir, monkeypatch):
@@ -77,7 +83,6 @@ def test_detect_table_single(source, pages, expected, testdir, monkeypatch):
         )
     tables = tablero.path.decide(testdir.tmpdir)
     loaded = serializeraw.load_tables(tables)
-
     current = [len(item) for item in loaded]
     assert current == expected
 
