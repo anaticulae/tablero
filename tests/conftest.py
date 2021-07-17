@@ -31,6 +31,12 @@ RESOURCES = [
     (power.MASTER112_PDF, '110'),
 ]
 
+RESOURCES_NOTABLE = [
+    (power.HOME040_PDF, None),
+    (power.HOME025_PDF, None),
+    (power.BOOK007_PDF, None),
+]
+
 
 @pytest.mark.usefixtures('session')
 def pytest_sessionstart():
@@ -41,6 +47,19 @@ def extract(resources):
     genex.extract(
         files=resources,
         destination=power.generated(),
+        groupme='--pagenumbers --footer',
+        linero=False,
+        oneline=None,
+        pdfinfo=False,
+        worker=WORKER,
+        base=power.REPOSITORY,
+    )
+
+
+def extract_notable(resources):
+    genex.extract(
+        files=resources,
+        destination=power.generated('notable'),
         groupme='--pagenumbers --footer',
         linero=False,
         oneline=None,
