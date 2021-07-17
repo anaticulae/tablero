@@ -8,6 +8,7 @@
 # =============================================================================
 
 import power
+import pytest
 import serializeraw
 import utilatest
 
@@ -16,13 +17,16 @@ import tests
 
 
 @utilatest.longrun
-@utilatest.requires(power.BOOK007_PDF)
-def test_table_extract_negative(testdir, monkeypatch):
-    book = power.BOOK007_PDF
+@pytest.mark.parametrize('pdf', [
+    pytest.param(power.BOOK007_PDF, id='book007'),
+    pytest.param(power.HOME025_PDF, id='home025'),
+    pytest.param(power.HOME040_PDF, id='home040'),
+])
+def test_table_extract_negative(pdf, testdir, monkeypatch):
+    folder = 'notable'
     # copy pdffile
-    tests.copy_pdf(power.BOOK007_PDF, testdir.tmpdir)
-    # run cli
-    source = power.link(book)
+    tests.copy_pdf(pdf, testdir.tmpdir, folder=folder)
+    source = power.link(pdf, folder=folder)
     tests.run(f'-i {source} -i {testdir.tmpdir}', monkeypatch=monkeypatch)
     # load result
     tables = tablero.path.decide(testdir.tmpdir)
