@@ -95,17 +95,21 @@ def extract_potential_table(verticals, horizontals):
         x0, top, x1, bottom = vertical
         for item in utila.ranges(top, bottom, 10):
             buckets.add((x0, item, x1, item))
-
     merged = [index if item else None for index, item in enumerate(buckets)]
     merged = utila.groupby_none(merged)
-
     tables = []
     for group in merged:
         topline = horizontals[group[0] - 1]
         # double content below table?
         bottomline = horizontals[min((group[-1], len(horizontals) - 1))]
-
         table = utila.rectangle_max((topline, bottomline))
         tables.append(table)
     tables = tablero.utils.merge_tables(tables)
+    # merge overlapping table again
+    # TODO: REMOVE AFTER FIXING
+    tables = utila.intersecting_rectangle_cluster(tables)
+    tables = [
+        item[0] if len(item) == 1 else utila.rectangle_max(item)
+        for item in tables
+    ]
     return tables
