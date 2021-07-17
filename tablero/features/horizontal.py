@@ -135,43 +135,17 @@ def cluster_page(navigator, lines) -> iamraw.TableBoundings:
 
 
 def extract_potential_table(boundings, horizontals, min_elements=2):
-    # determine most left and right x-coordinate of potential table
-    inside_table = tuple(utila.rectangle_max(horizontals))
-    boundings = [
-        rectangle for rectangle in boundings if utila.dot_in_rectangle(
-            inside_table,
-            utila.rectangle_center(rectangle),
-        )
-    ]
-    # cluster potential table elements on the same line
-    clustered = utila.same_line_cluster(
-        boundings,
-        min_elements=min_elements,
-    )
-    if not clustered:
-        return []
+    boundings = inside_horizontals(boundings, horizontals)
     # TODO: singlequote is not possible for min_elements more than one
+    groups = boundings_to_buckets(boundings, horizontals, min_elements)
+    if not groups:
+        return []
     # singles = [item for item in clustered if len(item) == 1]
     # singlequote = len(singles) / len(boundings)
     # if singlequote > 0.4:  # TODO: HOLY VALUE
     #     return []
-    buckets = utila.Buckets(
-        horizontals,
-        selector=lambda bounding: (bounding[1] + bounding[3]) / 2,
-    )
-    for cluster in clustered:
-        for item in cluster:
-            buckets.add(item)
-    # remove convtent before and after horizontals which are not part of
-    # the table.
-    buckets = buckets[1:-1]
-    merged = [
-        index if rectangle else None
-        for index, rectangle in enumerate(buckets, start=0)
-    ]
-    merged = utila.groupby_none(merged)
     tables = []
-    for group in merged:
+    for group in groups:
         if len(group) < 2:
             # TODO: MULTIPLE ITEMS IN ONLY ONE GROUP BETWEEN HORIZONTAL LINES
             # table requires a least 3 horizontal lines
@@ -188,6 +162,44 @@ def extract_potential_table(boundings, horizontals, min_elements=2):
         tablebounding = utila.rectangle_max((topline, bottomline))
         tables.append(tablebounding)
     return tables
+
+
+def inside_horizontals(boundings, horizontals) -> list:
+    # determine most left and right x-coordinate of potential table
+    inside_table = tuple(utila.rectangle_max(horizontals))
+    boundings = [
+        rectangle for rectangle in boundings if utila.dot_in_rectangle(
+            inside_table,
+            utila.rectangle_center(rectangle),
+        )
+    ]
+    return boundings
+
+
+def boundings_to_buckets(boundings, horizontals, min_elements):
+    # cluster potential table elements on the same line
+    clustered = utila.same_line_cluster(
+        boundings,
+        min_elements=min_elements,
+    )
+    if not clustered:
+        return []
+    buckets = utila.Buckets(
+        horizontals,
+        selector=lambda bounding: (bounding[1] + bounding[3]) / 2,
+    )
+    for cluster in clustered:
+        for item in cluster:
+            buckets.add(item)
+    # remove convtent before and after horizontals which are not part of
+    # the table.
+    buckets = buckets[1:-1]
+    merged = [
+        index if rectangle else None
+        for index, rectangle in enumerate(buckets, start=0)
+    ]
+    merged = utila.groupby_none(merged)
+    return merged
 
 
 MAX_HEADER_HEIGHT = 50  # TODO: HOLY VALUE
