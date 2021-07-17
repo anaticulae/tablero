@@ -110,11 +110,13 @@ def cluster_page(navigator, lines) -> iamraw.TableBoundings:
         double_table = extract_potential_table(
             boundings,
             group,
+            navigator=navigator,
             min_elements=2,
         )
         single_table = extract_potential_table(
             boundings,
             group,
+            navigator=navigator,
             min_elements=1,
         )
         tables = double_table
@@ -134,7 +136,12 @@ def cluster_page(navigator, lines) -> iamraw.TableBoundings:
     return result
 
 
-def extract_potential_table(boundings, horizontals, min_elements=2):
+def extract_potential_table(
+    boundings,
+    horizontals,
+    min_elements=2,
+    navigator=None,
+):
     boundings = inside_horizontals(boundings, horizontals)
     # TODO: singlequote is not possible for min_elements more than one
     groups = boundings_to_buckets(boundings, horizontals, min_elements)
@@ -154,6 +161,10 @@ def extract_potential_table(boundings, horizontals, min_elements=2):
         # +1 to include horizontal cause of python indexing
         group_horizontals = horizontals[group[0]:bottom_horizontal_index + 1]
         if not valid_distances(group_horizontals):
+            continue
+        header = set(inside_horizontals(boundings, group_horizontals[0:2]))
+        header = [item for item in navigator if item.bounding in header]
+        if not valid_header(header):
             continue
         topline = group_horizontals[0]
         # content below last horizontal raises out of IndexError in
@@ -205,11 +216,24 @@ def boundings_to_buckets(boundings, horizontals, min_elements):
 MAX_HEADER_HEIGHT = 50  # TODO: HOLY VALUE
 
 
-def valid_distances(horizontals) -> True:
+def valid_distances(horizontals) -> bool:
     if len(horizontals) < 3:
         return True
     headerheight = horizontals[1][1] - horizontals[0][1]
     if headerheight > MAX_HEADER_HEIGHT:
         utila.log(f'header too hight: {headerheight}')
+        return False
+    return True
+
+
+HEADER_MIN_WIDTH = 100  # TODO: HOLY VALUE
+
+
+def valid_header(content) -> bool:
+    boundings = [item.bounding for item in content]
+    left = min([item[0] for item in boundings])
+    right = max([item[2] for item in boundings])
+    width = right - left
+    if width < HEADER_MIN_WIDTH:
         return False
     return True
