@@ -176,10 +176,28 @@ def extract_potential_table(boundings, horizontals, min_elements=2):
             # TODO: MULTIPLE ITEMS IN ONLY ONE GROUP BETWEEN HORIZONTAL LINES
             # table requires a least 3 horizontal lines
             continue
-        topline = horizontals[group[0]]
+        bottom_horizontal_index = group[-1] + 1
+        # +1 to include horizontal cause of python indexing
+        group_horizontals = horizontals[group[0]:bottom_horizontal_index + 1]
+        if not valid_distances(group_horizontals):
+            continue
+        topline = group_horizontals[0]
         # content below last horizontal raises out of IndexError in
         # `horizontals`.
-        bottomline = horizontals[group[-1] + 1]
+        bottomline = group_horizontals[-1]
         tablebounding = utila.rectangle_max((topline, bottomline))
         tables.append(tablebounding)
     return tables
+
+
+MAX_HEADER_HEIGHT = 50  # TODO: HOLY VALUE
+
+
+def valid_distances(horizontals) -> True:
+    if len(horizontals) < 3:
+        return True
+    headerheight = horizontals[1][1] - horizontals[0][1]
+    if headerheight > MAX_HEADER_HEIGHT:
+        utila.log(f'header too hight: {headerheight}')
+        return False
+    return True

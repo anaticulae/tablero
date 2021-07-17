@@ -31,7 +31,6 @@ import tests
         '2:7',
         [1, 3, 3, 5, 2],
         id='vimguide',
-        marks=pytest.mark.xfail(reason='layout extractor changed'),
     ),
     pytest.param(
         power.DOCU13_PDF,
@@ -51,7 +50,6 @@ import tests
         '31',
         [2],
         id='bachelor56_page31',
-        marks=pytest.mark.xfail(reason='broken tab extractor'),
     ),
     pytest.param(
         power.DOCU07_PDF,
