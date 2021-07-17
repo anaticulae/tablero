@@ -49,18 +49,18 @@ def valid_table(bounding, navigator: texmex.PageTextContentNavigator) -> bool:
         utila.debug('no table content')
         return False
 
-    boundings = [item.bounding for item in table_content]
-    clustered = utila.same_line_cluster(
-        boundings,
-        min_elements=1,
-    )
-    singles = len([item for item in clustered if len(item) == 1])
-    single_quote = utila.roundme(singles / len(clustered))
+    # boundings = [item.bounding for item in table_content]
+    # clustered = utila.same_line_cluster(
+    #     boundings,
+    #     min_elements=1,
+    # )
+    # singles = len([item for item in clustered if len(item) == 1])
+    # single_quote = utila.roundme(singles / len(clustered))
 
-    if singles >= 2 and single_quote > tablero.config.MAX_SINGLE_LINE_QUOTE:
-        # invalid table content
-        utila.debug(f'single quote: {single_quote}')
-        return False
+    # if singles >= 2 and single_quote > tablero.config.MAX_SINGLE_LINE_QUOTE:
+    #     # invalid table content
+    #     utila.debug(f'single quote: {single_quote}')
+    #     return False
 
     # table seems to be valid
     return True

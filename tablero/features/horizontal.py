@@ -8,7 +8,6 @@
 # =============================================================================
 
 import functools
-import operator
 
 import iamraw
 import serializeraw
@@ -89,6 +88,9 @@ def done():
 
 
 def cluster_page(navigator, lines) -> iamraw.TableBoundings:
+    """\
+    1. Group horizontals by x-displacement
+    """
     horizontals = [
         item for item in lines if tablero.lines.horizontal(
             item,
@@ -100,8 +102,8 @@ def cluster_page(navigator, lines) -> iamraw.TableBoundings:
         return []
     boundings = [item.bounding for item in navigator]
     boundings = utila.sort_leftright_topdown(boundings)
+    grouped_horizontals = tablero.utils.group_horizontals(horizontals, xdiff=5)
     result = []
-    grouped_horizontals = tablero.utils.group_horizontals(horizontals)
     for group in grouped_horizontals:
         if len(group) <= 1:
             continue
@@ -116,7 +118,7 @@ def cluster_page(navigator, lines) -> iamraw.TableBoundings:
             min_elements=1,
         )
         tables = double_table
-        if len(single_table) > len(double_table):
+        if len(single_table) >= len(double_table):
             tables = single_table
         tables = [
             # judge tables
@@ -133,39 +135,51 @@ def cluster_page(navigator, lines) -> iamraw.TableBoundings:
 
 
 def extract_potential_table(boundings, horizontals, min_elements=2):
+    # determine most left and right x-coordinate of potential table
+    inside_table = tuple(utila.rectangle_max(horizontals))
+    boundings = [
+        rectangle for rectangle in boundings if utila.dot_in_rectangle(
+            inside_table,
+            utila.rectangle_center(rectangle),
+        )
+    ]
+    # cluster potential table elements on the same line
     clustered = utila.same_line_cluster(
         boundings,
         min_elements=min_elements,
     )
-
     if not clustered:
         return []
-
-    singles = [item for item in clustered if len(item) == 1]
-    singlequote = len(singles) / len(boundings)
-
-    if singlequote > 0.4:  # TODO: HOLY VALUE
-        return []
-
+    # TODO: singlequote is not possible for min_elements more than one
+    # singles = [item for item in clustered if len(item) == 1]
+    # singlequote = len(singles) / len(boundings)
+    # if singlequote > 0.4:  # TODO: HOLY VALUE
+    #     return []
     buckets = utila.Buckets(
         horizontals,
-        selector=operator.itemgetter(3),  # y1
+        selector=lambda bounding: (bounding[1] + bounding[3]) / 2,
     )
     for cluster in clustered:
         for item in cluster:
             buckets.add(item)
-
-    merged = [index if item else None for index, item in enumerate(buckets)]
+    # remove convtent before and after horizontals which are not part of
+    # the table.
+    buckets = buckets[1:-1]
+    merged = [
+        index if rectangle else None
+        for index, rectangle in enumerate(buckets, start=0)
+    ]
     merged = utila.groupby_none(merged)
-
     tables = []
     for group in merged:
         if len(group) < 2:
             # TODO: MULTIPLE ITEMS IN ONLY ONE GROUP BETWEEN HORIZONTAL LINES
+            # table requires a least 3 horizontal lines
             continue
         topline = horizontals[group[0]]
-        # double content below table?
-        bottomline = horizontals[min((group[-1], len(horizontals) - 1))]
-        table = utila.rectangle_max((topline, bottomline))
-        tables.append(table)
+        # content below last horizontal raises out of IndexError in
+        # `horizontals`.
+        bottomline = horizontals[group[-1] + 1]
+        tablebounding = utila.rectangle_max((topline, bottomline))
+        tables.append(tablebounding)
     return tables
