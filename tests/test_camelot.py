@@ -21,7 +21,7 @@ def test_camelot_run():
     assert len(parsed) == 1
 
 
-@utilatest.longrun
+@utilatest.nightly
 def test_camelot_forked(testdir):
     source = power.DOCU13_PDF
     parsed = tablero.camelox.fork.run(source, worker=4)

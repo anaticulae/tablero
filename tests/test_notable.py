@@ -16,12 +16,12 @@ import tablero.path
 import tests
 
 
-@utilatest.longrun
 @pytest.mark.parametrize('pdf', [
     pytest.param(power.BOOK007_PDF, id='book007'),
     pytest.param(power.HOME025_PDF, id='home025'),
     pytest.param(power.HOME040_PDF, id='home040'),
 ])
+@utilatest.nightly
 def test_table_extract_negative(pdf, testdir, monkeypatch):
     folder = 'notable'
     # copy pdffile

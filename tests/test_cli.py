@@ -18,7 +18,7 @@ def test_tablero_cli_help(monkeypatch):
     tests.run('--help', monkeypatch=monkeypatch)
 
 
-@utilatest.longrun
+@utilatest.nightly
 @utilatest.requires(power.BOOK007_PDF)
 def test_tablero_cli_run(testdir, monkeypatch):
     """Run tabelero with all steps."""

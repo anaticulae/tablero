@@ -25,7 +25,7 @@ def tables():
     return result
 
 
-@utilatest.longrun
+@utilatest.nightly
 def test_display_tables(testdir):
     source = power.DOCU13_PDF
     data = tables()

@@ -69,7 +69,7 @@ import tests
         id='order50',
     ),
 ])
-@utilatest.longrun
+@utilatest.nightly
 def test_detect_table_single(source, pages, expected, testdir, monkeypatch):
     utilatest.fixture_requires(source)
     tests.copy_pdf(source, testdir.tmpdir)
