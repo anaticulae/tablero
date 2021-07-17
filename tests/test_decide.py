@@ -25,7 +25,6 @@ import tests
         '75:80',
         [1, 3, 3, 3],
         id='bachelor90',
-        marks=pytest.mark.xfail(reason='improve horizontal check'),
     ),
     pytest.param(
         power.DOCU13_PDF,
