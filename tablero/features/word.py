@@ -22,10 +22,12 @@ TABLE_MIN_LINE_COUNT = configo.HV_INT_PLUS(10)
 TABLE_MIN_HORIZONTAL_VERTICAL_LINE = configo.HV_PERCENT_PLUS(0.9)
 
 
-def work(lines: str, pages: tuple = None) -> str:
+def work(lines: str, content: str, pages: tuple = None) -> str:
+    # content
+    content = serializeraw.load_contentboundingbox(content, pages=pages)
     # prepare data
     lines = serializeraw.load_lines(lines, pages=pages)
-    lines = tablero.utils.limit_lines(lines)
+    lines = tablero.utils.limit_lines(lines, contentbox=content)
     # run strategy
     result = run(lines)
     dumped = serializeraw.dump_tables(result)

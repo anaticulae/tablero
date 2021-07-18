@@ -23,6 +23,7 @@ WORKPLAN = [
         'crossed',
         [
             utila.ResultFile('rawmaker', 'line_line'),
+            utila.ResultFile('groupme', 'content_content'),
         ],
         ('crossed',),
     ),
@@ -30,6 +31,7 @@ WORKPLAN = [
         'word',
         [
             utila.ResultFile('rawmaker', 'line_line'),
+            utila.ResultFile('groupme', 'content_content'),
         ],
         ('word',),
     ),

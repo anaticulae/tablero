@@ -29,10 +29,11 @@ import tablero.lines
 import tablero.utils
 
 
-def work(lines: str, pages: tuple = None) -> str:
+def work(lines: str, content: str, pages: tuple = None) -> str:
     # prepare data
+    content = serializeraw.load_contentboundingbox(content, pages=pages)
     lines = serializeraw.load_lines(lines, pages=pages)
-    lines = tablero.utils.limit_lines(lines)
+    lines = tablero.utils.limit_lines(lines, content)
     # run strategy
     result = run(lines)
     dumped = serializeraw.dump_tables(result)

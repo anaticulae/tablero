@@ -19,14 +19,24 @@ import tablero.lines
 LINES_PER_PAGE_MAX = 1000
 
 
-def limit_lines(lines):
+def limit_lines(lines, contentbox=None):
     # TODO: DISABLE AFTER HAVING BETTER CLUSTER STRATEGY
+    if contentbox:
+        contentbox = {
+            item.page: (-1024, item.top, 1024 * 2, item.bottom)
+            for item in contentbox
+        }
     result = []
     for page in lines:
         content = page.content
         if len(page.content) > LINES_PER_PAGE_MAX:
             # too many lines on this page
             content = []
+        if contentbox:
+            content = [
+                item for item in content
+                if utila.rectangle_inside(contentbox[page.page], item)
+            ]
         result.append(iamraw.PageContentLine(page=page.page, content=content))
     return result
 
