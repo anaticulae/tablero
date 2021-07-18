@@ -46,6 +46,8 @@ def run(pdffile: str, content: str, pages: tuple = None, worker: int = 1):
     if errors:
         utila.error(errors)
     dones = [done.stdout.strip() for done in todo]
+    # skip empty result
+    dones = [item for item in dones if item != '[]']
     raw = '\n'.join(dones)
     result = serializeraw.load_tables(raw)
     return result
