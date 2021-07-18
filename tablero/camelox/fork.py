@@ -48,8 +48,12 @@ def run(pdffile: str, content: str, pages: tuple = None, worker: int = 1):
     dones = [done.stdout.strip() for done in todo]
     # skip empty result
     dones = [item for item in dones if item != '[]']
-    raw = '\n'.join(dones)
-    result = serializeraw.load_tables(raw)
+    raw = '\n'.join(dones).strip()
+    if raw:
+        result = serializeraw.load_tables(raw)
+    else:
+        # no table parsed
+        result = []
     return result
 
 
