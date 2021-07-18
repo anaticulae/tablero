@@ -43,6 +43,7 @@ WORKPLAN = [
             utila.ResultFile('rawmaker', 'border_pages'),
             utila.ResultFile('groupme', 'footer_footerheader'),
             utila.ResultFile('rawmaker', 'line_line'),
+            utila.ResultFile('groupme', 'content_content'),
         ],
         ('horizontal',),
     ),
