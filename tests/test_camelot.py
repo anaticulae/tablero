@@ -8,7 +8,6 @@
 # =============================================================================
 
 import power
-import serializeraw
 import utila
 import utilatest
 

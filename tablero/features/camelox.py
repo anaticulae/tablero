@@ -17,6 +17,7 @@ import rawmaker.features.border
 import serializeraw
 import utila
 
+import tablero.__patch__
 import tablero.camelox.fork
 
 
@@ -58,11 +59,11 @@ def parse_tables(pdffile: str, boundings: list, pages: tuple = None):
 
 
 def parse_page(pdffile: str, boundings: list, page: str) -> list:
-    table_regions = list(boundings) if boundings else None
-    # table_regions = ['170,370,560,270']
+    boundings = list(boundings) if boundings else None
+    # HACK:
+    tablero.__patch__.TODO = boundings
     parsed: camelot.core.TableList = camelot.read_pdf(
-        pdffile,
-        table_regions=table_regions,
+        filepath=pdffile,
         pages=page,
     )
     if not parsed:
