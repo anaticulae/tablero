@@ -66,13 +66,12 @@ def parse_page(pdffile: str, boundings: list, page: str) -> list:
         filepath=pdffile,
         pages=page,
     )
-    if not parsed:
-        parsed: camelot.core.TableList = camelot.read_pdf(
-            pdffile,
-            # table_regions=table_regions,
-            pages=page,
-            flavor="stream",
-        )
+    # if not parsed:
+    #     parsed: camelot.core.TableList = camelot.read_pdf(
+    #         pdffile,
+    #         pages=page,
+    #         flavor="stream",
+    #     )
     return parsed
 
 

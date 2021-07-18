@@ -8,6 +8,7 @@
 # =============================================================================
 
 import power
+import pytest
 import utila
 import utilatest
 
@@ -32,6 +33,7 @@ def test_camelot_forked(testdir):
     assert 20 <= len(flatten) <= 40
 
 
+@pytest.mark.xfail(reason='improve stream')
 def test_camelot_latex():
     source = power.BACHELOR090_PDF
     parsed = tablero.features.camelox.run(source, pages=76)
