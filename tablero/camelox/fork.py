@@ -42,6 +42,9 @@ def run(pdffile: str, content: str, pages: tuple = None, worker: int = 1):
         utila.error('error while running camelox')
         sys.exit(utila.FAILURE)
     # prepare result
+    errors = [done.stderr.strip() for done in todo if done.stderr.strip()]
+    if errors:
+        utila.error(errors)
     dones = [done.stdout.strip() for done in todo]
     raw = '\n'.join(dones)
     result = serializeraw.load_tables(raw)
