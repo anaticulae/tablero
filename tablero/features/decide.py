@@ -98,6 +98,8 @@ def select_page(latex, word, crossed, camelot):
         result = word
     if latex_detected > word_detected and latex_detected > crossed_detected:
         result = latex
+    if camelot_detected > len(result):
+        result = camelot
     return result
 
 
