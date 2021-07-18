@@ -2,6 +2,23 @@
 
 Every noteable change is logged here.
 
+## v0.4.0
+
+### Feature
+
+* enable camelox decider (576dd54aad0b)
+* use parsing report to improve parsing result (15aed98fc349)
+* add error logger (3ed6366324ca)
+* fill non content area with white (8a2c060515ef)
+* shrink extraction to ptcn area (9f50bf5517b6)
+* use contentbox to improve extraction result (9a34681a3986)
+
+### Fix
+
+* skip stream flavour (e62d4c2c83b7)
+* handle empty parsing correctly (53c400032692)
+* skip empty item to avoid parsing error (b01d35d87842)
+
 ## v0.3.0
 
 ### Feature
