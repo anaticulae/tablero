@@ -76,11 +76,19 @@ def parse_page(pdffile: str, boundings: list, page: str) -> list:
     return parsed
 
 
+TABLE_ACCURACY_MIN = 75.0  # TODO: HOLY VALUE
+
+
 def group_result(parsed, pdffile, pages) -> iamraw.PageContentTableBoundings:
     # Determine pdf page size to convert to rawmaker bounding definiton.
     sizes = pagesizes(pdffile, pages)
     collected = collections.defaultdict(list)
     for table in parsed:
+        if table.parsing_report['accuracy'] < TABLE_ACCURACY_MIN:
+            utila.debug(f'skip table: {table}')
+            utila.debug(table.parsing_report)
+            continue
+        utila.error(table.parsing_report)
         pagenumber = zero_based(table.page)
         # Hint: We flip top/down
         bounding = flip_bounding(table._bbox, sizes[pagenumber])  # pylint:disable=W0212
