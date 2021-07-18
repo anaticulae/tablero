@@ -48,7 +48,7 @@ def extract(resources):
     genex.extract(
         files=resources,
         destination=power.generated(),
-        groupme='--pagenumbers --footer',
+        groupme='--pagenumbers --footer --content',
         linero=False,
         oneline=None,
         pdfinfo=False,
@@ -61,7 +61,7 @@ def extract_notable(resources):
     genex.extract(
         files=resources,
         destination=power.generated('notable'),
-        groupme='--pagenumbers --footer',
+        groupme='--pagenumbers --footer --content',
         linero=False,
         oneline=None,
         pdfinfo=False,
