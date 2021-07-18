@@ -8,6 +8,7 @@
 # =============================================================================
 
 import power
+import serializeraw
 import utila
 import utilatest
 
@@ -24,7 +25,8 @@ def test_camelot_run():
 @utilatest.nightly
 def test_camelot_forked(testdir):
     source = power.DOCU13_PDF
-    parsed = tablero.camelox.fork.run(source, worker=4)
+    content = power.link(source)
+    parsed = tablero.camelox.fork.run(source, content=content, worker=4)
     flatten = utila.flatten_content(parsed)
     # The purpose of this test is to run in forked mode, not to check the
     # correct result.

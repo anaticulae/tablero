@@ -16,6 +16,7 @@ WORKPLAN = [
         'camelox',
         [
             utila.ResultFile('table', name=None, ext=None, optional=True),
+            utila.ResultFile('groupme', 'content_content'),
         ],
         ('camelox',),
     ),

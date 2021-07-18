@@ -9,6 +9,7 @@
 
 import functools
 import os
+import sys
 
 import pdfinfo.pages
 import serializeraw
@@ -20,13 +21,26 @@ RUNTIME = os.path.join(tablero.ROOT, 'tablero/camelox/runtime.py')
 utila.exists_assert(RUNTIME)
 
 
-def run(pdffile, pages: tuple = None, worker: int = 1):
+def run(pdffile: str, content: str, pages: tuple = None, worker: int = 1):
     if not utila.exists(pdffile):
         return []
     pages = determine_pages(pdffile, pages)
     grouped = utila.xsome(pages, count=worker)
-    todo = [functools.partial(single, pdffile, page) for page in grouped]
+    if content and utila.exists(content):
+        content = serializeraw.load_contentboundingbox(content, pages=pages)
+        content = [f'0,{box.top},1024,{box.bottom}' for box in content]
+        content: list = list(utila.xsome(content, count=worker))
+        todo = [
+            functools.partial(single, pdffile, page, area)
+            for page, area in zip(grouped, content)
+        ]
+    else:
+        content = None
+        todo = [functools.partial(single, pdffile, page) for page in grouped]
     todo = utila.fork(*todo, worker=worker)
+    if isinstance(todo, int):
+        utila.error('error while running camelox')
+        sys.exit(utila.FAILURE)
     # prepare result
     dones = [done.stdout.strip() for done in todo]
     raw = '\n'.join(dones)
@@ -34,9 +48,10 @@ def run(pdffile, pages: tuple = None, worker: int = 1):
     return result
 
 
-def single(pdffile, page):
+def single(pdffile, page, area=None):
     page = utila.from_tuple(page, separator='_')
-    cmd = f'python {RUNTIME} {pdffile} {page}'
+    area = utila.from_tuple(area, separator='*') if area else ''
+    cmd = f'python {RUNTIME} {pdffile} {area} {page}'
     cmd = utila.forward_slash(cmd, newline=False)
     completed = utila.run(cmd)
     return completed

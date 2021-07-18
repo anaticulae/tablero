@@ -20,10 +20,11 @@ import utila
 import tablero.camelox.fork
 
 
-def work(pdffile: str, pages: tuple = None) -> str:
+def work(pdffile: str, content: str, pages: tuple = None) -> str:
     worker: int = 6
     extracted = tablero.camelox.fork.run(
         pdffile=pdffile,
+        content=content,
         pages=pages,
         worker=worker,
     )
@@ -32,34 +33,42 @@ def work(pdffile: str, pages: tuple = None) -> str:
 
 
 @utila.profile('strategy:camelot')
-def run(pdffile: str, pages: tuple = None) -> iamraw.PageContentTableBoundings:
+def run(
+    pdffile: str,
+    boundings: list = None,
+    pages: tuple = None,
+) -> iamraw.PageContentTableBoundings:
     if pdffile is None:
         # no pdffile given
         utila.error('no camelot pdf file given')
         return []
     utila.exists_assert(pdffile)
-    parsed = parse_tables(pdffile, pages)
+    parsed = parse_tables(pdffile, boundings, pages)
     # group by page number
     result = group_result(parsed, pdffile, pages)
     return result
 
 
-def parse_tables(pdffile: str, pages: tuple = None):
+def parse_tables(pdffile: str, boundings: list, pages: tuple = None):
     # convert internal page definition to camelot definition
     pagesmax = pdfinfo.pages.determine(pdffile)
     pages = camelot_pages(pages, pagesmax)
-    result = parse_page(pdffile, pages)
+    result = parse_page(pdffile, boundings, pages)
     return result
 
 
-def parse_page(pdffile: str, page: str) -> list:
+def parse_page(pdffile: str, boundings: list, page: str) -> list:
+    table_regions = list(boundings) if boundings else None
+    # table_regions = ['170,370,560,270']
     parsed: camelot.core.TableList = camelot.read_pdf(
         pdffile,
+        table_regions=table_regions,
         pages=page,
     )
     if not parsed:
         parsed: camelot.core.TableList = camelot.read_pdf(
             pdffile,
+            # table_regions=table_regions,
             pages=page,
             flavor="stream",
         )

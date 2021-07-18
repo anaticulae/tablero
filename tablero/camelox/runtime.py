@@ -15,9 +15,10 @@ import utila
 import tablero.features.camelox
 
 if __name__ == "__main__":
-    FILE, PAGES = sys.argv[1], sys.argv[2]
+    FILE, CONTENT, PAGES = sys.argv[1], sys.argv[2], sys.argv[3]
     # TODO: REPLACE AFTER UPGRADING UTILA
     PAGES = utila.parse_numbers(PAGES.replace('_', ' '))
-    result = tablero.features.camelox.run(FILE, PAGES)
+    CONTENT = CONTENT.split('*')
+    result = tablero.features.camelox.run(FILE, CONTENT, PAGES)
     dumped = serializeraw.dump_tables(result)
     utila.log(dumped)
