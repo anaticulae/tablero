@@ -13,6 +13,7 @@ import serializeraw
 import utila
 
 import tablero.lines
+import tablero.utils
 
 # a table must have at least this amount of lines
 TABLE_MIN_LINE_COUNT = configo.HV_INT_PLUS(10)
