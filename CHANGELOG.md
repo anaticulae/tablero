@@ -2,6 +2,13 @@
 
 Every noteable change is logged here.
 
+## v0.4.1
+
+### Fix
+
+* add missing import (274c5110b3e7)
+* reduce verbosity (2dcaafc0d5a5)
+
 ## v0.4.0
 
 ### Feature
