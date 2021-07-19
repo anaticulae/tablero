@@ -206,7 +206,8 @@ def valid_distances(horizontals) -> bool:
         return True
     headerheight = horizontals[1][1] - horizontals[0][1]
     if headerheight > MAX_HEADER_HEIGHT:
-        utila.log(f'header too hight: {headerheight}')
+        utila.debug(f'header too hight: {headerheight}')
+        utila.debug(horizontals)
         return False
     return True
 
