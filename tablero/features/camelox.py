@@ -21,10 +21,13 @@ import tablero.__patch__
 import tablero.camelox.fork
 
 
-def work(pdffile: str, content: str, pages: tuple = None) -> str:
+def work(content: str, table: str, pages: tuple = None) -> str:
+    if not utila.exists(table):
+        utila.error(f'skip camelox, missing: {table}')
+        return '[]'
     worker: int = 6
     extracted = tablero.camelox.fork.run(
-        pdffile=pdffile,
+        pdffile=table,
         content=content,
         pages=pages,
         worker=worker,

@@ -15,8 +15,8 @@ WORKPLAN = [
     utila.create_step(
         'camelox',
         [
-            utila.ResultFile('table', name=None, ext=None, optional=True),
             utila.ResultFile('groupme', 'content_content'),
+            utila.Value('table', typ=None, defaultvar=None),
         ],
         ('camelox',),
     ),

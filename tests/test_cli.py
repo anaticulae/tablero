@@ -22,6 +22,8 @@ def test_tablero_cli_help(monkeypatch):
 @utilatest.requires(power.BOOK007_PDF)
 def test_tablero_cli_run(testdir, monkeypatch):
     """Run tabelero with all steps."""
-    tests.copy_pdf(power.BOOK007_PDF, testdir.tmpdir)
     source = power.link(power.BOOK007_PDF)
-    tests.run(f'-i {source} -i {testdir.tmpdir} -j8', monkeypatch=monkeypatch)
+    tests.run(
+        f'-i {source} -i {testdir.tmpdir} --table={power.BOOK007_PDF} -j8',
+        monkeypatch=monkeypatch,
+    )

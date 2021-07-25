@@ -29,8 +29,3 @@ failure = functools.partial(  # pylint:disable=C0103
     process=tablero.PROCESS,
     success=False,
 )
-
-
-def copy_pdf(source, dest, folder=None):
-    utilatest.fixture_requires(source, folder=folder)
-    utila.file_copy(source, os.path.join(dest, 'table'))

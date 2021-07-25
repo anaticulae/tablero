@@ -72,13 +72,13 @@ import tests
 @utilatest.nightly
 def test_detect_table_single(source, pages, expected, testdir, monkeypatch):
     utilatest.fixture_requires(source)
-    tests.copy_pdf(source, testdir.tmpdir)
+    pdf = source
     source = power.link(source)
     with monkeypatch.context() as context:
         # TODO: REMOVE AFTER UPGRADING CLUSTER STRATEGY
         context.setattr(tablero.utils, 'LINES_PER_PAGE_MAX', 180)
         tests.run(
-            f'-i {source} -i {testdir.tmpdir} --pages={pages}',
+            f'-i {source} -i {testdir.tmpdir} --table={pdf} --pages={pages}',
             monkeypatch=monkeypatch,
         )
     tables = tablero.path.decide(testdir.tmpdir)
@@ -90,13 +90,13 @@ def test_detect_table_single(source, pages, expected, testdir, monkeypatch):
 @utilatest.requires(power.BACHELOR090_PDF)
 def test_detect_table_bachelor90_page80(testdir, monkeypatch):
     """The table header contains only one connected textual string."""
-    source = power.link(power.BACHELOR090_PDF)
+    pdf = power.BACHELOR090_PDF
+    source = power.link(pdf)
     pages = '80'
     tests.run(
-        f'-i {source} --pages={pages}',
+        f'-i {source} --table={pdf} --pages={pages}',
         monkeypatch=monkeypatch,
     )
-
     tables = tablero.path.decide(testdir.tmpdir)
     loaded = serializeraw.load_tables(tables)[0].content
     assert len(loaded) == 1
@@ -104,9 +104,13 @@ def test_detect_table_bachelor90_page80(testdir, monkeypatch):
 
 @utilatest.requires(power.MASTER098_PDF)
 def test_detect_table_master98_page54_60(testdir, monkeypatch):
-    source = power.link(power.MASTER098_PDF)
+    pdf = power.MASTER098_PDF
+    source = power.link(pdf)
     pages = '54:62'
-    tests.run(f'-i {source} --pages={pages}', monkeypatch=monkeypatch)
+    tests.run(
+        f'-i {source} --table={pdf} --pages={pages}',
+        monkeypatch=monkeypatch,
+    )
 
     tables = tablero.path.decide(testdir.tmpdir)
     loaded = serializeraw.load_tables(tables)
@@ -118,13 +122,17 @@ def test_detect_table_master98_page54_60(testdir, monkeypatch):
     assert len(utila.select_content(loaded, 59)) == 1
 
 
+@pytest.mark.xfail(reason='check later')
 @utilatest.requires(power.BACHELOR056_PDF)
 def test_detect_table_bachelor56(testdir, monkeypatch):
-    source = power.link(power.BACHELOR056_PDF)
-    tests.run(f'-i {source} ', monkeypatch=monkeypatch)
+    pdf = power.BACHELOR056_PDF
+    source = power.link(pdf)
+    tests.run(
+        f'-i {source} --table={pdf}',
+        monkeypatch=monkeypatch,
+    )
     loaded = serializeraw.load_tables(tablero.path.decide(testdir.tmpdir))
-
-    tablero.display.render_tables(loaded, power.BACHELOR056_PDF, testdir.tmpdir)
+    tablero.display.render_tables(loaded, pdf, testdir.tmpdir)
     tables = utila.flatten_content(loaded)
     # 6 includes 1 figure which can be detected as table
     assert len(tables) in (5, 6)  # VALIDATED
@@ -134,5 +142,5 @@ def test_detect_table_bachelor56(testdir, monkeypatch):
 @utilatest.requires(power.MASTER112_PDF)
 def test_master112_bachelor_timeout(testdir, monkeypatch):
     source = power.link(power.MASTER112_PDF)
-    cmd = f'-i {source} --pages=110'
+    cmd = f'-i {source} --table={power.MASTER112_PDF} --pages=110'
     tests.run(cmd, monkeypatch=monkeypatch)

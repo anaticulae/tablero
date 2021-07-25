@@ -24,10 +24,11 @@ import tests
 @utilatest.nightly
 def test_table_extract_negative(pdf, testdir, monkeypatch):
     folder = 'notable'
-    # copy pdffile
-    tests.copy_pdf(pdf, testdir.tmpdir, folder=folder)
     source = power.link(pdf, folder=folder)
-    tests.run(f'-i {source} -i {testdir.tmpdir}', monkeypatch=monkeypatch)
+    tests.run(
+        f'-i {source} -i {testdir.tmpdir} --table={pdf}',
+        monkeypatch=monkeypatch,
+    )
     # load result
     tables = tablero.path.decide(testdir.tmpdir)
     loaded = serializeraw.load_tables(tables)
