@@ -102,6 +102,7 @@ def test_detect_table_bachelor90_page80(testdir, monkeypatch):
     assert len(loaded) == 1
 
 
+@utilatest.nightly
 @utilatest.requires(power.MASTER098_PDF)
 def test_detect_table_master98_page54_60(testdir, monkeypatch):
     pdf = power.MASTER098_PDF
@@ -123,6 +124,7 @@ def test_detect_table_master98_page54_60(testdir, monkeypatch):
 
 
 @pytest.mark.xfail(reason='check later')
+@utilatest.nightly
 @utilatest.requires(power.BACHELOR056_PDF)
 def test_detect_table_bachelor56(testdir, monkeypatch):
     pdf = power.BACHELOR056_PDF
