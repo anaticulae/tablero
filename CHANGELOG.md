@@ -2,6 +2,13 @@
 
 Every noteable change is logged here.
 
+## v0.5.0
+
+### Feature
+
+* replace with ghost code (a71c1b888653)
+* replace static file with parameter (8940f0e3a3ed)
+
 ## v0.4.1
 
 ### Fix
