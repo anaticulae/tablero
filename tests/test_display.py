@@ -26,16 +26,8 @@ def tables():
 
 
 @utilatest.nightly
-def test_display_tables(testdir):
+def test_display_tables():
     source = power.DOCU13_PDF
     data = tables()
-    tablero.display.render_tables(data, source, testdir.tmpdir)
-    assert utila.file_count(testdir.tmpdir) == 11
-
-
-@utilatest.longrun
-def test_ghost_small(testdir):
-    source = power.DOCU13_PDF
-    pages = (1, 2, 3)
-    tablero.display.ghost_small(source, testdir.tmpdir, pages)
-    assert utila.file_count(testdir.tmpdir) == 3
+    outdir = tablero.display.render_tables(data, source)
+    assert utila.file_count(outdir) == 11

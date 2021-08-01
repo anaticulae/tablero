@@ -132,7 +132,7 @@ def test_detect_table_bachelor56(testdir, monkeypatch):
         monkeypatch=monkeypatch,
     )
     loaded = serializeraw.load_tables(tablero.path.decide(testdir.tmpdir))
-    tablero.display.render_tables(loaded, pdf, testdir.tmpdir)
+    tablero.display.render_tables(loaded, pdf)
     tables = utila.flatten_content(loaded)
     # 6 includes 1 figure which can be detected as table
     assert len(tables) in (5, 6)  # VALIDATED

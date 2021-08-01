@@ -46,7 +46,7 @@ def test_table_bachelor90_page77_extract_table(testdir):
     tables = extract_tables(source, page)
     assert len(tables) == 3
     tables = [iamraw.PageContentTableBounding(page=page, content=tables)]
-    tablero.display.render_tables(tables, power.BACHELOR090_PDF, testdir.tmpdir)
+    tablero.display.render_tables(tables, power.BACHELOR090_PDF)
 
 
 @pytest.mark.parametrize(
@@ -58,7 +58,7 @@ def test_table_bachelor90_page77_extract_table(testdir):
     ],
 )
 @utilatest.requires(power.BACHELOR090_PDF)
-def test_table_bachelor90_page77_first_table(text, line, bounding, testdir):
+def test_table_bachelor90_page77_first_table(text, line, bounding):
     source = power.link(power.BACHELOR090_PDF)
     page = 77
     ptn = serializeraw.create_pagetextnavigators_frompath(
@@ -77,4 +77,4 @@ def test_table_bachelor90_page77_first_table(text, line, bounding, testdir):
     tables_bounding = [table.bounding for table in tables]
     assert tables_bounding == [bounding]
     tables = [iamraw.PageContentTableBounding(page=page, content=tables)]
-    tablero.display.render_tables(tables, power.BACHELOR090_PDF, testdir.tmpdir)
+    tablero.display.render_tables(tables, power.BACHELOR090_PDF)
