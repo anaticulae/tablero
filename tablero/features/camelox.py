@@ -8,6 +8,7 @@
 # =============================================================================
 
 import collections
+import warnings
 
 import camelot
 import camelot.core
@@ -41,34 +42,47 @@ def run(
     pdffile: str,
     boundings: list = None,
     pages: tuple = None,
+    verbose: bool = False,
 ) -> iamraw.PageContentTableBoundings:
     if pdffile is None:
         # no pdffile given
         utila.error('no camelot pdf file given')
         return []
     utila.exists_assert(pdffile)
-    parsed = parse_tables(pdffile, boundings, pages)
+    parsed = parse_tables(pdffile, boundings, pages, verbose=verbose)
     # group by page number
     result = group_result(parsed, pdffile, pages)
     return result
 
 
-def parse_tables(pdffile: str, boundings: list, pages: tuple = None):
+def parse_tables(
+    pdffile: str,
+    boundings: list,
+    pages: tuple = None,
+    verbose: bool = False,
+):
     # convert internal page definition to camelot definition
     pagesmax = pdfinfo.pages.determine(pdffile)
     pages = camelot_pages(pages, pagesmax)
-    result = parse_page(pdffile, boundings, pages)
+    result = parse_page(pdffile, boundings, pages, verbose=verbose)
     return result
 
 
-def parse_page(pdffile: str, boundings: list, page: str) -> list:
+def parse_page(
+    pdffile: str,
+    boundings: list,
+    page: str,
+    verbose: bool = False,
+) -> list:
     boundings = list(boundings) if boundings else None
     # HACK:
     tablero.__patch__.TODO = boundings
-    parsed: camelot.core.TableList = camelot.read_pdf(
-        filepath=pdffile,
-        pages=page,
-    )
+    catch_warnings = warnings.catch_warnings if verbose else utila.nothing
+    with catch_warnings():
+        parsed: camelot.core.TableList = camelot.read_pdf(
+            filepath=pdffile,
+            pages=page,
+        )
     # if not parsed:
     #     parsed: camelot.core.TableList = camelot.read_pdf(
     #         pdffile,

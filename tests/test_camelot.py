@@ -38,3 +38,15 @@ def test_camelot_latex():
     source = power.BACHELOR090_PDF
     parsed = tablero.features.camelox.run(source, pages=76)
     assert len(parsed) == 1
+
+
+@pytest.mark.parametrize('verbose', [True, False])
+def test_camelot_verbose_flag(verbose, capsys):
+    source = power.MASTER116_PDF
+    tablero.features.camelox.run(
+        source,
+        pages=(2, 3),
+        verbose=verbose,
+    )
+    stderr = utilatest.stderr(capsys)
+    assert 'page-3 is image-based' in stderr != verbose, stderr
