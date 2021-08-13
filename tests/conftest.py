@@ -24,18 +24,18 @@ RESOURCES = [
     (power.BACHELOR056_PDF, '0:34'),
     (power.BACHELOR090_PDF, '76:81'),
     (power.MASTER098_PDF, '53:61'),
-    (power.DOCU13_PDF, None),
-    (power.BOOK007_PDF, None),
-    (power.DOCU07_PDF, None),
+    power.ORDER050_PDF,
+    power.DOCU13_PDF,
+    power.BOOK007_PDF,
+    power.DOCU007_PDF,
     (power.BACHELOR063_PDF, '24:28'),
     (power.MASTER112_PDF, '110'),
-    (power.ORDER050_PDF, None),
 ]
 
 RESOURCES_NOTABLE = [
-    (power.HOME040_PDF, None),
-    (power.HOME025_PDF, None),
-    (power.BOOK007_PDF, None),
+    power.HOME040_PDF,
+    power.HOME025_PDF,
+    power.BOOK007_PDF,
 ]
 
 
@@ -54,6 +54,7 @@ def extract(resources):
         pdfinfo=False,
         worker=WORKER,
         base=power.REPOSITORY,
+        pages=':',
     )
 
 
@@ -67,4 +68,5 @@ def extract_notable(resources):
         pdfinfo=False,
         worker=WORKER,
         base=power.REPOSITORY,
+        pages=':',
     )
