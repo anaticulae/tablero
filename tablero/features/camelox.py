@@ -93,6 +93,9 @@ def parse_page(
 
 
 TABLE_ACCURACY_MIN = 75.0  # TODO: HOLY VALUE
+TABLE_WHITESPACE_MAX = 40.0  # TODO: HOLY VALUE
+TABLE_WIDTH_MIN = 100
+TABLE_HEIGHT_MIN = 30
 
 
 def group_result(parsed, pdffile, pages) -> iamraw.PageContentTableBoundings:
@@ -100,11 +103,11 @@ def group_result(parsed, pdffile, pages) -> iamraw.PageContentTableBoundings:
     sizes = pagesizes(pdffile, pages)
     collected = collections.defaultdict(list)
     for table in parsed:
-        if table.parsing_report['accuracy'] < TABLE_ACCURACY_MIN:
+        if invalid_table(table):
             utila.debug(f'skip table: {table}')
             utila.debug(table.parsing_report)
             continue
-        utila.error(table.parsing_report)
+        utila.debug(table.parsing_report)
         pagenumber = zero_based(table.page)
         # Hint: We flip top/down
         bounding = flip_bounding(table._bbox, sizes[pagenumber])  # pylint:disable=W0212
@@ -114,6 +117,25 @@ def group_result(parsed, pdffile, pages) -> iamraw.PageContentTableBoundings:
         for page, content in collected.items()
     ]
     return result
+
+
+def invalid_table(table) -> bool:
+    if table.parsing_report['accuracy'] < TABLE_ACCURACY_MIN:
+        return True
+    if table.parsing_report['whitespace'] > TABLE_WHITESPACE_MAX:
+        return True
+    cells = utila.flatten(table.cells)
+    cells = [
+        (item.x1, item.y1, item.x2, item.y2)
+        for item in cells
+        if item._text.strip()  # pylint:disable=W0212
+    ]
+    rectangle = utila.rectangle_max(cells)
+    if utila.rectangle_width(rectangle) < TABLE_WIDTH_MIN:
+        return True
+    if utila.rectangle_height(rectangle) < TABLE_HEIGHT_MIN:
+        return True
+    return False
 
 
 def flip_bounding(bounding, pagesize) -> iamraw.BoundingBox:

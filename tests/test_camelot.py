@@ -50,3 +50,14 @@ def test_camelot_verbose_flag(verbose, capsys):
     )
     stderr = utilatest.stderr(capsys)
     assert 'page-3 is image-based' in stderr != verbose, stderr
+
+
+def test_camelot_master116_error():
+    """Do not detect `Maximum, Minimum, Durchschnitt` as table."""
+    source = power.MASTER116_PDF
+    parsed = tablero.features.camelox.run(
+        source,
+        pages=(20,),
+        verbose=True,
+    )
+    assert not parsed
