@@ -61,3 +61,19 @@ def test_camelot_master116_error():
         verbose=True,
     )
     assert not parsed
+
+
+@pytest.mark.xfail(reason='could not detect image tables')
+def test_camelot_bachelor76_error():
+    """\
+    TODO: INVESTIGATE:
+    UserWarning: (479.5, 482.5) does not lie in column range
+    (116.13284084038696, 478.9434582829505) [utils.py:650]
+    """
+    source = power.BACHELOR076_PDF
+    parsed = tablero.features.camelox.run(
+        source,
+        verbose=True,
+        pages=(13,),
+    )
+    assert parsed
