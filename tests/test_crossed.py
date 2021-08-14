@@ -18,12 +18,12 @@ import tablero.features.crossed
 
 @pytest.mark.parametrize('source, expected', [
     pytest.param(
-        power.DOCU13_PDF,
+        power.DOCU013_PDF,
         [1, 3, 3, 5, 2, 5, 6, 4, 5, 3, 1],
         id='vim',
     ),
 ])
-@utilatest.requires(power.DOCU13_PDF)
+@utilatest.requires(power.DOCU013_PDF)
 def test_table_extract(source, expected):
     source = power.link(source)
     source = iamraw.path.line(source)

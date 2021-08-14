@@ -15,9 +15,9 @@ import utilatest
 import tablero.features.word
 
 
-@utilatest.requires(power.DOCU13_PDF)
+@utilatest.requires(power.DOCU013_PDF)
 def test_table_dump_and_load():
-    source = iamraw.path.line(power.link(power.DOCU13_PDF))
+    source = iamraw.path.line(power.link(power.DOCU013_PDF))
     loaded = serializeraw.load_lines(source, pages=(0, 1, 2))
     grouped = tablero.features.word.locate_tables(loaded)
     tables = tablero.features.word.judge_tables(grouped)

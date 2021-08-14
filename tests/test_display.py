@@ -18,7 +18,7 @@ import tablero.features
 
 
 def tables():
-    source = iamraw.path.line(power.link(power.DOCU13_PDF))
+    source = iamraw.path.line(power.link(power.DOCU013_PDF))
     loaded = serializeraw.load_lines(source)
     grouped = tablero.features.word.locate_tables(loaded)
     result = tablero.features.word.judge_tables(grouped)
@@ -27,7 +27,7 @@ def tables():
 
 @utilatest.nightly
 def test_display_tables():
-    source = power.DOCU13_PDF
+    source = power.DOCU013_PDF
     data = tables()
     outdir = tablero.display.render_tables(data, source)
     assert utila.file_count(outdir) == 11

@@ -17,14 +17,14 @@ import tablero.features.camelox
 
 
 def test_camelot_run():
-    source = power.DOCU13_PDF
+    source = power.DOCU013_PDF
     parsed = tablero.features.camelox.run(source, pages=2)
     assert len(parsed) == 1
 
 
 @utilatest.nightly
 def test_camelot_forked(testdir):
-    source = power.DOCU13_PDF
+    source = power.DOCU013_PDF
     content = power.link(source)
     parsed = tablero.camelox.fork.run(source, content=content, worker=4)
     flatten = utila.flatten_content(parsed)

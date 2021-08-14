@@ -27,13 +27,13 @@ import tests
         id='bachelor90',
     ),
     pytest.param(
-        power.DOCU13_PDF,
+        power.DOCU013_PDF,
         '2:7',
         [1, 3, 3, 5, 2],
         id='vimguide',
     ),
     pytest.param(
-        power.DOCU13_PDF,
+        power.DOCU013_PDF,
         '5',
         [5],
         id='vimguide_page5',
@@ -51,7 +51,7 @@ import tests
         id='bachelor56_page31',
     ),
     pytest.param(
-        power.DOCU07_PDF,
+        power.DOCU007_PDF,
         '0,1,2',
         [],
         id='notable_howto_pyporting',
