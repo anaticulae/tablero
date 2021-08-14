@@ -2,6 +2,17 @@
 
 Every noteable change is logged here.
 
+## v0.6.0
+
+### Feature
+
+* skip non-line pages (445f20db8a17)
+* improve invalid table check (0cdbc4d1a21f)
+
+### Fix
+
+* suppress camelot logging (68cd24ab407e)
+
 ## v0.5.0
 
 ### Feature
