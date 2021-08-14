@@ -22,19 +22,43 @@ import tablero.__patch__
 import tablero.camelox.fork
 
 
-def work(content: str, table: str, pages: tuple = None) -> str:
+def work(content: str, lines: str, table: str, pages: tuple = None) -> str:
     if not utila.exists(table):
         utila.error(f'skip camelox, missing: {table}')
         return '[]'
-    worker: int = 6
-    extracted = tablero.camelox.fork.run(
-        pdffile=table,
-        content=content,
-        pages=pages,
-        worker=worker,
-    )
+    if not utila.exists(lines):
+        lines = None
+    else:
+        lines = serializeraw.load_lines(lines, pages=pages)
+        pages = shrink_pages(lines, pages)
+    if pages != []:
+        worker: int = 6
+        extracted = tablero.camelox.fork.run(
+            pdffile=table,
+            content=content,
+            pages=pages,
+            worker=worker,
+        )
+    else:
+        utila.debug('no pages with lines selected, skip camelox')
+        extracted = []
     dumped = serializeraw.dump_tables(extracted)
     return dumped
+
+
+def shrink_pages(lines, pages):
+    """Use line pages to reduce amount of generated pages. In the
+    current state, camelox detect tables constructing out of lines. If
+    we do not have any lines, we can save this generation time."""
+    if not lines:
+        return pages
+    line_pages = [item.page for item in lines if len(item.content) >= 3]
+    if not line_pages:
+        return []
+    result = [
+        item for item in line_pages if not utila.should_skip(line_pages, pages)
+    ]
+    return result
 
 
 @utila.profile('strategy:camelot')
