@@ -21,11 +21,11 @@ WORKER = 6
 power.setup(tablero.ROOT)
 
 RESOURCES = [
-    (power.BACHELOR056_PDF, '0:34'),
-    (power.BACHELOR090_PDF, '76:81'),
-    (power.MASTER098_PDF, '53:61'),
     power.ORDER050_PDF,
+    (power.BACHELOR056_PDF, '0:34'),
     power.DOCU013_PDF,
+    (power.MASTER098_PDF, '53:61'),
+    (power.BACHELOR090_PDF, '76:81'),
     power.BOOK007_PDF,
     power.DOCU007_PDF,
     (power.BACHELOR063_PDF, '24:28'),
