@@ -59,7 +59,7 @@ def run(pdffile: str, content: str, pages: tuple = None, worker: int = 1):
 
 def single(pdffile, page, area=None):
     page = utila.from_tuple(page, separator='_')
-    area = utila.from_tuple(area, separator='*') if area else ''
+    area = utila.from_tuple(area, separator='*') if area else '0,0,1024,1024'
     cmd = f'python {RUNTIME} {pdffile} {area} {page}'
     cmd = utila.forward_slash(cmd, newline=False)
     completed = utila.run(cmd)
