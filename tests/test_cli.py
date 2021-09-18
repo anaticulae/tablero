@@ -8,6 +8,7 @@
 # =============================================================================
 
 import power
+import utila
 import utilatest
 
 import tests
@@ -27,3 +28,14 @@ def test_tablero_cli_run(testdir, monkeypatch):
         f'-i {source} -i {testdir.tmpdir} --table={power.BOOK007_PDF} -j8',
         monkeypatch=monkeypatch,
     )
+
+
+def test_tablero_cli_internal_error(testdir, monkeypatch):
+    """Run tablero with unsupported camelot file."""
+    pdf = power.BACHELOR109_PDF
+    source = power.link(pdf)
+    completed = tests.run(
+        f'-i {source} -i {testdir.tmpdir} --table={pdf} --camelox',
+        monkeypatch=monkeypatch,
+    )
+    assert completed == utila.SUCCESS
