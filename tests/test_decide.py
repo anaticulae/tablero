@@ -121,7 +121,6 @@ def test_detect_table_master98_page54_60(testdir, monkeypatch):
     assert len(utila.select_content(loaded, 59)) == 1
 
 
-@pytest.mark.xfail(reason='check later')
 @utilatest.nightly
 @utilatest.requires(power.BACHELOR056_PDF)
 def test_detect_table_bachelor56(testdir, monkeypatch):
