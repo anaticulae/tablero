@@ -39,6 +39,9 @@ def work(content: str, lines: str, table: str, pages: tuple = None) -> str:
             pages=pages,
             worker=worker,
         )
+        if extracted is None:
+            # error while running camelot
+            extracted = []
     else:
         utila.debug('no pages with lines selected, skip camelox')
         extracted = []
@@ -74,6 +77,8 @@ def run(
         return []
     utila.exists_assert(pdffile)
     parsed = parse_tables(pdffile, boundings, pages, verbose=verbose)
+    if not parsed:
+        return []
     # group by page number
     result = group_result(parsed, pdffile, pages)
     return result
@@ -102,11 +107,16 @@ def parse_page(
     # HACK:
     tablero.__patch__.TODO = boundings
     catch_warnings = warnings.catch_warnings if verbose else utila.nothing
-    with catch_warnings():
-        parsed: camelot.core.TableList = camelot.read_pdf(
-            filepath=pdffile,
-            pages=page,
-        )
+    try:
+        with catch_warnings():
+            parsed: camelot.core.TableList = camelot.read_pdf(
+                filepath=pdffile,
+                pages=page,
+            )
+    except NotImplementedError as msg:
+        utila.error('internal camelot error')
+        utila.error(msg)
+        return None
     # if not parsed:
     #     parsed: camelot.core.TableList = camelot.read_pdf(
     #         pdffile,

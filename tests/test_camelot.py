@@ -77,3 +77,11 @@ def test_camelot_bachelor76_error():
         pages=(13,),
     )
     assert parsed
+
+
+def test_camelot_internal_error(capsys):
+    source = power.BACHELOR109_PDF
+    parsed = tablero.features.camelox.run(source)
+    assert not parsed
+    error = utilatest.stderr(capsys)
+    assert 'internal camelot error' in error
