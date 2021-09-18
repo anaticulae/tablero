@@ -9,7 +9,6 @@
 
 import functools
 import os
-import sys
 
 import pdfinfo.pages
 import serializeraw
@@ -38,13 +37,12 @@ def run(pdffile: str, content: str, pages: tuple = None, worker: int = 1):
         content = None
         todo = [functools.partial(single, pdffile, page) for page in grouped]
     todo = utila.fork(*todo, worker=worker)
-    if isinstance(todo, int):
-        utila.error('error while running camelox')
-        sys.exit(utila.FAILURE)
     # prepare result
     errors = [done.stderr.strip() for done in todo if done.stderr.strip()]
     if errors:
-        utila.error(errors)
+        msg = ''.join(errors).replace('[ERROR]', '')
+        utila.error(msg)
+        return []
     dones = [done.stdout.strip() for done in todo]
     # skip empty result
     dones = [item for item in dones if item != '[]']
@@ -62,7 +60,9 @@ def single(pdffile, page, area=None):
     area = utila.from_tuple(area, separator='*') if area else '0,0,1024,1024'
     cmd = f'python {RUNTIME} {pdffile} {area} {page}'
     cmd = utila.forward_slash(cmd, newline=False)
-    completed = utila.run(cmd)
+    completed = utila.run(cmd, expect=None)
+    if completed.returncode:
+        utila.debug(completed)
     return completed
 
 
