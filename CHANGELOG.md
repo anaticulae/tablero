@@ -2,6 +2,14 @@
 
 Every noteable change is logged here.
 
+## v0.6.1
+
+### Fix
+
+* make failing camelot less strict (d1ba965580c4)
+* use default area if no area is given (be5a5f756cce)
+* catch internal camelot error (489b9ead4701)
+
 ## v0.6.0
 
 ### Feature
