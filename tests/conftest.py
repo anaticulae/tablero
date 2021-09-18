@@ -52,6 +52,7 @@ def extract(resources):
         tablero=False,
         oneline=None,
         pdfinfo=False,
+        codero=False,
         worker=WORKER,
         base=power.REPOSITORY,
         pages=':',
