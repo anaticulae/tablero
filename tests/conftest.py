@@ -36,6 +36,7 @@ RESOURCES = [
 RESOURCES_NOTABLE = [
     power.HOME040_PDF,
     power.HOME025_PDF,
+    (power.MASTER075_PDF, '10:20'),
     power.BOOK007_PDF,
 ]
 
