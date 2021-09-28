@@ -2,6 +2,15 @@
 
 Every noteable change is logged here.
 
+## v0.7.0
+
+### Feature
+
+* skip potential table with too many columns (a0b21b056019)
+* skip tables with to small table mean row (8388dd7716f6)
+* skip groups with too many horizontal lines (e268f746dec4)
+* convert cluster earlier (e41e8c189ab7)
+
 ## v0.6.1
 
 ### Fix
