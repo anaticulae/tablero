@@ -72,6 +72,9 @@ def done():
     return []
 
 
+LINE_COUNT_MAX = 15
+
+
 def cluster_page(navigator, lines) -> iamraw.TableBoundings:
     """\
     1. Group horizontals by x-displacement
@@ -91,6 +94,10 @@ def cluster_page(navigator, lines) -> iamraw.TableBoundings:
     result = []
     for group in grouped_horizontals:
         if len(group) <= 1:
+            continue
+        if len(group) > LINE_COUNT_MAX:
+            # this group can not be a table, latex tables have only few
+            # lines.
             continue
         double_table = extract_potential_table(
             boundings,
