@@ -86,7 +86,7 @@ def cluster_page(lines) -> iamraw.TableBoundings:
 
 def extract_potential_table(verticals, horizontals):
     if not horizontals:
-        utila.debug('skip corossed, no horizontals, extract_potential_table')
+        utila.debug('skip crossed, no horizontals, extract_potential_table')
         return []
     buckets = utila.Buckets(
         horizontals,
