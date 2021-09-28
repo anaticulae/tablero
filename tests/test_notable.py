@@ -23,14 +23,19 @@ import tests
 ])
 @utilatest.nightly
 def test_table_extract_negative(pdf, testdir, monkeypatch):
+    loaded = determine_tables(pdf, ':', testdir, monkeypatch)
+    assert not loaded, str(loaded)
+
+
+def determine_tables(pdf, pages, testdir, monkeypatch):
     folder = 'notable'
     source = power.link(pdf, folder=folder)
     tests.run(
-        f'-i {source} -i {testdir.tmpdir} --table={pdf}',
+        f'-i {source} -i {testdir.tmpdir} --table={pdf} --pages={pages}',
         monkeypatch=monkeypatch,
     )
     # load result
     tables = tablero.path.decide(testdir.tmpdir)
     loaded = serializeraw.load_tables(tables)
     loaded = [item for item in loaded if item.content]
-    assert not loaded, str(loaded)
+    return loaded
