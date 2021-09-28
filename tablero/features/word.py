@@ -49,6 +49,8 @@ def locate_tables(lines):
         # TODO: profile only on --profile
         # with utila.profile():
         clustered = utila.intersecting_line_cluster(content, max_diff=5.0)
+        # convert cluster to list
+        clustered = list(clustered)
         result.append((page.page, clustered))
     return result
 
@@ -71,7 +73,6 @@ def judge_tables(grouped):
                 continue
             bounding = utila.rectangle_max(item)
             # convert cluster to list
-            item = list(item)
             pageresult.append(
                 iamraw.TableBounding(
                     bounding=bounding,
