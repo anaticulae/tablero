@@ -12,6 +12,7 @@ import iamraw
 import serializeraw
 import utila
 
+import tablero.features.crossed
 import tablero.lines
 import tablero.utils
 
@@ -55,6 +56,9 @@ def locate_tables(lines):
     return result
 
 
+TABLE_ROW_HEIGHT_MEAN = 12.0
+
+
 def judge_tables(grouped):
     """This approach handles only very simple word tables, beautiful
     "latex" tables are not supported because there are build out of
@@ -70,6 +74,9 @@ def judge_tables(grouped):
                 continue
             avg = tablero.lines.length_avg(item)
             if avg < tablero.config.TABLE_MIN_AVG_LINE_LENGTH:
+                continue
+            rowheight_mean = tablero.features.crossed.table_row_height_mean(item)  # yapf:disable
+            if rowheight_mean < TABLE_ROW_HEIGHT_MEAN:
                 continue
             bounding = utila.rectangle_max(item)
             # convert cluster to list

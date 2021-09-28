@@ -27,6 +27,11 @@ def test_table_extract_negative(pdf, testdir, monkeypatch):
     assert not loaded, str(loaded)
 
 
+def test_master75page17_notable(testdir, monkeypatch):
+    tables = determine_tables(power.MASTER075_PDF, '17', testdir, monkeypatch)
+    assert not tables
+
+
 def determine_tables(pdf, pages, testdir, monkeypatch):
     folder = 'notable'
     source = power.link(pdf, folder=folder)

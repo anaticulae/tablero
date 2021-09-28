@@ -20,6 +20,7 @@ Strategy:
 """
 
 import operator
+import statistics
 
 import iamraw
 import serializeraw
@@ -55,12 +56,13 @@ def run(lines):
     return result
 
 
+TABLE_ROW_HEIGHT_MEAN = 12.0
+
+
 def cluster_page(lines) -> iamraw.TableBoundings:
     horizontals = tablero.utils.determine_horizontals(lines)
     verticals = tablero.utils.determine_verticals(lines)
-
     result = extract_potential_table(verticals, horizontals)
-
     result = [
         iamraw.TableBounding(
             bounding=item,
@@ -70,17 +72,28 @@ def cluster_page(lines) -> iamraw.TableBoundings:
             ),
         ) for item in result
     ]
-
     # exclude bounding box, which has two vertical lines
     result = [
         item for item in result
         if len(tablero.utils.determine_verticals(item.lines)) >= 3
     ]
-
     result = [
         item for item in result if tablero.lines.length_avg(item.lines) >=
         tablero.config.TABLE_MIN_AVG_LINE_LENGTH
     ]
+    result = [
+        item for item in result
+        if table_row_height_mean(item.lines) > TABLE_ROW_HEIGHT_MEAN
+    ]
+    return result
+
+
+def table_row_height_mean(lines):
+    hori = tablero.utils.determine_horizontals(lines)
+    hori = [item[1] for item in utila.sort_leftright_topdown(hori)]
+    grouped = [item[0] for item in utila.groupby_diff(hori, maxdiff=5.0)]
+    diff = utila.diffs(grouped)
+    result = statistics.mean(diff)
     return result
 
 
