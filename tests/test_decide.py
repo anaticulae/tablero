@@ -41,7 +41,7 @@ import tests
     pytest.param(
         power.BACHELOR056_PDF,
         '15,18',
-        [1, 1],
+        [1],
         id='bachelor56_page15',
     ),
     pytest.param(
@@ -71,6 +71,9 @@ import tests
 ])
 @utilatest.nightly
 def test_detect_table_single(source, pages, expected, testdir, monkeypatch):
+    """\
+    # bachelor56page18: figure is not detected as table anymore.
+    """
     utilatest.fixture_requires(source)
     pdf = source
     source = power.link(source)

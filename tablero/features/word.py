@@ -57,6 +57,7 @@ def locate_tables(lines):
 
 
 TABLE_ROW_HEIGHT_MEAN = 12.0
+TABLE_COLUMN_COUNT_MAX = 10
 
 
 def judge_tables(grouped):
@@ -77,6 +78,9 @@ def judge_tables(grouped):
                 continue
             rowheight_mean = tablero.features.crossed.table_row_height_mean(item)  # yapf:disable
             if rowheight_mean < TABLE_ROW_HEIGHT_MEAN:
+                continue
+            column_count = tablero.features.crossed.column_count(item)
+            if column_count > TABLE_COLUMN_COUNT_MAX:
                 continue
             bounding = utila.rectangle_max(item)
             # convert cluster to list
