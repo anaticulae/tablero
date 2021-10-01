@@ -92,10 +92,12 @@ def cluster_page(lines) -> iamraw.TableBoundings:
     return result
 
 
-def table_row_height_mean(lines):
+def table_row_height_mean(lines) -> float:
     hori = tablero.utils.determine_horizontals(lines)
     hori = [item[1] for item in utila.sort_leftright_topdown(hori)]
     grouped = [item[0] for item in utila.groupby_diff(hori, maxdiff=5.0)]
+    if len(grouped) < 2:
+        return 0.0
     diff = utila.diffs(grouped)
     result = statistics.mean(diff)
     return result
