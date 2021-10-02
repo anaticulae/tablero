@@ -23,6 +23,7 @@ power.setup(tablero.ROOT)
 RESOURCES = [
     power.ORDER050_PDF,
     (power.BACHELOR056_PDF, '0:34'),
+    (power.BACHELOR051_PDF, '20:35'),
     power.DOCU013_PDF,
     (power.MASTER098_PDF, '53:61'),
     (power.BACHELOR090_PDF, '76:81'),
