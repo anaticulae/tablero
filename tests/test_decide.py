@@ -146,3 +146,14 @@ def test_master112_bachelor_timeout(testdir, monkeypatch):
     source = power.link(power.MASTER112_PDF)
     cmd = f'-i {source} --table={power.MASTER112_PDF} --pages=110'
     tests.run(cmd, monkeypatch=monkeypatch)
+
+
+def test_bachelor51page29(testdir, monkeypatch):
+    pdf = power.BACHELOR051_PDF
+    source = power.link(pdf)
+    cmd = f'-i {source} --table={pdf} --pages=29'
+    tests.run(cmd, monkeypatch=monkeypatch)
+    loaded = serializeraw.load_tables(tablero.path.decide(testdir.tmpdir))
+    page29content = utila.select_page(loaded, page=29).content
+    assert len(page29content) == 1
+    assert page29content[0].bounding == (81.84, 645.6, 513.6, 697.92)

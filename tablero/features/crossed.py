@@ -128,6 +128,8 @@ def extract_potential_table(verticals, horizontals):
             buckets.add((x0, item, x1, item))
     merged = [index if item else None for index, item in enumerate(buckets)]
     merged = utila.groupby_none(merged)
+    # single line carnt build a table
+    merged = [item for item in merged if len(item) > 1]
     tables = []
     for group in merged:
         topline = horizontals[group[0] - 1]
