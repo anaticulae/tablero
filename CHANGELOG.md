@@ -2,6 +2,13 @@
 
 Every noteable change is logged here.
 
+## v0.7.1
+
+### Fix
+
+* single lines can not build a table (c2624ca6ee0e)
+* skip tablero row height check (b8334012162b)
+
 ## v0.7.0
 
 ### Feature
