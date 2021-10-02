@@ -11,4 +11,4 @@ utilatest==0.9.0
 power==2.2.0
 genex==0.18.0
 # TODO: REMOVE LATER
-groupme>=0.15.1<1.0.0
+groupme>=0.15.2<1.0.0
