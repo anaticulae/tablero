@@ -108,15 +108,7 @@ def test_detect_table_bachelor90_page80(testdir, monkeypatch):
 @utilatest.nightly
 @utilatest.requires(power.MASTER098_PDF)
 def test_detect_table_master98_page54_60(testdir, monkeypatch):
-    pdf = power.MASTER098_PDF
-    source = power.link(pdf)
-    pages = '54:62'
-    tests.run(
-        f'-i {source} --table={pdf} --pages={pages}',
-        monkeypatch=monkeypatch,
-    )
-    tables = tablero.path.decide(testdir.tmpdir)
-    loaded = serializeraw.load_tables(tables)
+    loaded = run_tables(power.MASTER098_PDF, '54:62', testdir, monkeypatch)
     # verify extracted tables
     assert len(utila.select_content(loaded, 54)) == 1
     assert len(utila.select_content(loaded, 55)) == 1
@@ -127,14 +119,7 @@ def test_detect_table_master98_page54_60(testdir, monkeypatch):
 @utilatest.nightly
 @utilatest.requires(power.BACHELOR056_PDF)
 def test_detect_table_bachelor56(testdir, monkeypatch):
-    pdf = power.BACHELOR056_PDF
-    source = power.link(pdf)
-    tests.run(
-        f'-i {source} --table={pdf}',
-        monkeypatch=monkeypatch,
-    )
-    loaded = serializeraw.load_tables(tablero.path.decide(testdir.tmpdir))
-    tablero.display.render_tables(loaded, pdf)
+    loaded = run_tables(power.BACHELOR056_PDF, ':', testdir, monkeypatch)
     tables = utila.flatten_content(loaded)
     # 6 includes 1 figure which can be detected as table
     assert len(tables) in (5, 6)  # VALIDATED
@@ -143,17 +128,19 @@ def test_detect_table_bachelor56(testdir, monkeypatch):
 @pytest.mark.timeout(30)
 @utilatest.requires(power.MASTER112_PDF)
 def test_master112_bachelor_timeout(testdir, monkeypatch):
-    source = power.link(power.MASTER112_PDF)
-    cmd = f'-i {source} --table={power.MASTER112_PDF} --pages=110'
-    tests.run(cmd, monkeypatch=monkeypatch)
+    run_tables(power.MASTER112_PDF, '110', testdir, monkeypatch)
 
 
 def test_bachelor51page29(testdir, monkeypatch):
-    pdf = power.BACHELOR051_PDF
-    source = power.link(pdf)
-    cmd = f'-i {source} --table={pdf} --pages=29'
-    tests.run(cmd, monkeypatch=monkeypatch)
-    loaded = serializeraw.load_tables(tablero.path.decide(testdir.tmpdir))
+    loaded = run_tables(power.BACHELOR051_PDF, '29', testdir, monkeypatch)
     page29content = utila.select_page(loaded, page=29).content
     assert len(page29content) == 1
     assert page29content[0].bounding == (81.84, 645.6, 513.6, 697.92)
+
+
+def run_tables(pdf, pages, testdir, monkeypatch):
+    source = power.link(pdf)
+    cmd = f'-i {source} --table={pdf} --pages={pages}'
+    tests.run(cmd, monkeypatch=monkeypatch)
+    loaded = serializeraw.load_tables(tablero.path.decide(testdir.tmpdir))
+    return loaded
