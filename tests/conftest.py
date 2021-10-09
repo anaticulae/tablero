@@ -21,6 +21,7 @@ WORKER = 6
 power.setup(tablero.ROOT)
 
 RESOURCES = [
+    power.MASTER110_PDF,
     power.ORDER050_PDF,
     (power.BACHELOR056_PDF, '0:34'),
     (power.BACHELOR051_PDF, '20:35'),
