@@ -63,6 +63,16 @@ def test_camelot_master116_error():
     assert not parsed
 
 
+def test_camelot_master110page89():
+    source = power.MASTER110_PDF
+    parsed = tablero.features.camelox.run(
+        source,
+        pages=(89,),
+        verbose=True,
+    )
+    assert len(utila.flatten_content(parsed)) == 1
+
+
 @pytest.mark.xfail(reason='could not detect image tables')
 def test_camelot_bachelor76_error():
     """\
