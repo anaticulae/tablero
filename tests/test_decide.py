@@ -139,6 +139,7 @@ def test_bachelor51page29(testdir, monkeypatch):
 
 
 def run_tables(pdf, pages, testdir, monkeypatch):
+    utilatest.fixture_requires(pdf)
     source = power.link(pdf)
     cmd = f'-i {source} --table={pdf} --pages={pages}'
     tests.run(cmd, monkeypatch=monkeypatch)

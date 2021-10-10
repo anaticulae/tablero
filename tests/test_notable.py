@@ -35,6 +35,7 @@ def test_master75page1718_notable(testdir, monkeypatch):
 
 def determine_tables(pdf, pages, testdir, monkeypatch):
     folder = 'notable'
+    utilatest.fixture_requires(pdf, folder=folder)
     source = power.link(pdf, folder=folder)
     tests.run(
         f'-i {source} -i {testdir.tmpdir} --table={pdf} --pages={pages}',
