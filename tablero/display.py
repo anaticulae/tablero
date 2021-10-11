@@ -15,6 +15,9 @@ import PIL.Image
 import PIL.ImageDraw
 import utila
 
+SCALE = 300 / 72
+SCALES = (SCALE, SCALE, SCALE, SCALE)
+
 
 def render_tables(
     tables: iamraw.PageContentTableBoundings,
@@ -33,12 +36,19 @@ def render_tables(
         with PIL.Image.open(filepath) as images:
             renderer = PIL.ImageDraw.Draw(images)
             for item in tablepage.content:
-                scale = 300 / 72
                 bounding = utila.rectangle_scale(
                     item.bounding,
-                    scale=(scale, scale, scale, scale),
+                    scale=SCALES,
                 )
                 renderer.rectangle(bounding, outline='red', width=5)
+                lines = item.lines
+                if lines:
+                    for line in lines:
+                        line = utila.rectangle_scale(
+                            line,
+                            scale=SCALES,
+                        )
+                        renderer.rectangle(line, outline='blue', width=2)
             images.save(filepath, 'PNG')
         index += 1
     outdir: str = utila.forward_slash(outdir)
