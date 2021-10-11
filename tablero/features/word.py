@@ -49,7 +49,11 @@ def locate_tables(lines):
         content = page.content
         # TODO: profile only on --profile
         # with utila.profile():
-        clustered = utila.intersecting_line_cluster(content, max_diff=5.0)
+        clustered = utila.intersecting_line_cluster(
+            content,
+            max_diff=5.0,
+            min_elements=3,
+        )
         # convert cluster to list
         clustered = list(clustered)
         result.append((page.page, clustered))
