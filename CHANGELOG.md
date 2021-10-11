@@ -2,6 +2,15 @@
 
 Every noteable change is logged here.
 
+## v0.8.0
+
+### Feature
+
+* skip potential table with too height header (e4c0460d4e70)
+* render detected lines (f1216030f711)
+* increase required lines (d9fe375b54ff)
+* skip very short lines (fcc9b3b4d952)
+
 ## v0.7.1
 
 ### Fix
