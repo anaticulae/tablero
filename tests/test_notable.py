@@ -33,8 +33,19 @@ def test_master75page1718_notable(testdir, monkeypatch):
     assert not tables
 
 
-def determine_tables(pdf, pages, testdir, monkeypatch):
-    folder = 'notable'
+def test_master110page9092(testdir, monkeypatch):
+    source = power.MASTER110_PDF
+    tables = determine_tables(
+        source,
+        '29,90,92,94',
+        testdir,
+        monkeypatch,
+        folder=None,
+    )
+    assert not tables
+
+
+def determine_tables(pdf, pages, testdir, monkeypatch, folder='notable'):
     utilatest.fixture_requires(pdf, folder=folder)
     source = power.link(pdf, folder=folder)
     tests.run(
