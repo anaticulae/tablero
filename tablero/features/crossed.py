@@ -58,6 +58,7 @@ def run(lines):
 
 TABLE_ROW_HEIGHT_MEAN = 12.0
 TABLE_COLUMN_COUNT_MAX = 10
+TABLE_HEADER_HEIGHT_MAX = 45
 
 
 def cluster_page(lines) -> iamraw.TableBoundings:
@@ -89,6 +90,10 @@ def cluster_page(lines) -> iamraw.TableBoundings:
     result = [
         item for item in result if column_count(item) <= TABLE_COLUMN_COUNT_MAX
     ]
+    result = [
+        item for item in result
+        if table_header_height(item) <= TABLE_HEADER_HEIGHT_MAX
+    ]
     return result
 
 
@@ -101,6 +106,16 @@ def table_row_height_mean(lines) -> float:
     diff = utila.diffs(grouped)
     result = statistics.mean(diff)
     return result
+
+
+def table_header_height(lines) -> float:
+    hori = tablero.utils.determine_horizontals(lines)
+    hori = [item[1] for item in utila.sort_leftright_topdown(hori)]
+    grouped = [item[0] for item in utila.groupby_diff(hori, maxdiff=5.0)]
+    if len(grouped) < 2:
+        return 0.0
+    diff = utila.diffs(grouped)
+    return diff[0]
 
 
 def columns(lines):

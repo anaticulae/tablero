@@ -62,6 +62,7 @@ def locate_tables(lines):
 
 TABLE_ROW_HEIGHT_MEAN = 12.0
 TABLE_COLUMN_COUNT_MAX = 10
+TABLE_HEADER_HEIGHT_MAX = 45
 
 
 def judge_tables(grouped):
@@ -86,6 +87,9 @@ def judge_tables(grouped):
             column_count = tablero.features.crossed.column_count(item)
             if column_count > TABLE_COLUMN_COUNT_MAX:
                 continue
+            header_height = table_header_height(item)
+            if header_height > TABLE_HEADER_HEIGHT_MAX:
+                continue
             bounding = utila.rectangle_max(item)
             # convert cluster to list
             pageresult.append(
@@ -97,3 +101,13 @@ def judge_tables(grouped):
     # remove empty pages
     result = [item for item in result if item.content]
     return result
+
+
+def table_header_height(lines) -> float:
+    hori = tablero.utils.determine_horizontals(lines)
+    hori = [item[1] for item in utila.sort_leftright_topdown(hori)]
+    grouped = [item[0] for item in utila.groupby_diff(hori, maxdiff=5.0)]
+    if len(grouped) < 2:
+        return 0.0
+    diff = utila.diffs(grouped)
+    return diff[0]
