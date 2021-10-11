@@ -19,7 +19,7 @@ import tablero.lines
 LINES_PER_PAGE_MAX = 1000
 
 
-def limit_lines(lines, contentbox=None):
+def limit_lines(lines, contentbox=None, line_length_min: float = 10.0):
     # TODO: DISABLE AFTER HAVING BETTER CLUSTER STRATEGY
     if contentbox:
         contentbox = {
@@ -32,6 +32,9 @@ def limit_lines(lines, contentbox=None):
         if len(page.content) > LINES_PER_PAGE_MAX:
             # too many lines on this page
             content = []
+        content = [
+            item for item in content if utila.length(*item) > line_length_min
+        ]
         if contentbox:
             content = [
                 item for item in content
@@ -44,7 +47,6 @@ def limit_lines(lines, contentbox=None):
 def valid_table(bounding, navigator: texmex.PageTextContentNavigator) -> bool:
     top, bottom = bounding[1], bounding[3]
     utila.debug(f'validate table: {bounding} on page {navigator.page}')
-
     height = utila.roundme(bottom - top)
     if height < tablero.config.TABLE_MIN_HEIGHT:
         # remove to small tables
@@ -58,7 +60,6 @@ def valid_table(bounding, navigator: texmex.PageTextContentNavigator) -> bool:
         # no content in table
         utila.debug('no table content')
         return False
-
     # boundings = [item.bounding for item in table_content]
     # clustered = utila.same_line_cluster(
     #     boundings,
