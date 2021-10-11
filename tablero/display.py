@@ -41,4 +41,5 @@ def render_tables(
                 renderer.rectangle(bounding, outline='red', width=5)
             images.save(filepath, 'PNG')
         index += 1
+    outdir: str = utila.forward_slash(outdir)
     return outdir
