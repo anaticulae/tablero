@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.8.1
+
+### Fix
+
+* fix percent definition (ce6af3904648)
+
 ## v0.8.0
 
 ### Feature
