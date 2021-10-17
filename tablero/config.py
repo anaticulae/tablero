@@ -15,8 +15,8 @@ MAX_SINGLE_LINE_QUOTE = 0.4  # TODO: HOLY VALUE
 
 TABLE_MERGE_DISTANCE = 20  # TODO: HOLY VALUE
 
-TABLE_HORIZONTAL_MAX_DIFF = configo.HV_FLOAT_PLUS(default=4.0).value
-TABLE_VERTICAL_MAX_DIFF = configo.HV_FLOAT_PLUS(default=4.0).value
+TABLE_HORIZONTAL_MAX_DIFF = configo.HV_FLOAT_PLUS(default=4.0)
+TABLE_VERTICAL_MAX_DIFF = configo.HV_FLOAT_PLUS(default=4.0)
 
 # tables are buld ouf long lines. The average line length is used to
 # exclude figures etc.
