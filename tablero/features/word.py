@@ -21,7 +21,7 @@ TABLE_MIN_LINE_COUNT = configo.HV_INT_PLUS(default=10)
 
 # tables are build out of vertical and horizontal lines, but only a few
 # cross lines.
-TABLE_MIN_HORIZONTAL_VERTICAL_LINE = configo.HV_PERCENT_PLUS(0.9)
+TABLE_MIN_HORIZONTAL_VERTICAL_LINE = configo.HV_PERCENT_PLUS(default=90)
 
 
 def work(lines: str, content: str, pages: tuple = None) -> str:
