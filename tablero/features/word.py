@@ -17,7 +17,7 @@ import tablero.lines
 import tablero.utils
 
 # a table must have at least this amount of lines
-TABLE_MIN_LINE_COUNT = configo.HV_INT_PLUS(10)
+TABLE_MIN_LINE_COUNT = configo.HV_INT_PLUS(default=10)
 
 # tables are build out of vertical and horizontal lines, but only a few
 # cross lines.

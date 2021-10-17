@@ -12,6 +12,7 @@ import warnings
 
 import camelot
 import camelot.core
+import configo
 import iamraw
 import pdfinfo.pages
 import rawmaker.features.border
@@ -126,10 +127,13 @@ def parse_page(
     return parsed
 
 
-TABLE_ACCURACY_MIN = 75.0  # TODO: HOLY VALUE
-TABLE_WHITESPACE_MAX = 40.0  # TODO: HOLY VALUE
-TABLE_WIDTH_MIN = 100
-TABLE_HEIGHT_MIN = 30
+TABLE_ACCURACY_MIN = configo.HV_FLOAT_PLUS(default=75.0)
+
+TABLE_WHITESPACE_MAX = configo.HV_FLOAT_PLUS(default=40.0)
+
+TABLE_WIDTH_MIN = configo.HV_FLOAT_PLUS(default=100.0)
+
+TABLE_HEIGHT_MIN = configo.HV_FLOAT_PLUS(default=30.0)
 
 
 def group_result(parsed, pdffile, pages) -> iamraw.PageContentTableBoundings:

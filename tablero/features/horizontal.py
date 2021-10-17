@@ -9,6 +9,7 @@
 
 import functools
 
+import configo
 import iamraw
 import serializeraw
 import utila
@@ -205,7 +206,7 @@ def boundings_to_buckets(boundings, horizontals, min_elements):
     return merged
 
 
-MAX_HEADER_HEIGHT = 50  # TODO: HOLY VALUE
+MAX_HEADER_HEIGHT = configo.HV_FLOAT_PLUS(default=50.0)
 
 
 def valid_distances(horizontals) -> bool:
@@ -219,7 +220,7 @@ def valid_distances(horizontals) -> bool:
     return True
 
 
-HEADER_MIN_WIDTH = 100  # TODO: HOLY VALUE
+HEADER_MIN_WIDTH = configo.HV_FLOAT_PLUS(default=100.0)
 
 
 def valid_header(content) -> bool:

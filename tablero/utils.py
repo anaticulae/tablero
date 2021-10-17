@@ -9,6 +9,7 @@
 
 import math
 
+import configo
 import iamraw
 import texmex
 import utila
@@ -17,6 +18,8 @@ import tablero.config
 import tablero.lines
 
 LINES_PER_PAGE_MAX = 1000
+
+GROUP_HORIZONTALS_XDIFF_MAX = configo.HV_FLOAT_PLUS(default=30.0)
 
 
 def limit_lines(lines, contentbox=None, line_length_min: float = 10.0):
@@ -91,7 +94,7 @@ def merge_tables(boundings):
     return result
 
 
-def group_horizontals(items, xdiff: float = 30.0):  # TODO: HOLY VALUE
+def group_horizontals(items, xdiff: float = GROUP_HORIZONTALS_XDIFF_MAX):
     """\
     >>> group_horizontals([(100, 50, 500, 50),
     ...                    (98, 150, 510, 150),
