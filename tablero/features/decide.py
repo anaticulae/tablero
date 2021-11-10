@@ -32,17 +32,17 @@ import utila
 
 
 def work(
-    camelox: str,
-    crossed: str,
-    horizontal: str,
-    word: str,
+    rcamelox: str,
+    rcrossed: str,
+    rhorizontal: str,
+    rword: str,
     pages: tuple = None,
 ) -> str:
     # prepare data
-    camelox = serializeraw.load_tables(camelox, pages=pages)
-    crossed = serializeraw.load_tables(crossed, pages=pages)
-    horizontal = serializeraw.load_tables(horizontal, pages=pages)
-    word = serializeraw.load_tables(word, pages=pages)
+    camelox = serializeraw.load_tables(rcamelox, pages=pages)
+    crossed = serializeraw.load_tables(rcrossed, pages=pages)
+    horizontal = serializeraw.load_tables(rhorizontal, pages=pages)
+    word = serializeraw.load_tables(rword, pages=pages)
     # decide
     result = select_best(
         horizontal,
