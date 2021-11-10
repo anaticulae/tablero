@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.8.2
+
+### Fix
+
+* avoid magic variables (d0864e0de4c7)
+
 ## v0.8.1
 
 ### Fix
