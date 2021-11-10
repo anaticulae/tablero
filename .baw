@@ -4,3 +4,6 @@ name = hard task, bro
 
 [release]
 fail_on_finding = True
+
+[test]
+plugins = timeout
