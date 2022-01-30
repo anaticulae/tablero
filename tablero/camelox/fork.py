@@ -25,7 +25,7 @@ def run(pdffile: str, content: str, pages: tuple = None, worker: int = 1):
         return []
     pages = determine_pages(pdffile, pages)
     grouped = utila.xsome(pages, count=worker)
-    if content and utila.exists(content):
+    if utila.exists(content):
         content = serializeraw.load_contentboundingbox(content, pages=pages)
         content = [f'0,{box.top},1024,{box.bottom}' for box in content]
         content: list = list(utila.xsome(content, count=worker))
