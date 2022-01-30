@@ -22,6 +22,9 @@ import utila
 import tablero.__patch__
 import tablero.camelox.fork
 
+# parallel worker to run camelox
+CAMELOX_WORKER = configo.HV_INT_PLUS(default=6)
+
 
 def work(content: str, lines: str, table: str, pages: tuple = None) -> str:
     if not utila.exists(table):
@@ -31,12 +34,11 @@ def work(content: str, lines: str, table: str, pages: tuple = None) -> str:
     if pages == NOPAGES:
         utila.debug('no pages with lines selected, skip camelox')
         return EMPTY
-    worker: int = 6
     extracted = tablero.camelox.fork.run(
         pdffile=table,
         content=content,
         pages=pages,
-        worker=worker,
+        worker=CAMELOX_WORKER,
     )
     if extracted is None:
         # error while running camelot
