@@ -68,6 +68,12 @@ import tests
         [1],
         id='order50',
     ),
+    pytest.param(
+        power.MASTER099_PDF,
+        '11,48,49',
+        [1, 1, 1],
+        id='master099p48p49',
+    ),
 ])
 @utilatest.nightly
 def test_detect_table_single(source, pages, expected, testdir, monkeypatch):
