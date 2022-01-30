@@ -90,6 +90,7 @@ def test_detect_table_single(source, pages, expected, testdir, monkeypatch):
     assert current == expected
 
 
+@utilatest.longrun
 @utilatest.requires(power.BACHELOR090_PDF)
 def test_detect_table_bachelor90_page80(testdir, monkeypatch):
     """The table header contains only one connected textual string."""
@@ -126,11 +127,13 @@ def test_detect_table_bachelor56(testdir, monkeypatch):
 
 
 @pytest.mark.timeout(30)
+@utilatest.longrun
 @utilatest.requires(power.MASTER112_PDF)
 def test_master112_bachelor_timeout(testdir, monkeypatch):
     run_tables(power.MASTER112_PDF, '110', testdir, monkeypatch)
 
 
+@utilatest.longrun
 def test_bachelor51page29(testdir, monkeypatch):
     loaded = run_tables(power.BACHELOR051_PDF, '29', testdir, monkeypatch)
     page29content = utila.select_page(loaded, page=29).content

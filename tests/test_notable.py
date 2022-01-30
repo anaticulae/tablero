@@ -27,6 +27,7 @@ def test_table_extract_negative(pdf, testdir, monkeypatch):
     assert not loaded, str(loaded)
 
 
+@utilatest.longrun
 def test_master75page1718_notable(testdir, monkeypatch):
     source = power.MASTER075_PDF
     tables = determine_tables(source, '17,18', testdir, monkeypatch)

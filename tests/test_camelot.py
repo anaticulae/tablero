@@ -52,6 +52,7 @@ def test_camelot_verbose_flag(verbose, capsys):
     assert 'page-3 is image-based' in stderr != verbose, stderr
 
 
+@utilatest.longrun
 def test_camelot_master116_error():
     """Do not detect `Maximum, Minimum, Durchschnitt` as table."""
     source = power.MASTER116_PDF

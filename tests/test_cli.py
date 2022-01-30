@@ -30,6 +30,7 @@ def test_tablero_cli_run(testdir, monkeypatch):
     )
 
 
+@utilatest.longrun
 @utilatest.requires(power.BACHELOR109_PDF)
 def test_tablero_cli_internal_error(testdir, monkeypatch):
     """Run tablero with unsupported camelot file."""
