@@ -50,18 +50,19 @@ def work(content: str, lines: str, table: str, pages: tuple = None) -> str:
     return dumped
 
 
-def shrink_pages(lines, pages):
-    """Use line pages to reduce amount of generated pages. In the
-    current state, camelox detect tables constructing out of lines. If
-    we do not have any lines, we can save this generation time."""
+def shrink_pages(lines, pages) -> list:
+    """Use line pages to reduce amount of generated pages.
+
+    In the current state, camelox detect tables constructing out of
+    lines. If we do not have any lines, we can save this generation
+    time.
+    """
     if not lines:
         return pages
     line_pages = [item.page for item in lines if len(item.content) >= 3]
     if not line_pages:
         return []
-    result = [
-        item for item in line_pages if not utila.should_skip(line_pages, pages)
-    ]
+    result = [page for page in line_pages if not utila.should_skip(page, pages)]
     return result
 
 
