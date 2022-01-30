@@ -58,7 +58,7 @@ def run(lines):
 
 TABLE_ROW_HEIGHT_MEAN = 12.0
 TABLE_COLUMN_COUNT_MAX = 10
-TABLE_HEADER_HEIGHT_MAX = 45
+TABLE_HEADER_HEIGHT_MAX = 65
 
 
 def cluster_page(lines) -> iamraw.TableBoundings:
