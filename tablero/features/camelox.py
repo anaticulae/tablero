@@ -26,28 +26,27 @@ import tablero.camelox.fork
 def work(content: str, lines: str, table: str, pages: tuple = None) -> str:
     if not utila.exists(table):
         utila.error(f'skip camelox, missing: {table}')
-        return '[]'
-    if not utila.exists(lines):
-        lines = None
-    else:
-        lines = serializeraw.load_lines(lines, pages=pages)
-        pages = shrink_pages(lines, pages)
-    if pages != []:
-        worker: int = 6
-        extracted = tablero.camelox.fork.run(
-            pdffile=table,
-            content=content,
-            pages=pages,
-            worker=worker,
-        )
-        if extracted is None:
-            # error while running camelot
-            extracted = []
-    else:
+        return EMPTY
+    pages = shrink_pages(lines, pages)
+    if pages == NOPAGES:
         utila.debug('no pages with lines selected, skip camelox')
-        extracted = []
+        return EMPTY
+    worker: int = 6
+    extracted = tablero.camelox.fork.run(
+        pdffile=table,
+        content=content,
+        pages=pages,
+        worker=worker,
+    )
+    if extracted is None:
+        # error while running camelot
+        return EMPTY
     dumped = serializeraw.dump_tables(extracted)
     return dumped
+
+
+EMPTY = serializeraw.dump_tables([])
+NOPAGES = object()
 
 
 def shrink_pages(lines, pages) -> list:
@@ -57,11 +56,12 @@ def shrink_pages(lines, pages) -> list:
     lines. If we do not have any lines, we can save this generation
     time.
     """
-    if not lines:
+    if not utila.exists(lines):
         return pages
+    lines = serializeraw.load_lines(lines, pages=pages)
     line_pages = [item.page for item in lines if len(item.content) >= 3]
     if not line_pages:
-        return []
+        return NOPAGES
     result = [page for page in line_pages if not utila.should_skip(page, pages)]
     return result
 
