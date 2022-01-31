@@ -136,7 +136,7 @@ def column_count(lines):
 
 def extract_potential_table(verticals, horizontals):
     if not horizontals:
-        utila.debug('skip crossed, no horizontals, extract_potential_table')
+        utila.debug('extract_potential_table: skip crossed, no horizontals')
         return []
     buckets = utila.Buckets(
         horizontals,
