@@ -93,16 +93,6 @@ def table_row_height_mean(lines) -> float:
     return result
 
 
-def table_header_height(lines) -> float:
-    hori = tablero.utils.determine_horizontals(lines)
-    hori = [item[1] for item in utila.sort_leftright_topdown(hori)]
-    grouped = [item[0] for item in utila.groupby_diff(hori, maxdiff=5.0)]
-    if len(grouped) < 2:
-        return 0.0
-    diff = utila.diffs(grouped)
-    return diff[0]
-
-
 def columns(lines):
     vertical = tablero.utils.determine_verticals(lines)
     vertical = [item[0] for item in utila.sort_leftright_topdown(vertical)]
