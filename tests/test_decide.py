@@ -96,6 +96,21 @@ def test_detect_table_single(source, pages, expected, testdir, monkeypatch):
     assert current == expected
 
 
+@pytest.mark.xfail(reason='table is too small')
+def test_table_bachelor56p31(testdir, monkeypatch):
+    loaded = run_tables(power.BACHELOR056_PDF, '31', testdir, monkeypatch)
+    loaded = utila.flatten_content(loaded)
+    loaded = sorted([item.bounding for item in loaded])
+    expected = [
+        (64.58, 97.6, 410.78, 162.15),
+        (65.33, 550.78, 524.93, 694.58),
+    ]
+    assert utila.nears(loaded[0], expected[0])
+    assert utila.nears(loaded[1], expected[1])
+    assert 0
+    loaded = run_tables(power.BACHELOR056_PDF, '31', testdir, monkeypatch)
+
+
 @utilatest.longrun
 @utilatest.requires(power.BACHELOR090_PDF)
 def test_detect_table_bachelor90_page80(testdir, monkeypatch):
