@@ -34,6 +34,7 @@ def test_master75page1718_notable(testdir, monkeypatch):
     assert not tables
 
 
+@utilatest.longrun
 def test_master110page9092(testdir, monkeypatch):
     source = power.MASTER110_PDF
     tables = determine_tables(
