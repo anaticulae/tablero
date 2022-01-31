@@ -27,6 +27,7 @@ import iamraw
 import serializeraw
 import utila
 
+import tablero.judge
 import tablero.lines
 import tablero.utils
 
@@ -77,29 +78,8 @@ def cluster_page(lines) -> iamraw.TableBoundings:
             ),
         ) for item in result
     ]
-    result = [table for table in result if isvalid(table)]
+    result = [table for table in result if tablero.judge.isvalid(table)]
     return result
-
-
-def isvalid(table) -> bool:
-    lines = table.lines
-    # exclude bounding box, which has two vertical lines
-    if len(tablero.utils.determine_verticals(lines)) < 3:
-        utila.debug(f'no enough lines: {table}')
-        return False
-    if tablero.lines.length_avg(lines) < tablero.config.TABLE_LINE_LENGTH_AVG_MIN:  # yapf:disable
-        utila.debug(f'line length avg small: {tablero.lines.length_avg(lines)}')
-        return False
-    if table_row_height_mean(lines) < TABLE_ROW_HEIGHT_MEAN:
-        utila.debug(f'row height too small: {table_row_height_mean(lines)}')
-        return False
-    if column_count(table) > TABLE_COLUMN_COUNT_MAX:
-        utila.debug(f'too many columns: {column_count(table)}')
-        return False
-    if table_header_height(table) > TABLE_HEADER_HEIGHT_MAX:
-        utila.debug(f'header too height: {table_header_height(table)}')
-        return False
-    return True
 
 
 def table_row_height_mean(lines) -> float:
