@@ -22,6 +22,7 @@ Strategy:
 import operator
 import statistics
 
+import configo
 import iamraw
 import serializeraw
 import utila
@@ -56,9 +57,11 @@ def run(lines):
     return result
 
 
-TABLE_ROW_HEIGHT_MEAN = 12.0
-TABLE_COLUMN_COUNT_MAX = 10
-TABLE_HEADER_HEIGHT_MAX = 65
+TABLE_ROW_HEIGHT_MEAN = configo.HV_FLOAT_PLUS(default=12.0)
+
+TABLE_COLUMN_COUNT_MAX = configo.HV_INT_PLUS(default=10)
+
+TABLE_HEADER_HEIGHT_MAX = configo.HV_FLOAT_PLUS(default=65)
 
 
 def cluster_page(lines) -> iamraw.TableBoundings:

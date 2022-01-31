@@ -73,7 +73,7 @@ def done():
     return []
 
 
-LINE_COUNT_MAX = 15
+LINE_COUNT_MAX = configo.HV_INT_PLUS(default=15)
 
 
 def cluster_page(navigator, lines) -> iamraw.TableBoundings:
