@@ -13,6 +13,7 @@ import serializeraw
 import utila
 
 import tablero.features.crossed
+import tablero.judge
 import tablero.lines
 import tablero.utils
 
@@ -60,11 +61,6 @@ def locate_tables(lines):
     return result
 
 
-TABLE_ROW_HEIGHT_MEAN = 12.0
-TABLE_COLUMN_COUNT_MAX = 10
-TABLE_HEADER_HEIGHT_MAX = 45
-
-
 def judge_tables(grouped):
     """This approach handles only very simple word tables, beautiful
     "latex" tables are not supported because there are build out of
@@ -78,25 +74,15 @@ def judge_tables(grouped):
             percentage = tablero.lines.horiverti_percentage(item)
             if percentage < TABLE_HORIZONTAL_VERTICAL_LINE_MIN:
                 continue
-            avg = tablero.lines.length_avg(item)
-            if avg < tablero.config.TABLE_LINE_LENGTH_AVG_MIN:
-                continue
-            rowheight_mean = tablero.features.crossed.table_row_height_mean(item)  # yapf:disable
-            if rowheight_mean < TABLE_ROW_HEIGHT_MEAN:
-                continue
-            column_count = tablero.features.crossed.column_count(item)
-            if column_count > TABLE_COLUMN_COUNT_MAX:
-                continue
-            header_height = table_header_height(item)
-            if header_height > TABLE_HEADER_HEIGHT_MAX:
-                continue
             bounding = utila.rectangle_max(item)
+            table = iamraw.TableBounding(
+                bounding=bounding,
+                lines=item,
+            )
+            if not tablero.judge.isvalid(table):
+                continue
             # convert cluster to list
-            pageresult.append(
-                iamraw.TableBounding(
-                    bounding=bounding,
-                    lines=item,
-                ))
+            pageresult.append(table)
         result.append(pageresult)
     # remove empty pages
     result = [item for item in result if item.content]

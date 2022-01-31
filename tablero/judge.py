@@ -15,6 +15,7 @@ import utila
 import tablero.config
 import tablero.utils
 
+# TODO: MAKE PAGE SIZE DEPENDENT?
 TABLE_ROW_HEIGHT_MEAN = configo.HV_FLOAT_PLUS(default=12.0)
 
 TABLE_COLUMN_COUNT_MAX = configo.HV_INT_PLUS(default=10)
