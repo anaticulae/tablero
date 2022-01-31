@@ -17,11 +17,11 @@ import tablero.lines
 import tablero.utils
 
 # a table must have at least this amount of lines
-TABLE_MIN_LINE_COUNT = configo.HV_INT_PLUS(default=10)
+TABLE_LINE_COUNT_MIN = configo.HV_INT_PLUS(default=10)
 
 # tables are build out of vertical and horizontal lines, but only a few
 # cross lines.
-TABLE_MIN_HORIZONTAL_VERTICAL_LINE = configo.HV_PERCENT_PLUS(default=90)
+TABLE_HORIZONTAL_VERTICAL_LINE_MIN = configo.HV_PERCENT_PLUS(default=90)
 
 
 def work(lines: str, content: str, pages: tuple = None) -> str:
@@ -73,13 +73,13 @@ def judge_tables(grouped):
     for page, clusters in grouped:
         pageresult = iamraw.PageContentTableBounding(page=page)
         for item in clusters:
-            if len(item) < TABLE_MIN_LINE_COUNT:
+            if len(item) < TABLE_LINE_COUNT_MIN:
                 continue
             percentage = tablero.lines.horiverti_percentage(item)
-            if percentage < TABLE_MIN_HORIZONTAL_VERTICAL_LINE:
+            if percentage < TABLE_HORIZONTAL_VERTICAL_LINE_MIN:
                 continue
             avg = tablero.lines.length_avg(item)
-            if avg < tablero.config.TABLE_MIN_AVG_LINE_LENGTH:
+            if avg < tablero.config.TABLE_LINE_LENGTH_AVG_MIN:
                 continue
             rowheight_mean = tablero.features.crossed.table_row_height_mean(item)  # yapf:disable
             if rowheight_mean < TABLE_ROW_HEIGHT_MEAN:

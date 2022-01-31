@@ -83,7 +83,7 @@ def cluster_page(navigator, lines) -> iamraw.TableBoundings:
     horizontals = [
         item for item in lines if tablero.lines.horizontal(
             item,
-            maxdiff=tablero.config.TABLE_HORIZONTAL_MAX_DIFF,
+            maxdiff=tablero.config.TABLE_HORIZONTAL_DIFF_MAX,
         )
     ]
     if len(horizontals) <= 2:
@@ -206,21 +206,21 @@ def boundings_to_buckets(boundings, horizontals, min_elements):
     return merged
 
 
-MAX_HEADER_HEIGHT = configo.HV_FLOAT_PLUS(default=50.0)
+HEADER_HEIGHT_MAX = configo.HV_FLOAT_PLUS(default=50.0)
 
 
 def valid_distances(horizontals) -> bool:
     if len(horizontals) < 3:
         return True
     headerheight = horizontals[1][1] - horizontals[0][1]
-    if headerheight > MAX_HEADER_HEIGHT:
+    if headerheight > HEADER_HEIGHT_MAX:
         utila.debug(f'header too hight: {headerheight}')
         utila.debug(horizontals)
         return False
     return True
 
 
-HEADER_MIN_WIDTH = configo.HV_FLOAT_PLUS(default=100.0)
+HEADER_WIDTH_MIN = configo.HV_FLOAT_PLUS(default=100.0)
 
 
 def valid_header(content) -> bool:
@@ -228,6 +228,6 @@ def valid_header(content) -> bool:
     left = min([item[0] for item in boundings])
     right = max([item[2] for item in boundings])
     width = right - left
-    if width < HEADER_MIN_WIDTH:
+    if width < HEADER_WIDTH_MIN:
         return False
     return True

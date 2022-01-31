@@ -51,7 +51,7 @@ def valid_table(bounding, navigator: texmex.PageTextContentNavigator) -> bool:
     top, bottom = bounding[1], bounding[3]
     utila.debug(f'validate table: {bounding} on page {navigator.page}')
     height = utila.roundme(bottom - top)
-    if height < tablero.config.TABLE_MIN_HEIGHT:
+    if height < tablero.config.TABLE_HEIGHT_MIN:
         # remove to small tables
         utila.debug(f'table to small: {height}')
         return False
@@ -71,7 +71,7 @@ def valid_table(bounding, navigator: texmex.PageTextContentNavigator) -> bool:
     # singles = len([item for item in clustered if len(item) == 1])
     # single_quote = utila.roundme(singles / len(clustered))
 
-    # if singles >= 2 and single_quote > tablero.config.MAX_SINGLE_LINE_QUOTE:
+    # if singles >= 2 and single_quote > tablero.config.SINGLE_LINE_QUOTE_MAX:
     #     # invalid table content
     #     utila.debug(f'single quote: {single_quote}')
     #     return False
@@ -127,7 +127,7 @@ def determine_verticals(lines):
     result = [
         item for item in lines if tablero.lines.vertical(
             item,
-            maxdiff=tablero.config.TABLE_VERTICAL_MAX_DIFF,
+            maxdiff=tablero.config.TABLE_VERTICAL_DIFF_MAX,
         )
     ]
     return result
@@ -137,7 +137,7 @@ def determine_horizontals(lines):
     result = [
         item for item in lines if tablero.lines.horizontal(
             item,
-            maxdiff=tablero.config.TABLE_HORIZONTAL_MAX_DIFF,
+            maxdiff=tablero.config.TABLE_HORIZONTAL_DIFF_MAX,
         )
     ]
     return result

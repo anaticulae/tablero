@@ -84,7 +84,7 @@ def cluster_page(lines) -> iamraw.TableBoundings:
     ]
     result = [
         item for item in result if tablero.lines.length_avg(item.lines) >=
-        tablero.config.TABLE_MIN_AVG_LINE_LENGTH
+        tablero.config.TABLE_LINE_LENGTH_AVG_MIN
     ]
     result = [
         item for item in result
