@@ -69,14 +69,10 @@ def judge_tables(grouped):
     for page, clusters in grouped:
         pageresult = iamraw.PageContentTableBounding(page=page)
         for item in clusters:
-            if len(item) < TABLE_LINE_COUNT_MIN:
+            if not isvalid(item):
                 continue
-            percentage = tablero.lines.horiverti_percentage(item)
-            if percentage < TABLE_HORIZONTAL_VERTICAL_LINE_MIN:
-                continue
-            bounding = utila.rectangle_max(item)
             table = iamraw.TableBounding(
-                bounding=bounding,
+                bounding=utila.rectangle_max(item),
                 lines=item,
             )
             if not tablero.judge.isvalid(table):
@@ -87,3 +83,16 @@ def judge_tables(grouped):
     # remove empty pages
     result = [item for item in result if item.content]
     return result
+
+
+def isvalid(cluster) -> bool:
+    if len(cluster) < TABLE_LINE_COUNT_MIN:
+        utila.debug(f'too few lines: {len(cluster)}')
+        utila.debug(cluster)
+        return False
+    percentage = tablero.lines.horiverti_percentage(cluster)
+    if percentage < TABLE_HORIZONTAL_VERTICAL_LINE_MIN:
+        utila.debug(f'too few vertical lines: {percentage}')
+        utila.debug(cluster)
+        return False
+    return True
