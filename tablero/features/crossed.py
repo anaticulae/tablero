@@ -77,27 +77,24 @@ def cluster_page(lines) -> iamraw.TableBoundings:
             ),
         ) for item in result
     ]
-    # exclude bounding box, which has two vertical lines
-    result = [
-        item for item in result
-        if len(tablero.utils.determine_verticals(item.lines)) >= 3
-    ]
-    result = [
-        item for item in result if tablero.lines.length_avg(item.lines) >=
-        tablero.config.TABLE_LINE_LENGTH_AVG_MIN
-    ]
-    result = [
-        item for item in result
-        if table_row_height_mean(item.lines) > TABLE_ROW_HEIGHT_MEAN
-    ]
-    result = [
-        item for item in result if column_count(item) <= TABLE_COLUMN_COUNT_MAX
-    ]
-    result = [
-        item for item in result
-        if table_header_height(item) <= TABLE_HEADER_HEIGHT_MAX
-    ]
+    result = [table for table in result if isvalid(table)]
     return result
+
+
+def isvalid(table) -> bool:
+    lines = table.lines
+    # exclude bounding box, which has two vertical lines
+    if len(tablero.utils.determine_verticals(lines)) < 3:
+        return False
+    if tablero.lines.length_avg(lines) < tablero.config.TABLE_LINE_LENGTH_AVG_MIN:  # yapf:disable
+        return False
+    if table_row_height_mean(lines) < TABLE_ROW_HEIGHT_MEAN:
+        return False
+    if column_count(table) > TABLE_COLUMN_COUNT_MAX:
+        return False
+    if table_header_height(table) > TABLE_HEADER_HEIGHT_MAX:
+        return False
+    return True
 
 
 def table_row_height_mean(lines) -> float:
