@@ -32,7 +32,7 @@ def extract_tables(source, page):
 
 
 @utilatest.requires(power.BACHELOR090_PDF)
-def test_table_bachelor90_page76_extract_table():
+def test_bachelor90p76_extract_table():
     source = power.link(power.BACHELOR090_PDF)
     page = 76
     tables = extract_tables(source, page)
@@ -40,7 +40,7 @@ def test_table_bachelor90_page76_extract_table():
 
 
 @utilatest.requires(power.BACHELOR090_PDF)
-def test_table_bachelor90_page77_extract_table(testdir):
+def test_bachelor90p77_extract_table(testdir):
     source = power.link(power.BACHELOR090_PDF)
     page = 77
     tables = extract_tables(source, page)
@@ -58,7 +58,7 @@ def test_table_bachelor90_page77_extract_table(testdir):
     ],
 )
 @utilatest.requires(power.BACHELOR090_PDF)
-def test_table_bachelor90_page77_first_table(text, line, bounding):
+def test_bachelor90p77_first_table(text, line, bounding):
     source = power.link(power.BACHELOR090_PDF)
     page = 77
     ptn = serializeraw.create_pagetextnavigators_frompath(

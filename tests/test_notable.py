@@ -22,7 +22,7 @@ import tests
     pytest.param(power.HOME040_PDF, id='home040'),
 ])
 @utilatest.nightly
-def test_table_extract_negative(pdf, testdir, monkeypatch):
+def test_extract_negative(pdf, testdir, monkeypatch):
     loaded = determine_tables(pdf, ':', testdir, monkeypatch)
     assert not loaded, str(loaded)
 

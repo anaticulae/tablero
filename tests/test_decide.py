@@ -36,19 +36,19 @@ import tests
         power.DOCU013_PDF,
         '5',
         [5],
-        id='vimguide_page5',
+        id='docu013p5',
     ),
     pytest.param(
         power.BACHELOR056_PDF,
         '15,18',
         [1],
-        id='bachelor56_page15',
+        id='bachelor56p15',
     ),
     pytest.param(
         power.BACHELOR056_PDF,
         '31',
         [2],
-        id='bachelor56_page31',
+        id='bachelor56p31',
     ),
     pytest.param(
         power.DOCU007_PDF,
@@ -97,7 +97,7 @@ def test_detect_table_single(source, pages, expected, testdir, monkeypatch):
 
 
 @pytest.mark.xfail(reason='table is too small')
-def test_table_bachelor56p31(testdir, monkeypatch):
+def test_bachelor56p31(testdir, monkeypatch):
     loaded = run_tables(power.BACHELOR056_PDF, '31', testdir, monkeypatch)
     loaded = utila.flatten_content(loaded)
     loaded = sorted([item.bounding for item in loaded])
@@ -113,7 +113,7 @@ def test_table_bachelor56p31(testdir, monkeypatch):
 
 @utilatest.longrun
 @utilatest.requires(power.BACHELOR090_PDF)
-def test_detect_table_bachelor90_page80(testdir, monkeypatch):
+def test_detect_table_bachelor90p80(testdir, monkeypatch):
     """The table header contains only one connected textual string."""
     pdf = power.BACHELOR090_PDF
     source = power.link(pdf)
@@ -129,7 +129,7 @@ def test_detect_table_bachelor90_page80(testdir, monkeypatch):
 
 @utilatest.nightly
 @utilatest.requires(power.MASTER098_PDF)
-def test_detect_table_master98_page54_60(testdir, monkeypatch):
+def test_detect_table_master98p54_60(testdir, monkeypatch):
     loaded = run_tables(power.MASTER098_PDF, '54:62', testdir, monkeypatch)
     # verify extracted tables
     assert len(utila.select_content(loaded, 54)) == 1

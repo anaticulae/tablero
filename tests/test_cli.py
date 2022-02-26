@@ -14,14 +14,14 @@ import utilatest
 import tests
 
 
-def test_tablero_cli_help(monkeypatch):
+def test_cli_help(monkeypatch):
     """Run help and version and format command to reach basic test coverage."""
     tests.run('--help', monkeypatch=monkeypatch)
 
 
 @utilatest.nightly
 @utilatest.requires(power.BOOK007_PDF)
-def test_tablero_cli_run(testdir, monkeypatch):
+def test_cli_run(testdir, monkeypatch):
     """Run tabelero with all steps."""
     source = power.link(power.BOOK007_PDF)
     tests.run(
@@ -32,7 +32,7 @@ def test_tablero_cli_run(testdir, monkeypatch):
 
 @utilatest.longrun
 @utilatest.requires(power.BACHELOR109_PDF)
-def test_tablero_cli_internal_error(testdir, monkeypatch):
+def test_cli_internal_error(testdir, monkeypatch):
     """Run tablero with unsupported camelot file."""
     pdf = power.BACHELOR109_PDF
     source = power.link(pdf)

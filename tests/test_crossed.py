@@ -24,7 +24,7 @@ import tablero.features.crossed
     ),
 ])
 @utilatest.requires(power.DOCU013_PDF)
-def test_table_extract(source, expected):
+def test_extract(source, expected):
     source = power.link(source)
     source = iamraw.path.line(source)
     loaded = serializeraw.load_lines(source)
