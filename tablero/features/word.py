@@ -62,9 +62,11 @@ def locate_tables(lines):
 
 
 def judge_tables(grouped):
-    """This approach handles only very simple word tables, beautiful
-    "latex" tables are not supported because there are build out of
-    single horizontal lines."""
+    """This approach handles only very simple word tables.
+
+    Beautiful "latex" tables are not supported because there are build
+    out of single horizontal lines.
+    """
     result = []
     for page, clusters in grouped:
         pageresult = iamraw.PageContentTableBounding(page=page)
