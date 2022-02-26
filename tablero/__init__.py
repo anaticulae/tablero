@@ -11,7 +11,7 @@ import os
 
 import tablero.__patch__
 
-__version__ = '0.8.3'
+__version__ = '0.9.0'
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 PROCESS = 'tablero'

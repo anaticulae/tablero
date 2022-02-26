@@ -2,6 +2,23 @@
 
 Every noteable change is logged here.
 
+## v0.9.0
+
+### Feature
+
+* add separate judger (eb438e20f54d)
+* increase debugging information (01ef818077c9)
+* increase possible header (3147aabdd824)
+
+### Fix
+
+* adjust page selector (4628f34f3e51)
+
+### Documentation
+
+* Happy New Year! (55e7230ea662)
+* adjust modules path (31e8c3170606)
+
 ## v0.8.3
 
 ## v0.8.2
