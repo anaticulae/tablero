@@ -37,6 +37,9 @@ def test_bachelor90p76_extract_table():
     page = 76
     tables = extract_tables(source, page)
     assert len(tables) == 1
+    expected = (81.17, 310.47, 538.01, 510.6)
+    bounding = tables[0].bounding
+    assert bounding == expected
 
 
 @utilatest.requires(power.BACHELOR090_PDF)
