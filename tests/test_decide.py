@@ -13,7 +13,6 @@ import serializeraw
 import utila
 import utilatest
 
-import tablero.display
 import tablero.path
 import tablero.utils
 import tests
@@ -98,7 +97,7 @@ def test_detect_table_single(source, pages, expected, testdir, monkeypatch):
 
 @pytest.mark.xfail(reason='table is too small')
 def test_bachelor56p31(testdir, monkeypatch):
-    loaded = run_tables(power.BACHELOR056_PDF, '31', testdir, monkeypatch)
+    loaded = tests.run_tables(power.BACHELOR056_PDF, '31', testdir, monkeypatch)
     loaded = utila.flatten_content(loaded)
     loaded = sorted([item.bounding for item in loaded])
     expected = [
@@ -108,7 +107,7 @@ def test_bachelor56p31(testdir, monkeypatch):
     assert utila.nears(loaded[0], expected[0])
     assert utila.nears(loaded[1], expected[1])
     assert 0
-    loaded = run_tables(power.BACHELOR056_PDF, '31', testdir, monkeypatch)
+    loaded = tests.run_tables(power.BACHELOR056_PDF, '31', testdir, monkeypatch)
 
 
 @utilatest.longrun
@@ -130,7 +129,8 @@ def test_detect_table_bachelor90p80(testdir, monkeypatch):
 @utilatest.nightly
 @utilatest.requires(power.MASTER098_PDF)
 def test_detect_table_master98p54_60(testdir, monkeypatch):
-    loaded = run_tables(power.MASTER098_PDF, '54:62', testdir, monkeypatch)
+    loaded = tests.run_tables(power.MASTER098_PDF, '54:62', testdir,
+                              monkeypatch)
     # verify extracted tables
     assert len(utila.select_content(loaded, 54)) == 1
     assert len(utila.select_content(loaded, 55)) == 1
@@ -141,7 +141,7 @@ def test_detect_table_master98p54_60(testdir, monkeypatch):
 @utilatest.nightly
 @utilatest.requires(power.BACHELOR056_PDF)
 def test_detect_table_bachelor56(testdir, monkeypatch):
-    loaded = run_tables(power.BACHELOR056_PDF, ':', testdir, monkeypatch)
+    loaded = tests.run_tables(power.BACHELOR056_PDF, ':', testdir, monkeypatch)
     tables = utila.flatten_content(loaded)
     # 6 includes 1 figure which can be detected as table
     assert len(tables) in (5, 6)  # VALIDATED
@@ -151,21 +151,12 @@ def test_detect_table_bachelor56(testdir, monkeypatch):
 @utilatest.longrun
 @utilatest.requires(power.MASTER112_PDF)
 def test_master112_bachelor_timeout(testdir, monkeypatch):
-    run_tables(power.MASTER112_PDF, '110', testdir, monkeypatch)
+    tests.run_tables(power.MASTER112_PDF, '110', testdir, monkeypatch)
 
 
 @utilatest.longrun
 def test_bachelor51page29(testdir, monkeypatch):
-    loaded = run_tables(power.BACHELOR051_PDF, '29', testdir, monkeypatch)
+    loaded = tests.run_tables(power.BACHELOR051_PDF, '29', testdir, monkeypatch)
     page29content = utila.select_page(loaded, page=29).content
     assert len(page29content) == 1
     assert page29content[0].bounding == (81.84, 645.6, 513.6, 697.92)
-
-
-def run_tables(pdf, pages, testdir, monkeypatch):
-    utilatest.fixture_requires(pdf)
-    source = power.link(pdf)
-    cmd = f'-i {source} --table={pdf} --pages={pages}'
-    tests.run(cmd, monkeypatch=monkeypatch)
-    loaded = serializeraw.load_tables(tablero.path.decide(testdir.tmpdir))
-    return loaded

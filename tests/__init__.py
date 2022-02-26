@@ -9,6 +9,8 @@
 
 import functools
 
+import power
+import serializeraw
 import utilatest
 
 import tablero
@@ -27,3 +29,12 @@ failure = functools.partial(  # pylint:disable=C0103
     process=tablero.PROCESS,
     success=False,
 )
+
+
+def run_tables(pdf, pages, testdir, monkeypatch):
+    utilatest.fixture_requires(pdf)
+    source = power.link(pdf)
+    cmd = f'-i {source} --table={pdf} --pages={pages}'
+    run(cmd, monkeypatch=monkeypatch)
+    loaded = serializeraw.load_tables(testdir.tmpdir)
+    return loaded
