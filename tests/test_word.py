@@ -7,23 +7,21 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import iamraw.path
 import power
-import pytest
 import serializeraw
 import utilatest
 
 import tablero.features.word
 
 
-@pytest.mark.xfail(reason='improve word parser')
 @utilatest.requires(power.DOCU013_PDF)
 def test_dump_and_load():
-    source = iamraw.path.line(power.link(power.DOCU013_PDF))
+    source = power.link(power.DOCU013_PDF)
     loaded = serializeraw.load_lines(source, pages=(0, 1, 2))
     grouped = tablero.features.word.locate_tables(loaded)
     tables = tablero.features.word.judge_tables(grouped)
-
+    # dump and load
     dumped = serializeraw.dump_tables(tables)
     loaded = serializeraw.load_tables(dumped)
+    # VERIFY THAT CLUSTERING IS SOLVED BEFORE DUMPING DATA, IF ERROR OCCURS
     assert loaded == tables

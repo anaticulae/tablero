@@ -73,6 +73,7 @@ def judge_tables(grouped):
         for item in clusters:
             if not isvalid(item):
                 continue
+            item = list(item)
             table = iamraw.TableBounding(
                 bounding=utila.rectangle_max(item),
                 lines=item,
