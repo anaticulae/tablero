@@ -7,8 +7,8 @@
 # be prosecuted under federal law. Its content is company confidential.
 #==============================================================================
 
-utilatest==0.12.1
-power==2.5.0
-genex==0.23.1
+utilatest==0.12.3
+power==2.7.0
+genex==0.25.0
 # TODO: REMOVE LATER
-groupme>=0.25.0<1.0.0
+groupme>=0.29.1<1.0.0
