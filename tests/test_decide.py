@@ -160,3 +160,12 @@ def test_bachelor51page29(testdir, monkeypatch):
     page29content = utila.select_page(loaded, page=29).content
     assert len(page29content) == 1
     assert page29content[0].bounding == (81.84, 645.6, 513.6, 697.92)
+
+
+@utilatest.longrun
+def test_bachelor51page30(testdir, monkeypatch):
+    loaded = tests.run_tables(power.BACHELOR051_PDF, '30', testdir, monkeypatch)
+    page30content = utila.select_page(loaded, page=30).content
+    assert len(page30content) == 1
+    expected = (81.84, 647.88, 513.6, 700.32)
+    assert page30content[0].bounding == expected
