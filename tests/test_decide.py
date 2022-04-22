@@ -29,7 +29,7 @@ import tests
         power.DOCU013_PDF,
         '2:7',
         [1, 3, 3, 5, 2],
-        id='vimguide',
+        id='docu013',
     ),
     pytest.param(
         power.DOCU013_PDF,
