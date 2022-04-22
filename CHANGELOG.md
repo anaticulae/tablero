@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.9.1
+
+### Fix
+
+* decouple clustering (fc0d893318c6)
+
 ## v0.9.0
 
 ### Feature
