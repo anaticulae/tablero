@@ -10,9 +10,9 @@
 import power
 import pytest
 import serializeraw
+import utila
 import utilatest
 
-import tablero.path
 import tests
 
 
@@ -55,7 +55,6 @@ def determine_tables(pdf, pages, testdir, monkeypatch, folder='notable'):
         monkeypatch=monkeypatch,
     )
     # load result
-    tables = tablero.path.decide(testdir.tmpdir)
-    loaded = serializeraw.load_tables(tables)
-    loaded = [item for item in loaded if item.content]
+    loaded = serializeraw.load_tables(testdir.tmpdir)
+    loaded = utila.flatten_content(loaded)
     return loaded
