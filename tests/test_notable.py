@@ -8,23 +8,11 @@
 # =============================================================================
 
 import power
-import pytest
 import serializeraw
 import utila
 import utilatest
 
 import tests
-
-
-@pytest.mark.parametrize('pdf', [
-    pytest.param(power.BOOK007_PDF, id='book007'),
-    pytest.param(power.HOME025_PDF, id='home025'),
-    pytest.param(power.HOME040_PDF, id='home040'),
-])
-@utilatest.nightly
-def test_extract_negative(pdf, testdir, monkeypatch):
-    loaded = determine_tables(pdf, ':', testdir, monkeypatch)
-    assert not loaded, str(loaded)
 
 
 @utilatest.nightly
