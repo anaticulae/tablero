@@ -18,20 +18,23 @@ import utilatest
 
 import tablero
 import tests
+import tests.conftest
 
 ARCHIVE = utila.join(tablero.ROOT, 'tests/expected', exist=True)
 
+TODO = [
+    item if isinstance(item, str) else item[0]
+    for item in tests.conftest.RESOURCES
+]
+TODO = [pytest.param(item, id=utila.file_name(item)) for item in TODO]
 
-@pytest.mark.parametrize('source, expected', [
-    pytest.param(power.BACHELOR090_PDF, 'bachelor090', id='bachelor090'),
-])
+
+@pytest.mark.parametrize('source', TODO)
 @utilatest.longrun
-def test_validate(source, expected, testdir, monkeypatch):
+def test_validate(source, testdir, monkeypatch):
     utilatest.fixture_requires(source)
     Evaluate(
         source=source,
-        pages=':',
-        expected=expected,
         workdir=testdir.tmpdir,
         monkeypatch=monkeypatch,
     ).evaluate()
@@ -39,7 +42,7 @@ def test_validate(source, expected, testdir, monkeypatch):
 
 class Evaluate(utilatest.BaseLiner):
 
-    def __init__(self, source, pages, expected, workdir, monkeypatch):
+    def __init__(self, source, workdir, monkeypatch):
         super().__init__(
             program=functools.partial(
                 tests.run,
@@ -52,7 +55,6 @@ class Evaluate(utilatest.BaseLiner):
             archive=ARCHIVE,
             loader=self.frompath,
             convert_source=False,
-            index=expected,
             onfailure=self.tables_show,
         )
         self.pdf = source
