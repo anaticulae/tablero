@@ -21,6 +21,7 @@ import tests
 import tests.conftest
 
 ARCHIVE = utila.join(tablero.ROOT, 'tests/expected', exist=True)
+ARCHIVE_NOTABLE = utila.join(tablero.ROOT, 'tests/notable', exist=True)
 
 TODO = [
     item if isinstance(item, str) else item[0]
@@ -56,6 +57,7 @@ def test_notable_validate(source, testdir, monkeypatch):
     Evaluate(
         source=source,
         folder=folder,
+        archive=ARCHIVE_NOTABLE,
         workdir=testdir.tmpdir,
         monkeypatch=monkeypatch,
     ).evaluate()
@@ -63,7 +65,7 @@ def test_notable_validate(source, testdir, monkeypatch):
 
 class Evaluate(utilatest.BaseLiner):
 
-    def __init__(self, source, folder, workdir, monkeypatch):
+    def __init__(self, source, folder, workdir, monkeypatch, archive=ARCHIVE):
         super().__init__(
             program=functools.partial(
                 tests.run,
@@ -73,7 +75,7 @@ class Evaluate(utilatest.BaseLiner):
             pages=':',
             source=power.link(source, folder=folder),
             workdir=workdir,
-            archive=ARCHIVE,
+            archive=archive,
             loader=self.frompath,
             convert_source=False,
             onfailure=self.tables_show,
