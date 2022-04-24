@@ -29,6 +29,7 @@ RESOURCES = [
     (power.MASTER099_PDF, '5:15,45:65'),
     (power.MASTER098_PDF, '53:61'),
     (power.BACHELOR090_PDF, '76:81'),
+    (power.MASTER075_PDF, '10:20'),
     (power.BACHELOR109_PDF, '0:10'),
     power.BOOK007_PDF,
     power.DOCU007_PDF,
@@ -39,7 +40,6 @@ RESOURCES = [
 RESOURCES_NOTABLE = [
     power.HOME040_PDF,
     power.HOME025_PDF,
-    (power.MASTER075_PDF, '10:20'),
     power.BOOK007_PDF,
 ]
 
