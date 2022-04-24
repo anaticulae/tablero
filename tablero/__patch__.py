@@ -17,7 +17,6 @@ import PIL.ImageDraw
 
 def __init__(self, filepath, pages="1", password=None):
     self.filepath = filepath
-
     if password is None:
         self.password = ""
     else:
@@ -37,17 +36,18 @@ TODO = None
 
 def _generate_image(self):
     BEFORE(self)
-    if TODO:
-        current = TODO.pop()
-        _, top, __, bottom = [float(item) for item in current.split(',')]
-        top = top * 300 / 72 + 45
-        bottom = bottom * 300 / 72 - 45
-        with PIL.Image.open(self.imagename) as image:
-            draw = PIL.ImageDraw.Draw(image)
-            width, height = image.width + 1, image.height + 1
-            draw.rectangle((0, 0, width, top), fill='white')
-            draw.rectangle((0, bottom, width, height), fill='white')
-            image.save(self.imagename)
+    if not TODO:
+        return
+    current = TODO.pop()
+    _, top, __, bottom = [float(item) for item in current.split(',')]
+    top = top * 300 / 72 + 45
+    bottom = bottom * 300 / 72 - 45
+    with PIL.Image.open(self.imagename) as image:
+        draw = PIL.ImageDraw.Draw(image)
+        width, height = image.width + 1, image.height + 1
+        draw.rectangle((0, 0, width, top), fill='white')
+        draw.rectangle((0, bottom, width, height), fill='white')
+        image.save(self.imagename)
 
 
 camelot.parsers.lattice.Lattice._generate_image = _generate_image  # pylint:disable=W0212
