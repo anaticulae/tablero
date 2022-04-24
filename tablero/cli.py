@@ -50,12 +50,19 @@ WORKPLAN = [
         ('horizontal',),
     ),
     utila.create_step(
-        'decide',
+        'result',
         [
             utila.ResultFile('tablero', 'camelox_camelox'),
             utila.ResultFile('tablero', 'crossed_crossed'),
             utila.ResultFile('tablero', 'horizontal_horizontal'),
             utila.ResultFile('tablero', 'word_word'),
+        ],
+        ('result',),
+    ),
+    utila.create_step(
+        'decide',
+        [
+            utila.ResultFile('tablero', 'result_result'),
         ],
         ('decide',),
     ),
