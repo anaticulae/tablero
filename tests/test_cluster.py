@@ -18,7 +18,7 @@ import tablero.features.horizontal
 
 
 def extract_tables(source, page):
-    ptn = serializeraw.create_pagetextnavigators_frompath(
+    ptn = serializeraw.ptn_frompath(
         source,
         pages=(page,),
     )[0]
@@ -64,7 +64,7 @@ def test_bachelor90p77_extract_table(testdir):
 def test_bachelor90p77_first_table(text, line, bounding):
     source = power.link(power.BACHELOR090_PDF)
     page = 77
-    ptn = serializeraw.create_pagetextnavigators_frompath(
+    ptn = serializeraw.ptn_frompath(
         source,
         pages=(page,),
     )[0]

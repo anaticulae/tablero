@@ -30,7 +30,7 @@ def work(
     content = serializeraw.load_contentboundingbox(content, pages=pages)
     lines = serializeraw.load_lines(lines, pages=pages)
     lines = tablero.utils.limit_lines(lines, contentbox=content)
-    navigators = serializeraw.create_pagetextcontentnavigators_fromfile(
+    navigators = serializeraw.ptcn_fromfile(
         text,
         textposition,
         sizeandborderpath=sizeandborder,
