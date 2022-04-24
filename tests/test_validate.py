@@ -45,16 +45,26 @@ class Evaluate(utilatest.BaseLiner):
                 tests.run,
                 monkeypatch=monkeypatch,
             ),
-            step=None,
-            pages=pages,
+            step=f'all --table {source}',
+            pages=':',
             source=power.link(source),
             workdir=workdir,
             archive=ARCHIVE,
             loader=self.frompath,
             convert_source=False,
             index=expected,
+            onfailure=self.tables_show,
         )
+        self.pdf = source
         self.headlines = power.link(source)
+
+    def tables_show(self, tables):
+        outdir = tablero.display.render_tables(
+            tables,
+            pdf=self.pdf,
+        )
+        utila.log(outdir)
+        utila.copy_content(outdir, self.workdir)
 
     def frompath(self, path):  # pylint:disable=R0201
         path = iamraw.path.tablero_result(path)
