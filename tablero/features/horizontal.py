@@ -195,7 +195,7 @@ def boundings_to_buckets(boundings, horizontals, min_elements):
     for cluster in clustered:
         for item in cluster:
             buckets.add(item)
-    # remove convtent before and after horizontals which are not part of
+    # remove content before and after horizontals which are not part of
     # the table.
     buckets = buckets[1:-1]
     merged = [
