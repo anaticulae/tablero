@@ -15,7 +15,7 @@ import tests
 
 
 def test_cli_help(monkeypatch):
-    """Run help and version and format command to reach basic test coverage."""
+    """Run help to reach basic test coverage."""
     tests.run('--help', monkeypatch=monkeypatch)
 
 
