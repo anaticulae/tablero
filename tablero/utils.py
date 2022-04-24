@@ -53,7 +53,7 @@ def valid_table(bounding, navigator: texmex.PageTextContentNavigator) -> bool:
     height = utila.roundme(bottom - top)
     if height < tablero.config.TABLE_HEIGHT_MIN:
         # remove to small tables
-        utila.debug(f'table to small: {height}')
+        utila.debug(f'table on page: {navigator.page} too small: {height}')
         return False
     table_content = navigator.between(
         top / navigator.pagesize[1],
