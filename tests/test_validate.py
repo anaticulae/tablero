@@ -88,7 +88,8 @@ class Evaluate(utilatest.BaseLiner):
             pdf=self.pdf,
         )
         utila.log(outdir)
-        utila.copy_content(outdir, self.workdir)
+        if outdir:
+            utila.copy_content(outdir, self.workdir)
 
     def frompath(self, path):  # pylint:disable=R0201
         path = iamraw.path.tablero_result(path)
