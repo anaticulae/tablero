@@ -48,8 +48,6 @@ def test_bachelor90p77_extract_table(testdir):
     page = 77
     tables = extract_tables(source, page)
     assert len(tables) == 3
-    tables = [iamraw.PageContentTableBounding(page=page, content=tables)]
-    tablero.display.render_tables(tables, power.BACHELOR090_PDF)
 
 
 @pytest.mark.parametrize(
