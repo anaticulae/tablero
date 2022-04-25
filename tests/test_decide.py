@@ -96,6 +96,7 @@ def test_detect_table_single(source, pages, expected, testdir, monkeypatch):
 
 
 @pytest.mark.xfail(reason='table is too small')
+@utilatest.longrun
 def test_bachelor56p31(testdir, monkeypatch):
     loaded = tests.run_tables(power.BACHELOR056_PDF, '31', testdir, monkeypatch)
     loaded = utila.flatten_content(loaded)
