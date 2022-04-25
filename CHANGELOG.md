@@ -2,6 +2,13 @@
 
 Every noteable change is logged here.
 
+## v0.9.3
+
+### Feature
+
+* do not detect peace of code as table (4bf277bd51f8)
+* extend logging information (280952831dac)
+
 ## v0.9.2
 
 ## v0.9.1
