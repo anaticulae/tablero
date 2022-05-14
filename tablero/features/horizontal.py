@@ -33,8 +33,8 @@ def work(
     navigators = serializeraw.ptcn_fromfile(
         text,
         textposition,
-        sizeandborderpath=sizeandborder,
-        headerfooterpath=headerfooter,
+        sizeandborder=sizeandborder,
+        headerfooter=headerfooter,
         pages=pages,
     )
     # run strategy
