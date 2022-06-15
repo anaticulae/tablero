@@ -77,6 +77,7 @@ def judge_tables(grouped):
             table = iamraw.TableBounding(
                 bounding=utila.rectangle_max(item),
                 lines=item,
+                page=page,
             )
             if not tablero.judge.isvalid(table):
                 continue

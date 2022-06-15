@@ -152,7 +152,11 @@ def group_result(parsed, pdffile, pages) -> iamraw.PageContentTableBoundings:
         pagenumber = zero_based(table.page)
         # Hint: We flip top/down
         bounding = flip_bounding(table._bbox, sizes[pagenumber])  # pylint:disable=W0212
-        collected[pagenumber].append(iamraw.TableBounding(bounding=bounding))
+        collected[pagenumber].append(
+            iamraw.TableBounding(
+                bounding=bounding,
+                page=pagenumber,
+            ))
     result = [
         iamraw.PageContentTableBounding(page=page, content=content)
         for page, content in collected.items()
