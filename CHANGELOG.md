@@ -2,6 +2,12 @@
 
 Every noteable change is logged here.
 
+## v0.9.4
+
+### Fix
+
+* add missing page number (06a3919f6710)
+
 ## v0.9.3
 
 ### Feature
