@@ -29,12 +29,12 @@ def __init__(self, filepath, pages="1", password=None):
 # disable path check, we know what we do.
 camelot.handlers.PDFHandler.__init__ = __init__
 
-BEFORE = camelot.parsers.lattice.Lattice._generate_image  # pylint:disable=W0212
+BEFORE = camelot.parsers.lattice.Lattice._generate_table_bbox  # pylint:disable=W0212
 
 TODO = None
 
 
-def _generate_image(self):
+def _generate_table_bbox(self):
     BEFORE(self)
     if not TODO:
         return
@@ -50,4 +50,4 @@ def _generate_image(self):
         image.save(self.imagename)
 
 
-camelot.parsers.lattice.Lattice._generate_image = _generate_image  # pylint:disable=W0212
+camelot.parsers.lattice.Lattice._generate_table_bbox = _generate_table_bbox  # pylint:disable=W0212

@@ -14,7 +14,7 @@ import camelot
 import camelot.core
 import configo
 import iamraw
-import pdfinfo.pages
+import pdfinfo
 import rawmaker.features.border
 import serializeraw
 import utila
@@ -95,7 +95,7 @@ def parse_tables(
     verbose: bool = False,
 ):
     # convert internal page definition to camelot definition
-    pagesmax = pdfinfo.pages.determine(pdffile)
+    pagesmax = pdfinfo.pagecount(pdffile)
     pages = camelot_pages(pages, pagesmax)
     result = parse_page(pdffile, boundings, pages, verbose=verbose)
     return result

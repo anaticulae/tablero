@@ -10,7 +10,7 @@
 import functools
 import os
 
-import pdfinfo.pages
+import pdfinfo
 import serializeraw
 import utila
 
@@ -67,7 +67,7 @@ def single(pdffile, page, area=None):
 
 
 def determine_pages(pdffile, pages: tuple = None):
-    pagesmax = pdfinfo.pages.determine(pdffile)
+    pagesmax = pdfinfo.pagecount(pdffile)
     if pages is None:
         return list(range(pagesmax))
     return [
