@@ -12,3 +12,4 @@ rawmaker>=2.39.3<3.0.0
 ghost>=0.7.1<1.0.0
 # Table Extractor
 camelot_py[cv]>=0.8.2<0.11.0
+opencv-python>=4.5.2.55
