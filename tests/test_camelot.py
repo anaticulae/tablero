@@ -14,8 +14,10 @@ import utilatest
 
 import tablero.camelox.fork
 import tablero.features.camelox
+import tests
 
 
+@tests.ghost
 def test_camelot_run():
     source = power.DOCU013_PDF
     parsed = tablero.features.camelox.run(source, pages=2)
@@ -40,6 +42,7 @@ def test_camelot_latex():
     assert len(parsed) == 1
 
 
+@tests.ghost
 @pytest.mark.parametrize('verbose', [True, False])
 def test_camelot_verbose_flag(verbose, capsys):
     source = power.MASTER116_PDF
@@ -52,6 +55,7 @@ def test_camelot_verbose_flag(verbose, capsys):
     assert 'page-3 is image-based' in stderr != verbose, stderr
 
 
+@tests.ghost
 @utilatest.longrun
 def test_camelot_master116_error():
     """Do not detect `Maximum, Minimum, Durchschnitt` as table."""
@@ -64,6 +68,7 @@ def test_camelot_master116_error():
     assert not parsed
 
 
+@tests.ghost
 def test_camelot_master110page89():
     source = power.MASTER110_PDF
     parsed = tablero.features.camelox.run(
@@ -90,6 +95,7 @@ def test_camelot_bachelor76_error():
     assert parsed
 
 
+@tests.ghost
 def test_camelot_internal_error(capsys):
     source = power.BACHELOR109_PDF
     parsed = tablero.features.camelox.run(source)

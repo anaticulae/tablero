@@ -9,12 +9,16 @@
 
 import functools
 
+import ghost
 import power
+import pytest
 import serializeraw
 import utilatest
 
 import tablero
 import tablero.cli
+
+ghost = pytest.mark.skipif(not ghost.HAS_GHOST, reason='require ghost')
 
 run = functools.partial(  # pylint:disable=C0103
     utilatest.run_command,
