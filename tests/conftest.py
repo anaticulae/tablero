@@ -52,8 +52,8 @@ def pytest_sessionstart():
 def extract(resources):
     genex.extract(
         files=resources,
-        destination=power.generated(),
-        groupme='--pagenumbers --footer --content',
+        pagenumber=True,
+        groupme='--footer --content',
         oneline=None,
         worker=WORKER,
         base=power.REPOSITORY,
@@ -64,8 +64,9 @@ def extract(resources):
 def extract_notable(resources):
     genex.extract(
         files=resources,
-        destination=power.generated('notable'),
-        groupme='--pagenumbers --footer --content',
+        dest=power.generated('notable'),
+        pagenumber=True,
+        groupme='--footer --content',
         oneline=None,
         worker=WORKER,
         base=power.REPOSITORY,
