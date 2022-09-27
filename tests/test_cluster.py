@@ -43,7 +43,7 @@ def test_bachelor90p76_extract_table():
 
 
 @utilatest.requires(power.BACHELOR090_PDF)
-def test_bachelor90p77_extract_table(testdir):
+def test_bachelor90p77_extract_table():
     source = power.link(power.BACHELOR090_PDF)
     page = 77
     tables = extract_tables(source, page)

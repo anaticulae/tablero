@@ -25,7 +25,7 @@ def test_camelot_run():
 
 
 @utilatest.nightly
-def test_camelot_forked(testdir):
+def test_camelot_forked():
     source = power.DOCU013_PDF
     content = power.link(source)
     parsed = tablero.camelox.fork.run(source, content=content, worker=4)

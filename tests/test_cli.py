@@ -14,30 +14,30 @@ import utilatest
 import tests
 
 
-def test_cli_help(monkeypatch):
+def test_cli_help(mp):
     """Run help to reach basic test coverage."""
-    tests.run('--help', monkeypatch=monkeypatch)
+    tests.run('--help', mp=mp)
 
 
 @utilatest.nightly
 @utilatest.requires(power.BOOK007_PDF)
-def test_cli_run(testdir, monkeypatch):
+def test_cli_run(td, mp):
     """Run tabelero with all steps."""
     source = power.link(power.BOOK007_PDF)
     tests.run(
-        f'-i {source} -i {testdir.tmpdir} --table={power.BOOK007_PDF} -j8',
-        monkeypatch=monkeypatch,
+        f'-i {source} -i {td.tmpdir} --table={power.BOOK007_PDF} -j8',
+        mp=mp,
     )
 
 
 @utilatest.longrun
 @utilatest.requires(power.BACHELOR109_PDF)
-def test_cli_internal_error(testdir, monkeypatch):
+def test_cli_internal_error(td, mp):
     """Run tablero with unsupported camelot file."""
     pdf = power.BACHELOR109_PDF
     source = power.link(pdf)
     completed = tests.run(
-        f'-i {source} -i {testdir.tmpdir} --table={pdf} --camelox',
-        monkeypatch=monkeypatch,
+        f'-i {source} -i {td.tmpdir} --table={pdf} --camelox',
+        mp=mp,
     )
     assert completed == utila.SUCCESS

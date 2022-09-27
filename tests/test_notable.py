@@ -16,46 +16,46 @@ import tests
 
 
 @utilatest.nightly
-def test_master75page1718_notable(testdir, monkeypatch):
+def test_master75page1718_notable(td, mp):
     source = power.MASTER075_PDF
-    tables = determine_tables(source, '17,18', testdir, monkeypatch)
+    tables = determine_tables(source, '17,18', td, mp)
     assert not tables
 
 
 @utilatest.nightly
-def test_master110page9092(testdir, monkeypatch):
+def test_master110page9092(td, mp):
     source = power.MASTER110_PDF
     tables = determine_tables(
         source,
         '29,90,92,94',
-        testdir,
-        monkeypatch,
+        td,
+        mp,
         folder=None,
     )
     assert not tables
 
 
 @utilatest.longrun
-def test_diss205p135p138p140(testdir, monkeypatch):
+def test_diss205p135p138p140(td, mp):
     source = power.DISS205_PDF
     tables = determine_tables(
         source,
         '135,138,140',
-        testdir,
-        monkeypatch,
+        td,
+        mp,
         folder=None,
     )
     assert not tables
 
 
-def determine_tables(pdf, pages, testdir, monkeypatch, folder='notable'):
+def determine_tables(pdf, pages, td, mp, folder='notable'):
     utilatest.fixture_requires(pdf, folder=folder)
     source = power.link(pdf, folder=folder)
     tests.run(
-        f'-i {source} -i {testdir.tmpdir} --table={pdf} --pages={pages}',
-        monkeypatch=monkeypatch,
+        f'-i {source} -i {td.tmpdir} --table={pdf} --pages={pages}',
+        mp=mp,
     )
     # load result
-    loaded = serializeraw.load_tables(testdir.tmpdir)
+    loaded = serializeraw.load_tables(td.tmpdir)
     loaded = utila.flatten_content(loaded)
     return loaded

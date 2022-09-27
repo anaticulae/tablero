@@ -32,13 +32,13 @@ TODO = [pytest.param(item, id=utila.file_name(item)) for item in TODO]
 
 @pytest.mark.parametrize('source', TODO)
 @utilatest.longrun
-def test_validate(source, testdir, monkeypatch):
+def test_validate(source, td, mp):
     utilatest.fixture_requires(source)
     Evaluate(
         source=source,
         folder=None,
-        workdir=testdir.tmpdir,
-        monkeypatch=monkeypatch,
+        workdir=td.tmpdir,
+        mp=mp,
     ).evaluate()
 
 
@@ -51,25 +51,25 @@ NOTABLE = [pytest.param(item, id=utila.file_name(item)) for item in NOTABLE]
 
 @pytest.mark.parametrize('source', NOTABLE)
 @utilatest.longrun
-def test_notable_validate(source, testdir, monkeypatch):
+def test_notable_validate(source, td, mp):
     folder = 'notable'
     utilatest.fixture_requires(source, folder=folder)
     Evaluate(
         source=source,
         folder=folder,
         archive=ARCHIVE_NOTABLE,
-        workdir=testdir.tmpdir,
-        monkeypatch=monkeypatch,
+        workdir=td.tmpdir,
+        mp=mp,
     ).evaluate()
 
 
 class Evaluate(utilatest.BaseLiner):
 
-    def __init__(self, source, folder, workdir, monkeypatch, archive=ARCHIVE):
+    def __init__(self, source, folder, workdir, mp, archive=ARCHIVE):
         super().__init__(
             program=functools.partial(
                 tests.run,
-                monkeypatch=monkeypatch,
+                mp=mp,
             ),
             step=f'all --table {source}',
             pages=':',

@@ -35,10 +35,10 @@ failure = functools.partial(  # pylint:disable=C0103
 )
 
 
-def run_tables(pdf, pages, testdir, monkeypatch):
+def run_tables(pdf, pages, td, mp):
     utilatest.fixture_requires(pdf)
     source = power.link(pdf)
     cmd = f'-i {source} --table={pdf} --pages={pages}'
-    run(cmd, monkeypatch=monkeypatch)
-    loaded = serializeraw.load_tables(testdir.tmpdir)
+    run(cmd, mp=mp)
+    loaded = serializeraw.load_tables(td.tmpdir)
     return loaded
