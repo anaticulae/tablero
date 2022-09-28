@@ -2,6 +2,27 @@
 
 Every noteable change is logged here.
 
+## v0.10.0 (2022-09-28)
+
+### Feature
+
+* patch backend (f68bcb71ba4f)
+
+### Fix
+
+* adjust interface (d2db25ac54b0)
+
+### Chore
+
+* add separate generator step (cfffe94c02aa)
+* use more cores on CI (8a55227da8f5)
+* upgrade requirements.txt (fb16148e4f1f)
+* add PyCryptoDome to decrypt pdf (4964fcfed3d8)
+* upgrade requirements.txt (89ee9688f5b5)
+* add missing resource (2a3237b10ce8)
+* add Jenkinsfile (515562bbe965)
+* upgrade requirements.txt (0037a6d1bbd2)
+
 ## v0.9.4
 
 ### Fix
