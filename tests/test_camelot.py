@@ -96,6 +96,7 @@ def test_camelot_bachelor76_error():
     assert parsed
 
 
+@utilatest.nightly
 @tests.ghost
 def test_camelot_internal_error(capsys):
     """Before upgrading camelot, camelot produces an error cause it was
