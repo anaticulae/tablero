@@ -20,7 +20,7 @@ import utila
 def __init__(self, filepath, pages="1", password=None):
     self.filepath = filepath
     if password is None:
-        self.password = ""
+        self.password = ""  # nosec
     else:
         self.password = password
         if sys.version_info[0] < 3:
