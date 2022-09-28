@@ -7,9 +7,9 @@
 # be prosecuted under federal law. Its content is company confidential.
 #==============================================================================
 
-utilatest==0.18.0
+utilatest==0.19.0
 power==2.14.1
 genex==0.34.1
-PyCryptodome>=3.10.1<4.0.0
+pycryptodome>=3.10.1<4.0.0
 # TODO: REMOVE LATER
 groupme>=0.36.1<1.0.0
