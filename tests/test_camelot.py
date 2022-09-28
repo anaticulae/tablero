@@ -24,6 +24,7 @@ def test_camelot_run():
     assert len(parsed) == 1
 
 
+@tests.ghost
 @utilatest.nightly
 def test_camelot_forked():
     source = power.DOCU013_PDF

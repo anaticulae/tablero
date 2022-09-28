@@ -30,6 +30,7 @@ TODO = [
 TODO = [pytest.param(item, id=utila.file_name(item)) for item in TODO]
 
 
+@tests.ghost
 @pytest.mark.parametrize('source', TODO)
 @utilatest.longrun
 def test_validate(source, td, mp):

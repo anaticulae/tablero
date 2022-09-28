@@ -15,6 +15,7 @@ import utilatest
 
 import tablero.display
 import tablero.features
+import tests
 
 
 def tables(source):
@@ -25,6 +26,7 @@ def tables(source):
     return result
 
 
+@tests.ghost
 @utilatest.nightly
 def test_display_tables_docu013():
     source = power.DOCU013_PDF

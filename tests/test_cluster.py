@@ -15,6 +15,7 @@ import utilatest
 
 import tablero.display
 import tablero.features.horizontal
+import tests
 
 
 def extract_tables(source, page):
@@ -50,6 +51,7 @@ def test_bachelor90p77_extract_table():
     assert len(tables) == 3
 
 
+@tests.ghost
 @pytest.mark.parametrize(
     'text, line, bounding',
     [

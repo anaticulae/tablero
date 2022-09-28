@@ -74,6 +74,7 @@ import tests
         id='master099p48p49',
     ),
 ])
+@tests.ghost
 @utilatest.nightly
 def test_detect_table_single(source, pages, expected, td, mp):
     """\
