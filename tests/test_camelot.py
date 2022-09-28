@@ -44,15 +44,15 @@ def test_camelot_latex():
 
 @tests.ghost
 @pytest.mark.parametrize('verbose', [True, False])
-def test_camelot_verbose_flag(verbose, capsys):
+def test_camelot_verbose_flag(verbose):
+    # TODO: REMOVE WARNING LATER
     source = power.MASTER116_PDF
-    tablero.features.camelox.run(
-        source,
-        pages=(2, 3),
-        verbose=verbose,
-    )
-    stderr = utilatest.stderr(capsys)
-    assert 'page-3 is image-based' in stderr != verbose, stderr
+    with pytest.warns(match='page-3 is image-based'):
+        tablero.features.camelox.run(
+            source,
+            pages=(2, 3),
+            verbose=verbose,
+        )
 
 
 @tests.ghost
