@@ -23,11 +23,7 @@ import tests.conftest
 ARCHIVE = utila.join(tablero.ROOT, 'tests/expected', exist=True)
 ARCHIVE_NOTABLE = utila.join(tablero.ROOT, 'tests/notable', exist=True)
 
-TODO = [
-    item if isinstance(item, str) else item[0]
-    for item in tests.conftest.RESOURCES
-]
-TODO = [pytest.param(item, id=utila.file_name(item)) for item in TODO]
+TODO = utilatest.test_resources(tests.conftest.RESOURCES)
 
 
 @tests.ghost
