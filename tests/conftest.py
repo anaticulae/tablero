@@ -10,6 +10,7 @@
 import genex
 import power
 import pytest
+import utilatest
 from utilatest import mp  # pylint:disable=W0611
 from utilatest import td  # pylint:disable=W0611
 
@@ -18,7 +19,6 @@ import tablero
 pytest_plugins = ['pytester', 'xdist']  # pylint: disable=invalid-name
 
 PACKAGE = tablero.PROCESS
-WORKER = 6
 
 power.setup(tablero.ROOT)
 
@@ -38,6 +38,11 @@ RESOURCES = [
     (power.BACHELOR063_PDF, '24:28'),
     (power.MASTER112_PDF, '110'),
 ]
+
+WORKER = utilatest.worker_count(
+    number=6,
+    onci=len(RESOURCES),
+)
 
 RESOURCES_NOTABLE = [
     power.HOME040_PDF,
