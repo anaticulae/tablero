@@ -98,8 +98,15 @@ def test_camelot_bachelor76_error():
 
 @tests.ghost
 def test_camelot_internal_error(capsys):
+    """Before upgrading camelot, camelot produces an error cause it was
+    not able to extract table.
+
+    After upgrading this error does not occur
+    anymore.
+    """
     source = power.BACHELOR109_PDF
     parsed = tablero.features.camelox.run(source)
-    assert not parsed
+    assert parsed
     error = utilatest.stderr(capsys)
-    assert 'internal camelot error' in error
+    assert not error, str(error)
+    # assert 'internal camelot error' in error
