@@ -118,7 +118,11 @@ def parse_page(
                 pages=page,
             )
     except NotImplementedError as msg:
-        utila.error('internal camelot error')
+        utila.error('internal camelot error: not implemented')
+        utila.error(msg)
+        return None
+    except Exception as msg:  # pylint:disable=broad-except
+        utila.error('internal camelot error: general exception')
         utila.error(msg)
         return None
     # if not parsed:
