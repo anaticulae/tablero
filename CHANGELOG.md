@@ -2,6 +2,16 @@
 
 Every noteable change is logged here.
 
+## v0.10.1 (2022-09-29)
+
+### Fix
+
+* catch internal exception (7b447929ee90)
+
+### Chore
+
+* upgrade requirements.txt (39c4f67d20f2)
+
 ## v0.10.0 (2022-09-28)
 
 ### Feature
