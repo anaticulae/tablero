@@ -77,7 +77,6 @@ def extract_notable(resources):
         footnote=True,
         groupme='--content',
         oneline=None,
-        worker=WORKER,
-        base=power.REPOSITORY,
+        worker=len(RESOURCES_NOTABLE),
         pages=':',
     )
