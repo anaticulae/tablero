@@ -2,6 +2,14 @@
 
 Every noteable change is logged here.
 
+## v0.10.2 (2022-09-29)
+
+### Chore
+
+* adjust worker count (b4ca1f38a567)
+* adjust data generator (a007b7634f29)
+* add missing dev requirement (89ed0c612696)
+
 ## v0.10.1 (2022-09-29)
 
 ### Fix
