@@ -173,16 +173,16 @@ def invalid_table(table) -> bool:
         return True
     if table.parsing_report['whitespace'] > TABLE_WHITESPACE_MAX:
         return True
-    cells = utila.flatten(table.cells)
+    cells = utila.flat(table.cells)
     cells = [
         (item.x1, item.y1, item.x2, item.y2)
         for item in cells
         if item._text.strip()  # pylint:disable=W0212
     ]
-    rectangle = utila.rectangle_max(cells)
-    if utila.rectangle_width(rectangle) < TABLE_WIDTH_MIN:
+    rectangle = utila.rect_max(cells)
+    if utila.rect_width(rectangle) < TABLE_WIDTH_MIN:
         return True
-    if utila.rectangle_height(rectangle) < TABLE_HEIGHT_MIN:
+    if utila.rect_height(rectangle) < TABLE_HEIGHT_MIN:
         return True
     return False
 

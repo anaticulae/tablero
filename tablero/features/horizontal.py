@@ -163,18 +163,18 @@ def extract_potential_table(
         # content below last horizontal raises out of IndexError in
         # `horizontals`.
         bottomline = group_horizontals[-1]
-        tablebounding = utila.rectangle_max((topline, bottomline))
+        tablebounding = utila.rect_max((topline, bottomline))
         tables.append(tablebounding)
     return tables
 
 
 def inside_horizontals(boundings, horizontals) -> list:
     # determine most left and right x-coordinate of potential table
-    inside_table = tuple(utila.rectangle_max(horizontals))
+    inside_table = tuple(utila.rect_max(horizontals))
     boundings = [
         rectangle for rectangle in boundings if utila.dot_in_rectangle(
             inside_table,
-            utila.rectangle_center(rectangle),
+            utila.rect_center(rectangle),
         )
     ]
     return boundings
@@ -225,8 +225,8 @@ HEADER_WIDTH_MIN = configo.HV_FLOAT_PLUS(default=100.0)
 
 def valid_header(content) -> bool:
     boundings = [item.bounding for item in content]
-    left = min([item[0] for item in boundings])
-    right = max([item[2] for item in boundings])
+    left = min((item[0] for item in boundings))
+    right = max((item[2] for item in boundings))
     width = right - left
     if width < HEADER_WIDTH_MIN:
         return False

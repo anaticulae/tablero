@@ -36,7 +36,7 @@ def render_tables(
         with PIL.Image.open(filepath) as images:
             renderer = PIL.ImageDraw.Draw(images)
             for item in tablepage.content:
-                bounding = utila.rectangle_scale(
+                bounding = utila.rect_scale(
                     item.bounding,
                     scale=SCALES,
                 )
@@ -44,7 +44,7 @@ def render_tables(
                 lines = item.lines
                 if lines:
                     for line in lines:
-                        line = utila.rectangle_scale(
+                        line = utila.rect_scale(
                             line,
                             scale=SCALES,
                         )

@@ -75,7 +75,7 @@ def judge_tables(grouped):
                 continue
             item = list(item)
             table = iamraw.TableBounding(
-                bounding=utila.rectangle_max(item),
+                bounding=utila.rect_max(item),
                 lines=item,
                 page=page,
             )

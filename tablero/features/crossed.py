@@ -125,14 +125,13 @@ def extract_potential_table(verticals, horizontals):
         topline = horizontals[group[0] - 1]
         # double content below table?
         bottomline = horizontals[min((group[-1], len(horizontals) - 1))]
-        table = utila.rectangle_max((topline, bottomline))
+        table = utila.rect_max((topline, bottomline))
         tables.append(table)
     tables = tablero.utils.merge_tables(tables)
     # merge overlapping table again
     # TODO: REMOVE AFTER FIXING
-    tables = utila.intersecting_rectangle_cluster(tables)
+    tables = utila.rect_intersecting_cluster(tables)
     tables = [
-        item[0] if len(item) == 1 else utila.rectangle_max(item)
-        for item in tables
+        item[0] if len(item) == 1 else utila.rect_max(item) for item in tables
     ]
     return tables

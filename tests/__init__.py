@@ -24,14 +24,14 @@ run = functools.partial(  # pylint:disable=C0103
     utilatest.run_command,
     main=tablero.cli.main,
     process=tablero.PROCESS,
-    success=True,
+    expect=True,
 )
 
 failure = functools.partial(  # pylint:disable=C0103
     utilatest.run_command,
     main=tablero.cli.main,
     process=tablero.PROCESS,
-    success=False,
+    expect=False,
 )
 
 

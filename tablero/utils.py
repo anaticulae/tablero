@@ -42,13 +42,13 @@ def limit_lines(lines, contentbox=None, line_length_min: float = 10.0):
         if contentbox:
             content = [
                 item for item in content
-                if utila.rectangle_inside(contentbox[page.page], item)
+                if utila.rect_inside(contentbox[page.page], item)
             ]
         result.append(iamraw.PageContentLine(page=page.page, content=content))
     return result
 
 
-def valid_table(bounding, navigator: texmex.PageTextContentNavigator) -> bool:
+def valid_table(bounding, navigator: texmex.PTCN) -> bool:
     top, bottom = bounding[1], bounding[3]
     utila.debug(f'validate table: {bounding} on page {navigator.page}')
     height = utila.roundme(bottom - top)
@@ -89,7 +89,7 @@ def merge_tables(boundings):
         tabledistance = utila.roundme(math.fabs(result[-1][3] - bounding[1]))
         utila.debug(tabledistance)
         if tabledistance < tablero.config.TABLE_MERGE_DISTANCE:
-            result[-1] = utila.rectangle_max((result[-1], bounding))
+            result[-1] = utila.rect_max((result[-1], bounding))
         else:
             result.append(bounding)
     return result

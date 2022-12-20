@@ -104,11 +104,10 @@ def select_page(latex, word, crossed, camelot):
 
 
 def present(latex, word, crossed, camelot):
-    latex_detected = sum([len(item.content) for item in latex])
-    word_detected = sum([len(item.content) for item in word])
-    crossed_detected = sum([len(item.content) for item in crossed])
-    camelot_detected = sum([len(item.content) for item in camelot])
-
+    latex_detected = sum((len(item.content) for item in latex))
+    word_detected = sum((len(item.content) for item in word))
+    crossed_detected = sum((len(item.content) for item in crossed))
+    camelot_detected = sum((len(item.content) for item in camelot))
     utila.log(f'latex:   {latex_detected}')
     utila.log(f'word:    {word_detected}')
     utila.log(f'crossed: {crossed_detected}')

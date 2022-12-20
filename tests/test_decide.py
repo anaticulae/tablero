@@ -145,7 +145,7 @@ def test_detect_table_bachelor56(td, mp):
     loaded = tests.run_tables(power.BACHELOR056_PDF, ':', td, mp)
     tables = utila.flatten_content(loaded)
     # 6 includes 1 figure which can be detected as table
-    assert len(tables) in (5, 6)  # VALIDATED
+    assert len(tables) in {5, 6}  # VALIDATED
 
 
 @pytest.mark.timeout(30)
