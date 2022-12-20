@@ -7,7 +7,6 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import iamraw
 import power
 import serializeraw
 import utila
@@ -19,7 +18,7 @@ import tests
 
 
 def tables(source):
-    source = iamraw.path.line(power.link(source))
+    source = power.link(source)
     loaded = serializeraw.load_lines(source)
     grouped = tablero.features.word.locate_tables(loaded)
     result = tablero.features.word.judge_tables(grouped)
