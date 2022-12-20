@@ -45,7 +45,7 @@ WORKER = utilatest.worker_count(
 )
 
 RESOURCES_NOTABLE = [
-    power.HOME040_PDF,
+    power.HOME043_PDF,
     power.HOME025_PDF,
     power.BOOK007_PDF,
 ]
