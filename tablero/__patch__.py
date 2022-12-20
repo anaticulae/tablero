@@ -62,7 +62,7 @@ def convert(self, pdf_path, png_path, resolution=300):
             " here: https://camelot-py.readthedocs.io/en/master/user/install-deps.html"
         )
     gs_command = [
-        "gswin64c",
+        "gswin64c" if utila.iswin() else 'gs',
         "-q",
         "-sDEVICE=png16m",
         "-o",
