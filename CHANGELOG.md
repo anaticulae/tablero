@@ -2,6 +2,17 @@
 
 Every noteable change is logged here.
 
+## v0.10.3 (2022-12-21)
+
+### Fix
+
+* use correct runner on linux (82ec0bbf8986)
+
+### Chore
+
+* upgrade requirements.txt (b5507810017a)
+* upgrade pipeline (5bf38108c022)
+
 ## v0.10.2 (2022-09-29)
 
 ### Chore
