@@ -2,6 +2,19 @@
 
 Every noteable change is logged here.
 
+## v0.10.4 (2023-01-02)
+
+### Documentation
+
+* happy New Year! (21bc41825fd3)
+
+### Chore
+
+* use quick install (7e7d8d30db54)
+* use new pre-release (cbceab488d6f)
+* upgrade pipe library (9bc20c939fcc)
+* upgrade requirements.txt (00f283104cce)
+
 ## v0.10.3 (2022-12-21)
 
 ### Fix
