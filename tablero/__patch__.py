@@ -7,13 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import sys
-
 import camelot.backends.ghostscript_backend
-import camelot.handlers
-import camelot.parsers.lattice
-import PIL
-import PIL.ImageDraw
 import playa.security
 import utilo
 
@@ -63,8 +57,8 @@ camelot.backends.ghostscript_backend.GhostscriptBackend.convert = convert
 
 
 @property
-def is_extractable(self):
+def is_extractable(self):  # pylint:disable=W0613
     return True
 
 
-playa.security.PDFStandardSecurityHandler.is_extractable = is_extractable
+playa.security.PDFStandardSecurityHandler.is_extractable = is_extractable  # pylint:disable=I1101
