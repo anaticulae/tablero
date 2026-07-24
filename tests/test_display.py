@@ -7,10 +7,10 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import power
+import hoverpower
 import serializeraw
-import utila
-import utilatest
+import utilo
+import utilotest
 
 import tablero.display
 import tablero.features
@@ -18,17 +18,17 @@ import tests
 
 
 def tables(source):
-    source = power.link(source)
+    source = hoverpower.link(source)
     loaded = serializeraw.load_lines(source)
     grouped = tablero.features.word.locate_tables(loaded)
     result = tablero.features.word.judge_tables(grouped)
     return result
 
 
-@tests.ghost
-@utilatest.nightly
+@tests.ughost
+@utilotest.nightly
 def test_display_tables_docu013():
-    source = power.DOCU013_PDF
+    source = hoverpower.DOCU013_PDF
     data = tables(source)
     outdir = tablero.display.render_tables(data, source)
-    assert utila.file_count(outdir) == 11
+    assert utilo.file_count(outdir) == 11

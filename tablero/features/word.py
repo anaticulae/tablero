@@ -7,10 +7,10 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import configo
+import configos
 import iamraw
 import serializeraw
-import utila
+import utilo
 
 import tablero.features.crossed
 import tablero.judge
@@ -18,11 +18,11 @@ import tablero.lines
 import tablero.utils
 
 # a table must have at least this amount of lines
-TABLE_LINE_COUNT_MIN = configo.HV_INT_PLUS(default=10)
+TABLE_LINE_COUNT_MIN = configos.HV_INT_PLUS(default=10)
 
 # tables are build out of vertical and horizontal lines, but only a few
 # cross lines.
-TABLE_HORIZONTAL_VERTICAL_LINE_MIN = configo.HV_PERCENT_PLUS(default=90)
+TABLE_HORIZONTAL_VERTICAL_LINE_MIN = configos.HV_PERCENT_PLUS(default=90)
 
 
 def work(lines: str, content: str, pages: tuple = None) -> str:
@@ -37,7 +37,7 @@ def work(lines: str, content: str, pages: tuple = None) -> str:
     return dumped
 
 
-@utila.profile('strategy:word')
+@utilo.profile('strategy:word')
 def run(lines):
     grouped = locate_tables(lines)
     result = judge_tables(grouped)
@@ -49,8 +49,8 @@ def locate_tables(lines):
     for page in lines:
         content = page.content
         # TODO: profile only on --profile
-        # with utila.profile():
-        clustered = utila.intersecting_line_cluster(
+        # with utilo.profile():
+        clustered = utilo.intersecting_line_cluster(
             content,
             max_diff=5.0,
             min_elements=3,
@@ -75,7 +75,7 @@ def judge_tables(grouped):
                 continue
             item = list(item)
             table = iamraw.TableBounding(
-                bounding=utila.rect_max(item),
+                bounding=utilo.rect_max(item),
                 lines=item,
                 page=page,
             )
@@ -91,12 +91,12 @@ def judge_tables(grouped):
 
 def isvalid(cluster) -> bool:
     if len(cluster) < TABLE_LINE_COUNT_MIN:
-        utila.debug(f'too few lines: {len(cluster)}')
-        utila.debug(cluster)
+        utilo.debug(f'too few lines: {len(cluster)}')
+        utilo.debug(cluster)
         return False
     percentage = tablero.lines.horiverti_percentage(cluster)
     if percentage < TABLE_HORIZONTAL_VERTICAL_LINE_MIN:
-        utila.debug(f'too few vertical lines: {percentage}')
-        utila.debug(cluster)
+        utilo.debug(f'too few vertical lines: {percentage}')
+        utilo.debug(cluster)
         return False
     return True

@@ -12,27 +12,27 @@ import warnings
 
 import camelot
 import camelot.core
-import configo
+import configos
 import iamraw
-import pdfinfo
+import pdflog
 import rawmaker.features.border
 import serializeraw
-import utila
+import utilo
 
 import tablero.__patch__
 import tablero.camelox.fork
 
 # parallel worker to run camelox
-CAMELOX_WORKER = configo.HV_INT_PLUS(default=6)
+CAMELOX_WORKER = configos.HV_INT_PLUS(default=6)
 
 
 def work(content: str, lines: str, table: str, pages: tuple = None) -> str:
-    if not utila.exists(table):
-        utila.error(f'skip camelox, missing: {table}')
+    if not utilo.exists(table):
+        utilo.error(f'skip camelox, missing: {table}')
         return EMPTY
     pages = shrink_pages(lines, pages)
     if pages == NOPAGES:
-        utila.debug('no pages with lines selected, skip camelox')
+        utilo.debug('no pages with lines selected, skip camelox')
         return EMPTY
     extracted = tablero.camelox.fork.run(
         pdffile=table,
@@ -58,17 +58,17 @@ def shrink_pages(lines, pages) -> list:
     lines. If we do not have any lines, we can save this generation
     time.
     """
-    if not utila.exists(lines):
+    if not utilo.exists(lines):
         return pages
     lines = serializeraw.load_lines(lines, pages=pages)
     line_pages = [item.page for item in lines if len(item.content) >= 3]
     if not line_pages:
         return NOPAGES
-    result = [page for page in line_pages if not utila.should_skip(page, pages)]
+    result = [page for page in line_pages if not utilo.should_skip(page, pages)]
     return result
 
 
-@utila.profile('strategy:camelot')
+@utilo.profile('strategy:camelot')
 def run(
     pdffile: str,
     boundings: list = None,
@@ -77,9 +77,9 @@ def run(
 ) -> iamraw.PageContentTableBoundings:
     if pdffile is None:
         # no pdffile given
-        utila.error('no camelot pdf file given')
+        utilo.error('no camelot pdf file given')
         return []
-    utila.exists_assert(pdffile)
+    utilo.exists_assert(pdffile)
     parsed = parse_tables(pdffile, boundings, pages, verbose=verbose)
     if not parsed:
         return []
@@ -95,7 +95,7 @@ def parse_tables(
     verbose: bool = False,
 ):
     # convert internal page definition to camelot definition
-    pagesmax = pdfinfo.pagecount(pdffile)
+    pagesmax = pdflog.pagecount(pdffile)
     pages = camelot_pages(pages, pagesmax)
     result = parse_page(pdffile, boundings, pages, verbose=verbose)
     return result
@@ -110,7 +110,7 @@ def parse_page(
     boundings = list(boundings) if boundings else None
     # HACK:
     tablero.__patch__.TODO = boundings
-    catch_warnings = warnings.catch_warnings if verbose else utila.nothing
+    catch_warnings = warnings.catch_warnings if verbose else utilo.nothing
     try:
         with catch_warnings():
             parsed: camelot.core.TableList = camelot.read_pdf(
@@ -118,12 +118,12 @@ def parse_page(
                 pages=page,
             )
     except NotImplementedError as msg:
-        utila.error('internal camelot error: not implemented')
-        utila.error(msg)
+        utilo.error('internal camelot error: not implemented')
+        utilo.error(msg)
         return None
     except Exception as msg:  # pylint:disable=broad-except
-        utila.error('internal camelot error: general exception')
-        utila.error(msg)
+        utilo.error('internal camelot error: general exception')
+        utilo.error(msg)
         return None
     # if not parsed:
     #     parsed: camelot.core.TableList = camelot.read_pdf(
@@ -134,13 +134,13 @@ def parse_page(
     return parsed
 
 
-TABLE_ACCURACY_MIN = configo.HV_FLOAT_PLUS(default=75.0)
+TABLE_ACCURACY_MIN = configos.HV_FLOAT_PLUS(default=75.0)
 
-TABLE_WHITESPACE_MAX = configo.HV_FLOAT_PLUS(default=40.0)
+TABLE_WHITESPACE_MAX = configos.HV_FLOAT_PLUS(default=40.0)
 
-TABLE_WIDTH_MIN = configo.HV_FLOAT_PLUS(default=100.0)
+TABLE_WIDTH_MIN = configos.HV_FLOAT_PLUS(default=100.0)
 
-TABLE_HEIGHT_MIN = configo.HV_FLOAT_PLUS(default=30.0)
+TABLE_HEIGHT_MIN = configos.HV_FLOAT_PLUS(default=30.0)
 
 
 def group_result(parsed, pdffile, pages) -> iamraw.PageContentTableBoundings:
@@ -149,10 +149,10 @@ def group_result(parsed, pdffile, pages) -> iamraw.PageContentTableBoundings:
     collected = collections.defaultdict(list)
     for table in parsed:
         if invalid_table(table):
-            utila.debug(f'skip table: {table}')
-            utila.debug(table.parsing_report)
+            utilo.debug(f'skip table: {table}')
+            utilo.debug(table.parsing_report)
             continue
-        utila.debug(table.parsing_report)
+        utilo.debug(table.parsing_report)
         pagenumber = zero_based(table.page)
         # Hint: We flip top/down
         bounding = flip_bounding(table._bbox, sizes[pagenumber])  # pylint:disable=W0212
@@ -173,16 +173,16 @@ def invalid_table(table) -> bool:
         return True
     if table.parsing_report['whitespace'] > TABLE_WHITESPACE_MAX:
         return True
-    cells = utila.flat(table.cells)
+    cells = utilo.flat(table.cells)
     cells = [
         (item.x1, item.y1, item.x2, item.y2)
         for item in cells
         if item._text.strip()  # pylint:disable=W0212
     ]
-    rectangle = utila.rect_max(cells)
-    if utila.rect_width(rectangle) < TABLE_WIDTH_MIN:
+    rectangle = utilo.rect_max(cells)
+    if utilo.rect_width(rectangle) < TABLE_WIDTH_MIN:
         return True
-    if utila.rect_height(rectangle) < TABLE_HEIGHT_MIN:
+    if utilo.rect_height(rectangle) < TABLE_HEIGHT_MIN:
         return True
     return False
 
@@ -214,7 +214,7 @@ def camelot_pages(pages: tuple, pagesmax: int) -> str:
     pages = [
         str(page + 1)
         for page in range(pagesmax)
-        if not utila.should_skip(page, pages)
+        if not utilo.should_skip(page, pages)
     ]
     result = ','.join(pages)
     return result

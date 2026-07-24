@@ -7,62 +7,62 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import utila
+import utilo
 
 import tablero
 
 WORKPLAN = [
-    utila.create_step(
+    utilo.create_step(
         'camelox',
         [
-            utila.ResultFile('groupme', 'content_content'),
-            utila.ResultFile('rawmaker', 'line_line', optional=True),
-            utila.Value('table', typ=None, defaultvar=None),
+            utilo.ResultFile('groupme', 'content_content'),
+            utilo.ResultFile('rawmaker', 'line_line', optional=True),
+            utilo.Value('table', typ=None, defaultvar=None),
         ],
         ('camelox',),
     ),
-    utila.create_step(
+    utilo.create_step(
         'crossed',
         [
-            utila.ResultFile('rawmaker', 'line_line'),
-            utila.ResultFile('groupme', 'content_content'),
+            utilo.ResultFile('rawmaker', 'line_line'),
+            utilo.ResultFile('groupme', 'content_content'),
         ],
         ('crossed',),
     ),
-    utila.create_step(
+    utilo.create_step(
         'word',
         [
-            utila.ResultFile('rawmaker', 'line_line'),
-            utila.ResultFile('groupme', 'content_content'),
+            utilo.ResultFile('rawmaker', 'line_line'),
+            utilo.ResultFile('groupme', 'content_content'),
         ],
         ('word',),
     ),
-    utila.create_step(
+    utilo.create_step(
         'horizontal',
         [
-            utila.ResultFile('rawmaker', 'text_text'),
-            utila.ResultFile('rawmaker', 'text_positions'),
-            utila.ResultFile('rawmaker', 'border_pages'),
-            utila.ResultFile('groupme', 'footer_footerheader'),
-            utila.ResultFile('rawmaker', 'line_line'),
-            utila.ResultFile('groupme', 'content_content'),
+            utilo.ResultFile('rawmaker', 'text_text'),
+            utilo.ResultFile('rawmaker', 'text_positions'),
+            utilo.ResultFile('rawmaker', 'border_pages'),
+            utilo.ResultFile('groupme', 'footer_footerheader'),
+            utilo.ResultFile('rawmaker', 'line_line'),
+            utilo.ResultFile('groupme', 'content_content'),
         ],
         ('horizontal',),
     ),
-    utila.create_step(
+    utilo.create_step(
         'result',
         [
-            utila.ResultFile('tablero', 'camelox_camelox'),
-            utila.ResultFile('tablero', 'crossed_crossed'),
-            utila.ResultFile('tablero', 'horizontal_horizontal'),
-            utila.ResultFile('tablero', 'word_word'),
+            utilo.ResultFile('tablero', 'camelox_camelox'),
+            utilo.ResultFile('tablero', 'crossed_crossed'),
+            utilo.ResultFile('tablero', 'horizontal_horizontal'),
+            utilo.ResultFile('tablero', 'word_word'),
         ],
         ('result',),
     ),
-    utila.create_step(
+    utilo.create_step(
         'decide',
         [
-            utila.ResultFile('tablero', 'result_result'),
+            utilo.ResultFile('tablero', 'result_result'),
         ],
         ('decide',),
     ),
@@ -70,11 +70,11 @@ WORKPLAN = [
 
 
 def main():
-    utila.featurepack(
+    utilo.featurepack(
         workplan=WORKPLAN,
         root=tablero.ROOT,
         featurepackage='tablero.features',
-        config=utila.FeaturePackConfig(
+        config=utilo.FeaturePackConfig(
             description=tablero.DESCRIPTION,
             multiprocessed=True,
             name=tablero.PROCESS,

@@ -7,11 +7,11 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
+import hoverpower
 import iamraw.path
-import power
 import pytest
 import serializeraw
-import utilatest
+import utilotest
 
 import tablero.display
 import tablero.features.horizontal
@@ -32,9 +32,9 @@ def extract_tables(source, page):
     return tables
 
 
-@utilatest.requires(power.BACHELOR090_PDF)
+@utilotest.requires(hoverpower.BACHELOR090_PDF)
 def test_bachelor90p76_extract_table():
-    source = power.link(power.BACHELOR090_PDF)
+    source = hoverpower.link(hoverpower.BACHELOR090_PDF)
     page = 76
     tables = extract_tables(source, page)
     assert len(tables) == 1
@@ -43,15 +43,15 @@ def test_bachelor90p76_extract_table():
     assert bounding == expected
 
 
-@utilatest.requires(power.BACHELOR090_PDF)
+@utilotest.requires(hoverpower.BACHELOR090_PDF)
 def test_bachelor90p77_extract_table():
-    source = power.link(power.BACHELOR090_PDF)
+    source = hoverpower.link(hoverpower.BACHELOR090_PDF)
     page = 77
     tables = extract_tables(source, page)
     assert len(tables) == 3
 
 
-@tests.ghost
+@tests.ughost
 @pytest.mark.parametrize(
     'text, line, bounding',
     [
@@ -60,9 +60,9 @@ def test_bachelor90p77_extract_table():
         ((28, -1), (7, -1), (173.43, 561.47, 418.86, 631.58)),
     ],
 )
-@utilatest.requires(power.BACHELOR090_PDF)
+@utilotest.requires(hoverpower.BACHELOR090_PDF)
 def test_bachelor90p77_first_table(text, line, bounding):
-    source = power.link(power.BACHELOR090_PDF)
+    source = hoverpower.link(hoverpower.BACHELOR090_PDF)
     page = 77
     ptn = serializeraw.ptn_frompath(
         source,
@@ -80,4 +80,4 @@ def test_bachelor90p77_first_table(text, line, bounding):
     tables_bounding = [table.bounding for table in tables]
     assert tables_bounding == [bounding]
     tables = [iamraw.PageContentTableBounding(page=page, content=tables)]
-    tablero.display.render_tables(tables, power.BACHELOR090_PDF)
+    tablero.display.render_tables(tables, hoverpower.BACHELOR090_PDF)

@@ -9,18 +9,18 @@
 
 import math
 
-import configo
-import elements
+import configos
+import elementae
 import iamraw
 import texmex
-import utila
+import utilo
 
 import tablero.config
 import tablero.lines
 
 LINES_PER_PAGE_MAX = 1000
 
-GROUP_HORIZONTALS_XDIFF_MAX = configo.HV_FLOAT_PLUS(default=30.0)
+GROUP_HORIZONTALS_XDIFF_MAX = configos.HV_FLOAT_PLUS(default=30.0)
 
 
 def limit_lines(lines, contentbox=None, line_length_min: float = 10.0):
@@ -37,12 +37,12 @@ def limit_lines(lines, contentbox=None, line_length_min: float = 10.0):
             # too many lines on this page
             content = []
         content = [
-            item for item in content if utila.length(*item) > line_length_min
+            item for item in content if utilo.length(*item) > line_length_min
         ]
         if contentbox:
             content = [
                 item for item in content
-                if utila.rect_inside(contentbox[page.page], item)
+                if utilo.rect_inside(contentbox[page.page], item)
             ]
         result.append(iamraw.PageContentLine(page=page.page, content=content))
     return result
@@ -50,11 +50,11 @@ def limit_lines(lines, contentbox=None, line_length_min: float = 10.0):
 
 def valid_table(bounding, navigator: texmex.PTCN) -> bool:
     top, bottom = bounding[1], bounding[3]
-    utila.debug(f'validate table: {bounding} on page {navigator.page}')
-    height = utila.roundme(bottom - top)
+    utilo.debug(f'validate table: {bounding} on page {navigator.page}')
+    height = utilo.roundme(bottom - top)
     if height < tablero.config.TABLE_HEIGHT_MIN:
         # remove to small tables
-        utila.debug(f'table on page: {navigator.page} too small: {height}')
+        utilo.debug(f'table on page: {navigator.page} too small: {height}')
         return False
     table_content = navigator.between(
         top / navigator.pagesize[1],
@@ -62,7 +62,7 @@ def valid_table(bounding, navigator: texmex.PTCN) -> bool:
     )
     if not table_content:
         # no content in table
-        utila.debug('no table content')
+        utilo.debug('no table content')
         return False
     if peace_of_code(table_content):
         # do not detect peace of code as table
@@ -73,10 +73,10 @@ def valid_table(bounding, navigator: texmex.PTCN) -> bool:
 
 def peace_of_code(table_content) -> bool:
     start = table_content[0:3]
-    if any(elements.iscaption_code(item.text) for item in start):
+    if any(elementae.iscaption_code(item.text) for item in start):
         return True
     end = table_content[-3:0]
-    if any(elements.iscaption_code(item.text) for item in end):
+    if any(elementae.iscaption_code(item.text) for item in end):
         return True
     return False
 
@@ -86,10 +86,10 @@ def merge_tables(boundings):
         return []
     result = [boundings[0]]
     for bounding in boundings[1:]:
-        tabledistance = utila.roundme(math.fabs(result[-1][3] - bounding[1]))
-        utila.debug(tabledistance)
+        tabledistance = utilo.roundme(math.fabs(result[-1][3] - bounding[1]))
+        utilo.debug(tabledistance)
         if tabledistance < tablero.config.TABLE_MERGE_DISTANCE:
-            result[-1] = utila.rect_max((result[-1], bounding))
+            result[-1] = utilo.rect_max((result[-1], bounding))
         else:
             result.append(bounding)
     return result
@@ -109,7 +109,7 @@ def group_horizontals(items, xdiff: float = GROUP_HORIZONTALS_XDIFF_MAX):
     for item in items[1:]:
         x0, _, x1, __ = result[-1][-1]
         x00, _, x11, __ = item
-        if utila.near(x0, x00, xdiff) and utila.near(x1, x11, xdiff):
+        if utilo.near(x0, x00, xdiff) and utilo.near(x1, x11, xdiff):
             result[-1].append(item)
         else:
             result.append([item])

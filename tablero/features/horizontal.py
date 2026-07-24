@@ -9,10 +9,10 @@
 
 import functools
 
-import configo
+import configos
 import iamraw
 import serializeraw
-import utila
+import utilo
 
 import tablero.lines
 import tablero.utils
@@ -43,11 +43,11 @@ def work(
     return dumped
 
 
-@utila.profile('strategy:horizontal')
+@utilo.profile('strategy:horizontal')
 def run(lines, navigators):
     todo = []
     for navigator in navigators:
-        pagelines = utila.select_page(lines, page=navigator.page)
+        pagelines = utilo.select_page(lines, page=navigator.page)
         if pagelines:
             todo.append(
                 functools.partial(
@@ -57,7 +57,7 @@ def run(lines, navigators):
                 ))
         else:
             todo.append(functools.partial(done))
-    extracted = utila.fork(*todo, worker=10, process=True)
+    extracted = utilo.fork(*todo, worker=10, process=True)
     result = [
         iamraw.PageContentTableBounding(
             page=navigator.page,
@@ -73,7 +73,7 @@ def done():
     return []
 
 
-LINE_COUNT_MAX = configo.HV_INT_PLUS(default=15)
+LINE_COUNT_MAX = configos.HV_INT_PLUS(default=15)
 
 
 def cluster_page(navigator, lines) -> iamraw.TableBoundings:
@@ -90,7 +90,7 @@ def cluster_page(navigator, lines) -> iamraw.TableBoundings:
         # TODO: SINGLE LINE TABLE?
         return []
     boundings = [item.bounding for item in navigator]
-    boundings = utila.sort_leftright_topdown(boundings)
+    boundings = utilo.sort_leftright_topdown(boundings)
     grouped_horizontals = tablero.utils.group_horizontals(horizontals, xdiff=5)
     result = []
     for group in grouped_horizontals:
@@ -163,18 +163,18 @@ def extract_potential_table(
         # content below last horizontal raises out of IndexError in
         # `horizontals`.
         bottomline = group_horizontals[-1]
-        tablebounding = utila.rect_max((topline, bottomline))
+        tablebounding = utilo.rect_max((topline, bottomline))
         tables.append(tablebounding)
     return tables
 
 
 def inside_horizontals(boundings, horizontals) -> list:
     # determine most left and right x-coordinate of potential table
-    inside_table = tuple(utila.rect_max(horizontals))
+    inside_table = tuple(utilo.rect_max(horizontals))
     boundings = [
-        rectangle for rectangle in boundings if utila.dot_in_rectangle(
+        rectangle for rectangle in boundings if utilo.dot_in_rectangle(
             inside_table,
-            utila.rect_center(rectangle),
+            utilo.rect_center(rectangle),
         )
     ]
     return boundings
@@ -182,13 +182,13 @@ def inside_horizontals(boundings, horizontals) -> list:
 
 def boundings_to_buckets(boundings, horizontals, min_elements):
     # cluster potential table elements on the same line
-    clustered = utila.same_line_cluster(
+    clustered = utilo.same_line_cluster(
         boundings,
         min_elements=min_elements,
     )
     if not clustered:
         return []
-    buckets = utila.Buckets(
+    buckets = utilo.Buckets(
         horizontals,
         selector=lambda bounding: (bounding[1] + bounding[3]) / 2,
     )
@@ -202,11 +202,11 @@ def boundings_to_buckets(boundings, horizontals, min_elements):
         index if rectangle else None
         for index, rectangle in enumerate(buckets, start=0)
     ]
-    merged = utila.groupby_none(merged)
+    merged = utilo.groupby_none(merged)
     return merged
 
 
-HEADER_HEIGHT_MAX = configo.HV_FLOAT_PLUS(default=50.0)
+HEADER_HEIGHT_MAX = configos.HV_FLOAT_PLUS(default=50.0)
 
 
 def valid_distances(horizontals) -> bool:
@@ -214,13 +214,13 @@ def valid_distances(horizontals) -> bool:
         return True
     headerheight = horizontals[1][1] - horizontals[0][1]
     if headerheight > HEADER_HEIGHT_MAX:
-        utila.debug(f'header too hight: {headerheight}')
-        utila.debug(horizontals)
+        utilo.debug(f'header too hight: {headerheight}')
+        utilo.debug(horizontals)
         return False
     return True
 
 
-HEADER_WIDTH_MIN = configo.HV_FLOAT_PLUS(default=100.0)
+HEADER_WIDTH_MIN = configos.HV_FLOAT_PLUS(default=100.0)
 
 
 def valid_header(content) -> bool:

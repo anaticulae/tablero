@@ -7,9 +7,9 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import power
-import utila
-import utilatest
+import hoverpower
+import utilo
+import utilotest
 
 import tests
 
@@ -19,25 +19,25 @@ def test_cli_help(mp):
     tests.run('--help', mp=mp)
 
 
-@utilatest.nightly
-@utilatest.requires(power.BOOK007_PDF)
+@utilotest.nightly
+@utilotest.requires(hoverpower.BOOK007_PDF)
 def test_cli_run(td, mp):
     """Run tabelero with all steps."""
-    source = power.link(power.BOOK007_PDF)
+    source = hoverpower.link(hoverpower.BOOK007_PDF)
     tests.run(
-        f'-i {source} -i {td.tmpdir} --table={power.BOOK007_PDF} -j8',
+        f'-i {source} -i {td.tmpdir} --table={hoverpower.BOOK007_PDF} -j8',
         mp=mp,
     )
 
 
-@utilatest.longrun
-@utilatest.requires(power.BACHELOR109_PDF)
+@utilotest.longrun
+@utilotest.requires(hoverpower.BACHELOR109_PDF)
 def test_cli_internal_error(td, mp):
     """Run tablero with unsupported camelot file."""
-    pdf = power.BACHELOR109_PDF
-    source = power.link(pdf)
+    pdf = hoverpower.BACHELOR109_PDF
+    source = hoverpower.link(pdf)
     completed = tests.run(
         f'-i {source} -i {td.tmpdir} --table={pdf} --camelox',
         mp=mp,
     )
-    assert completed == utila.SUCCESS
+    assert completed == utilo.SUCCESS

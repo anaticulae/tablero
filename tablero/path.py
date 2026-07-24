@@ -7,7 +7,7 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import utila
+import utilo
 
 import tablero
 
@@ -17,7 +17,7 @@ def decide(path: str, prefix: str = '') -> str:
     >>> decide('/data/resources')
     '/data/resources/tablero__decide_decide.yaml'
     """
-    return utila.pathconnector(path, tablero.PROCESS, 'decide_decide', prefix)
+    return utilo.pathconnector(path, tablero.PROCESS, 'decide_decide', prefix)
 
 
 def figure(path: str, prefix: str = '') -> str:
@@ -25,4 +25,4 @@ def figure(path: str, prefix: str = '') -> str:
     >>> figure('/data/resources')
     '/data/resources/tablero__figure_figure.yaml'
     """
-    return utila.pathconnector(path, tablero.PROCESS, 'figure_figure', prefix)
+    return utilo.pathconnector(path, tablero.PROCESS, 'figure_figure', prefix)

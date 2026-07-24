@@ -28,7 +28,7 @@ Example:
 
 import iamraw
 import serializeraw
-import utila
+import utilo
 
 
 def work(
@@ -65,7 +65,7 @@ def select_best(
 ) -> iamraw.PageContentTableBoundings:
     present(latexs, words, crosseds, camelots)
     result = []
-    synced = utila.sync_pages(
+    synced = utilo.sync_pages(
         [
             latexs,
             words,
@@ -108,7 +108,7 @@ def present(latex, word, crossed, camelot):
     word_detected = sum((len(item.content) for item in word))
     crossed_detected = sum((len(item.content) for item in crossed))
     camelot_detected = sum((len(item.content) for item in camelot))
-    utila.log(f'latex:   {latex_detected}')
-    utila.log(f'word:    {word_detected}')
-    utila.log(f'crossed: {crossed_detected}')
-    utila.log(f'camelot: {camelot_detected}')
+    utilo.log(f'latex:   {latex_detected}')
+    utilo.log(f'word:    {word_detected}')
+    utilo.log(f'crossed: {crossed_detected}')
+    utilo.log(f'camelot: {camelot_detected}')

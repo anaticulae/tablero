@@ -10,12 +10,12 @@
 import math
 import statistics
 
-import configo
-import utila
+import configos
+import utilo
 
-HORIZONTAL_DIFF_MAX = configo.HV_FLOAT_PLUS(default=0.01)
+HORIZONTAL_DIFF_MAX = configos.HV_FLOAT_PLUS(default=0.01)
 
-VERTICAL_DIFF_MAX = configo.HV_FLOAT_PLUS(default=0.01)
+VERTICAL_DIFF_MAX = configos.HV_FLOAT_PLUS(default=0.01)
 
 
 def horizontal(item: tuple, maxdiff=HORIZONTAL_DIFF_MAX) -> bool:
@@ -44,7 +44,7 @@ def horiverti_percentage(items) -> float:
 
 
 def length_avg(items) -> float:
-    length = [utila.length(*item) for item in items]
+    length = [utilo.length(*item) for item in items]
     mean = statistics.mean(length)
-    rounded = utila.roundme(mean)
+    rounded = utilo.roundme(mean)
     return rounded

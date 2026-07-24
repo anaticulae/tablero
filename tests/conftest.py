@@ -7,12 +7,12 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import genex
-import power
+import gennex
+import hoverpower
 import pytest
-import utilatest
-from utilatest import mp  # pylint:disable=W0611
-from utilatest import td  # pylint:disable=W0611
+import utilotest
+from utilotest import mp  # pylint:disable=W0611
+from utilotest import td  # pylint:disable=W0611
 
 import tablero
 
@@ -20,59 +20,58 @@ pytest_plugins = ['pytester', 'xdist']  # pylint: disable=invalid-name
 
 PACKAGE = tablero.PROCESS
 
-power.setup(tablero.ROOT)
+hoverpower.setup(tablero.ROOT)
 
 RESOURCES = [
-    power.BACHELOR109_PDF,
-    power.DOCU007_PDF,
-    power.DOCU013_PDF,
-    power.MASTER110_PDF,
-    power.ORDER050_PDF,
-    (power.BACHELOR051_PDF, '20:35'),
-    (power.BACHELOR056_PDF, '0:34'),
-    (power.BACHELOR063_PDF, '24:28'),
-    (power.BACHELOR090_PDF, '76:81'),
-    (power.DISS205_PDF, '130:145'),
-    (power.MASTER075_PDF, '10:20'),
-    (power.MASTER098_PDF, '53:61'),
-    (power.MASTER099_PDF, '5:15,45:65'),
-    (power.MASTER112_PDF, '110'),
+    hoverpower.BACHELOR109_PDF,
+    hoverpower.DOCU007_PDF,
+    hoverpower.DOCU013_PDF,
+    hoverpower.MASTER110_PDF,
+    hoverpower.ORDER050_PDF,
+    (hoverpower.BACHELOR051_PDF, '20:35'),
+    (hoverpower.BACHELOR056_PDF, '0:34'),
+    (hoverpower.BACHELOR063_PDF, '24:28'),
+    (hoverpower.BACHELOR090_PDF, '76:81'),
+    (hoverpower.DISS205_PDF, '130:145'),
+    (hoverpower.MASTER075_PDF, '10:20'),
+    (hoverpower.MASTER098_PDF, '53:61'),
+    (hoverpower.MASTER099_PDF, '5:15,45:65'),
+    (hoverpower.MASTER112_PDF, '110'),
 ]
 
-WORKER = utilatest.worker_count(
+WORKER = utilotest.worker_count(
     number=6,
     onci=len(RESOURCES),
 )
 
 RESOURCES_NOTABLE = [
-    power.HOME043_PDF,
-    power.HOME025_PDF,
-    power.BOOK007_PDF,
+    hoverpower.HOME043_PDF,
+    hoverpower.HOME025_PDF,
+    hoverpower.BOOK007_PDF,
 ]
 
 
 @pytest.mark.usefixtures('session')
 def pytest_sessionstart():
-    power.run()
+    hoverpower.run()
 
 
 def extract(resources):
-    genex.extract(
+    gennex.extract(
         files=resources,
         pagenumber=True,
         footnote=True,
         groupme='--content',
         oneline=None,
         worker=WORKER,
-        base=power.REPOSITORY,
         pages=':',
     )
 
 
 def extract_notable(resources):
-    genex.extract(
+    gennex.extract(
         files=resources,
-        dest=power.generated('notable'),
+        dest=hoverpower.generated('notable'),
         pagenumber=True,
         footnote=True,
         groupme='--content',

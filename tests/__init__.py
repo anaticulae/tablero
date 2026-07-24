@@ -9,26 +9,26 @@
 
 import functools
 
-import ghost
-import power
+import hoverpower
 import pytest
 import serializeraw
-import utilatest
+import ughost
+import utilotest
 
 import tablero
 import tablero.cli
 
-ghost = pytest.mark.skipif(not ghost.HAS_GHOST, reason='require ghost')
+ughost = pytest.mark.skipif(not ughost.HAS_GHOST, reason='require ughost')
 
 run = functools.partial(  # pylint:disable=C0103
-    utilatest.run_command,
+    utilotest.run_command,
     main=tablero.cli.main,
     process=tablero.PROCESS,
     expect=True,
 )
 
 failure = functools.partial(  # pylint:disable=C0103
-    utilatest.run_command,
+    utilotest.run_command,
     main=tablero.cli.main,
     process=tablero.PROCESS,
     expect=False,
@@ -36,8 +36,8 @@ failure = functools.partial(  # pylint:disable=C0103
 
 
 def run_tables(pdf, pages, td, mp):
-    utilatest.fixture_requires(pdf)
-    source = power.link(pdf)
+    utilotest.fixture_requires(pdf)
+    source = hoverpower.link(pdf)
     cmd = f'-i {source} --table={pdf} --pages={pages}'
     run(cmd, mp=mp)
     loaded = serializeraw.load_tables(td.tmpdir)

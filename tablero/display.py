@@ -9,11 +9,11 @@
 
 import os
 
-import ghost
 import iamraw
 import PIL.Image
 import PIL.ImageDraw
-import utila
+import ughost
+import utilo
 
 SCALE = 300 / 72
 SCALES = (SCALE, SCALE, SCALE, SCALE)
@@ -27,7 +27,7 @@ def render_tables(
     if not pages:
         # do not render all pages
         return None
-    outdir = ghost.pdfwrite(pdf, pages=pages)
+    outdir = ughost.pdfwrite(pdf, pages=pages)
     index = 1
     for tablepage in tables:
         if not tablepage.content:
@@ -36,7 +36,7 @@ def render_tables(
         with PIL.Image.open(filepath) as images:
             renderer = PIL.ImageDraw.Draw(images)
             for item in tablepage.content:
-                bounding = utila.rect_scale(
+                bounding = utilo.rect_scale(
                     item.bounding,
                     scale=SCALES,
                 )
@@ -44,12 +44,12 @@ def render_tables(
                 lines = item.lines
                 if lines:
                     for line in lines:
-                        line = utila.rect_scale(
+                        line = utilo.rect_scale(
                             line,
                             scale=SCALES,
                         )
                         renderer.rectangle(line, outline='blue', width=2)
             images.save(filepath, 'PNG')
         index += 1
-    outdir: str = utila.forward_slash(outdir)
+    outdir: str = utilo.forward_slash(outdir)
     return outdir

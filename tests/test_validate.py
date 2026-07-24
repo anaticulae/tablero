@@ -9,28 +9,28 @@
 
 import functools
 
+import hoverpower
 import iamraw
-import power
 import pytest
 import serializeraw
-import utila
-import utilatest
+import utilo
+import utilotest
 
 import tablero
 import tests
 import tests.conftest
 
-ARCHIVE = utila.join(tablero.ROOT, 'tests/expected', exist=True)
-ARCHIVE_NOTABLE = utila.join(tablero.ROOT, 'tests/notable', exist=True)
+ARCHIVE = utilo.join(tablero.ROOT, 'tests/expected', exist=True)
+ARCHIVE_NOTABLE = utilo.join(tablero.ROOT, 'tests/notable', exist=True)
 
-TODO = utilatest.test_resources(tests.conftest.RESOURCES)
+TODO = utilotest.test_resources(tests.conftest.RESOURCES)
 
 
-@tests.ghost
+@tests.ughost
 @pytest.mark.parametrize('source', TODO)
-@utilatest.longrun
+@utilotest.longrun
 def test_validate(source, td, mp):
-    utilatest.fixture_requires(source)
+    utilotest.fixture_requires(source)
     Evaluate(
         source=source,
         folder=None,
@@ -43,14 +43,14 @@ NOTABLE = [
     item if isinstance(item, str) else item[0]
     for item in tests.conftest.RESOURCES_NOTABLE
 ]
-NOTABLE = [pytest.param(item, id=utila.file_name(item)) for item in NOTABLE]
+NOTABLE = [pytest.param(item, id=utilo.file_name(item)) for item in NOTABLE]
 
 
 @pytest.mark.parametrize('source', NOTABLE)
-@utilatest.longrun
+@utilotest.longrun
 def test_notable_validate(source, td, mp):
     folder = 'notable'
-    utilatest.fixture_requires(source, folder=folder)
+    utilotest.fixture_requires(source, folder=folder)
     Evaluate(
         source=source,
         folder=folder,
@@ -60,7 +60,7 @@ def test_notable_validate(source, td, mp):
     ).evaluate()
 
 
-class Evaluate(utilatest.BaseLiner):
+class Evaluate(utilotest.BaseLiner):
 
     def __init__(self, source, folder, workdir, mp, archive=ARCHIVE):
         super().__init__(
@@ -70,7 +70,7 @@ class Evaluate(utilatest.BaseLiner):
             ),
             step=f'all --table {source}',
             pages=':',
-            source=power.link(source, folder=folder),
+            source=hoverpower.link(source, folder=folder),
             workdir=workdir,
             archive=archive,
             loader=self.frompath,
@@ -84,9 +84,9 @@ class Evaluate(utilatest.BaseLiner):
             tables,
             pdf=self.pdf,
         )
-        utila.log(outdir)
+        utilo.log(outdir)
         if outdir:
-            utila.copy_content(outdir, self.workdir)
+            utilo.copy_content(outdir, self.workdir)
 
     def frompath(self, path):  # pylint:disable=R0201
         path = iamraw.path.tablero_result(path)
@@ -98,7 +98,7 @@ class Evaluate(utilatest.BaseLiner):
             page, tables = content.page, content.content
             for table in tables:
                 collected.append(rawline(page, table))
-        result = utila.NEWLINE.join(collected)
+        result = utilo.NEWLINE.join(collected)
         return result
 
 

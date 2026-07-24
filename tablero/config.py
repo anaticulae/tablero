@@ -7,18 +7,18 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import configo
+import configos
 
-TABLE_HEIGHT_MIN = configo.HV_FLOAT_PLUS(default=50.0)
+TABLE_HEIGHT_MIN = configos.HV_FLOAT_PLUS(default=50.0)
 # TODO: USE TABLE APROACH
-SINGLE_LINE_QUOTE_MAX = configo.HV_FLOAT_PLUS(default=0.4)
+SINGLE_LINE_QUOTE_MAX = configos.HV_FLOAT_PLUS(default=0.4)
 
-TABLE_MERGE_DISTANCE = configo.HV_FLOAT_PLUS(default=20.0)
+TABLE_MERGE_DISTANCE = configos.HV_FLOAT_PLUS(default=20.0)
 
-TABLE_HORIZONTAL_DIFF_MAX = configo.HV_FLOAT_PLUS(default=4.0)
+TABLE_HORIZONTAL_DIFF_MAX = configos.HV_FLOAT_PLUS(default=4.0)
 
-TABLE_VERTICAL_DIFF_MAX = configo.HV_FLOAT_PLUS(default=4.0)
+TABLE_VERTICAL_DIFF_MAX = configos.HV_FLOAT_PLUS(default=4.0)
 
 # tables are buld ouf long lines. The average line length is used to
 # exclude figures etc.
-TABLE_LINE_LENGTH_AVG_MIN = configo.HV_FLOAT_PLUS(default=40.0)
+TABLE_LINE_LENGTH_AVG_MIN = configos.HV_FLOAT_PLUS(default=40.0)

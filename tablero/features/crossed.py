@@ -22,10 +22,10 @@ Strategy:
 import operator
 import statistics
 
-import configo
+import configos
 import iamraw
 import serializeraw
-import utila
+import utilo
 
 import tablero.judge
 import tablero.lines
@@ -43,7 +43,7 @@ def work(lines: str, content: str, pages: tuple = None) -> str:
     return dumped
 
 
-@utila.profile('strategy:crossed')
+@utilo.profile('strategy:crossed')
 def run(lines):
     result = []
     for page in lines:
@@ -58,11 +58,11 @@ def run(lines):
     return result
 
 
-TABLE_ROW_HEIGHT_MEAN = configo.HV_FLOAT_PLUS(default=12.0)
+TABLE_ROW_HEIGHT_MEAN = configos.HV_FLOAT_PLUS(default=12.0)
 
-TABLE_COLUMN_COUNT_MAX = configo.HV_INT_PLUS(default=10)
+TABLE_COLUMN_COUNT_MAX = configos.HV_INT_PLUS(default=10)
 
-TABLE_HEADER_HEIGHT_MAX = configo.HV_FLOAT_PLUS(default=65)
+TABLE_HEADER_HEIGHT_MAX = configos.HV_FLOAT_PLUS(default=65)
 
 
 def cluster_page(lines) -> iamraw.TableBoundings:
@@ -84,19 +84,19 @@ def cluster_page(lines) -> iamraw.TableBoundings:
 
 def table_row_height_mean(lines) -> float:
     hori = tablero.utils.determine_horizontals(lines)
-    hori = [item[1] for item in utila.sort_leftright_topdown(hori)]
-    grouped = [item[0] for item in utila.groupby_diff(hori, maxdiff=5.0)]
+    hori = [item[1] for item in utilo.sort_leftright_topdown(hori)]
+    grouped = [item[0] for item in utilo.groupby_diff(hori, maxdiff=5.0)]
     if len(grouped) < 2:
         return 0.0
-    diff = utila.diffs(grouped)
+    diff = utilo.diffs(grouped)
     result = statistics.mean(diff)
     return result
 
 
 def columns(lines):
     vertical = tablero.utils.determine_verticals(lines)
-    vertical = [item[0] for item in utila.sort_leftright_topdown(vertical)]
-    grouped = [item[0] for item in utila.groupby_diff(vertical, maxdiff=5)]
+    vertical = [item[0] for item in utilo.sort_leftright_topdown(vertical)]
+    grouped = [item[0] for item in utilo.groupby_diff(vertical, maxdiff=5)]
     return grouped
 
 
@@ -106,18 +106,18 @@ def column_count(lines):
 
 def extract_potential_table(verticals, horizontals):
     if not horizontals:
-        utila.debug('extract_potential_table: skip crossed, no horizontals')
+        utilo.debug('extract_potential_table: skip crossed, no horizontals')
         return []
-    buckets = utila.Buckets(
+    buckets = utilo.Buckets(
         horizontals,
         selector=operator.itemgetter(3),  # y1
     )
     for vertical in verticals:
         x0, top, x1, bottom = vertical
-        for item in utila.ranges(top, bottom, 10):
+        for item in utilo.ranges(top, bottom, 10):
             buckets.add((x0, item, x1, item))
     merged = [index if item else None for index, item in enumerate(buckets)]
-    merged = utila.groupby_none(merged)
+    merged = utilo.groupby_none(merged)
     # single line carnt build a table
     merged = [item for item in merged if len(item) > 1]
     tables = []
@@ -125,13 +125,13 @@ def extract_potential_table(verticals, horizontals):
         topline = horizontals[group[0] - 1]
         # double content below table?
         bottomline = horizontals[min((group[-1], len(horizontals) - 1))]
-        table = utila.rect_max((topline, bottomline))
+        table = utilo.rect_max((topline, bottomline))
         tables.append(table)
     tables = tablero.utils.merge_tables(tables)
     # merge overlapping table again
     # TODO: REMOVE AFTER FIXING
-    tables = utila.rect_intersecting_cluster(tables)
+    tables = utilo.rect_intersecting_cluster(tables)
     tables = [
-        item[0] if len(item) == 1 else utila.rect_max(item) for item in tables
+        item[0] if len(item) == 1 else utilo.rect_max(item) for item in tables
     ]
     return tables

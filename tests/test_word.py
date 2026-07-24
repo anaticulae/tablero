@@ -7,16 +7,16 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import power
+import hoverpower
 import serializeraw
-import utilatest
+import utilotest
 
 import tablero.features.word
 
 
-@utilatest.requires(power.DOCU013_PDF)
+@utilotest.requires(hoverpower.DOCU013_PDF)
 def test_dump_and_load():
-    source = power.link(power.DOCU013_PDF)
+    source = hoverpower.link(hoverpower.DOCU013_PDF)
     loaded = serializeraw.load_lines(source, pages=(0, 1, 2))
     grouped = tablero.features.word.locate_tables(loaded)
     tables = tablero.features.word.judge_tables(grouped)
