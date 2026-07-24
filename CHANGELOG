@@ -1,230 +1,927 @@
-# Changelog
+# CHANGELOG
 
-Every noteable change is logged here.
+
+## v1.0.0 (2026-07-24)
+
+### Bug Fixes
+
+- **camelot**: Ignore extraction flag
+  ([`ad20702`](https://github.com/anaticulae/tablero/commit/ad20702521a805e999bff240daff09201d3cb35a))
+
+### Chores
+
+- **github**: Add .github
+  ([`e48353b`](https://github.com/anaticulae/tablero/commit/e48353be7df2c52aedee58571cf35682179021b1))
+
+- **pyproject**: Add modern layout
+  ([`5697fbe`](https://github.com/anaticulae/tablero/commit/5697fbe94be5a3384de90b4ae60d294ed50d0e7d))
+
+- **pyproject**: Remove outdated files
+  ([`eec0168`](https://github.com/anaticulae/tablero/commit/eec01689d0a2307c770fb488fc07c48984934c0d))
+
+- **resources**: Sort resources
+  ([`2bb7d45`](https://github.com/anaticulae/tablero/commit/2bb7d45f66d0e9f59f31af80e298215f5255d72b))
+
+### Documentation
+
+- **readme**: Adjust names
+  ([`542baba`](https://github.com/anaticulae/tablero/commit/542babab19c22044edf637a179865e6b07a42506))
+
+### Refactoring
+
+- **camelot**: Adjust to new version
+  ([`cb5df7e`](https://github.com/anaticulae/tablero/commit/cb5df7e6fb40b0a22bc6c55a3b5452461eaabe8d))
+
+- **packages**: Adjust names
+  ([`89347b6`](https://github.com/anaticulae/tablero/commit/89347b6884fd3c01cd781a427758c717226b28d1))
+
+- **patch**: Disable debug renderer
+  ([`9e4da0a`](https://github.com/anaticulae/tablero/commit/9e4da0ae6fa82cf6ebce4f76f6d5e35a64558992))
+
+- **patch**: Solve linter warnings
+  ([`8966500`](https://github.com/anaticulae/tablero/commit/8966500e4e4459a0213ade753d91ef95846ab5de))
+
+- **tablero**: Use dynamic version
+  ([`5363935`](https://github.com/anaticulae/tablero/commit/536393522e0f593879f31faec5e55a310e199d9f))
+
+### Testing
+
+- **expected**: Adjust baseline after upgrading camelot
+  ([`87beb95`](https://github.com/anaticulae/tablero/commit/87beb957f834c747cfc094b430a2e3dbda013f42))
+
+- **validate**: Make test more robust
+  ([`aa86c37`](https://github.com/anaticulae/tablero/commit/aa86c37b94dff8b48b2e61937c33d461509a81cb))
+
 
 ## v0.10.4 (2023-01-02)
 
+### Chores
+
+- **Jenkins**: Upgrade pipe library
+  ([`9bc20c9`](https://github.com/anaticulae/tablero/commit/9bc20c939fcccbc619b9170ab9f2776c55eed262))
+
+- **Jenkins**: Use new pre-release
+  ([`cbceab4`](https://github.com/anaticulae/tablero/commit/cbceab488d6f5b60cd72eaa07d3146f54780cc01))
+
+- **requirements**: Upgrade requirements.txt
+  ([`00f2831`](https://github.com/anaticulae/tablero/commit/00f283104ccec041fa47a0b683960c3679b6ef3e))
+
+- **setup**: Use quick install
+  ([`7e7d8d3`](https://github.com/anaticulae/tablero/commit/7e7d8d30db549f4e5561ace2daeb393e51fa66b2))
+
 ### Documentation
 
-* happy New Year! (21bc41825fd3)
+- **copyright**: Happy New Year!
+  ([`21bc418`](https://github.com/anaticulae/tablero/commit/21bc41825fd3ec6638323c7a4f40d24b77efa171))
 
-### Chore
-
-* use quick install (7e7d8d30db54)
-* use new pre-release (cbceab488d6f)
-* upgrade pipe library (9bc20c939fcc)
-* upgrade requirements.txt (00f283104cce)
 
 ## v0.10.3 (2022-12-21)
 
-### Fix
+### Bug Fixes
 
-* use correct runner on linux (82ec0bbf8986)
+- **path**: Use correct runner on linux
+  ([`82ec0bb`](https://github.com/anaticulae/tablero/commit/82ec0bbf8986664787592a2ab7ea17c31e9ff610))
 
-### Chore
+### Chores
 
-* upgrade requirements.txt (b5507810017a)
-* upgrade pipeline (5bf38108c022)
+- **Jenkins**: Upgrade pipeline
+  ([`5bf3810`](https://github.com/anaticulae/tablero/commit/5bf38108c022733b4afa4ef7efa2d79153d7c760))
+
+- **requirements**: Upgrade requirements.txt
+  ([`b550781`](https://github.com/anaticulae/tablero/commit/b5507810017a03e48c9687c36659eff45c626751))
+
+### Refactoring
+
+- **replace**: Automated replacement
+  ([`c52fcac`](https://github.com/anaticulae/tablero/commit/c52fcacc4ac8e38e23791d578c91b5d4c8bbaa6c))
+
+### Testing
+
+- **baseline**: Adjust baseline
+  ([`956762e`](https://github.com/anaticulae/tablero/commit/956762ec6fb0313591dab8ff40c693e05a5d1a31))
+
+- **fix**: Improve expected result
+  ([`ddab3a0`](https://github.com/anaticulae/tablero/commit/ddab3a05a8d42356d663ae7dd09218bc4959c65c))
+
+- **refactor**: Use default path
+  ([`23aa247`](https://github.com/anaticulae/tablero/commit/23aa247db9d622777121e96fbfa7a3715fbf5b1d))
+
 
 ## v0.10.2 (2022-09-29)
 
-### Chore
+### Chores
 
-* adjust worker count (b4ca1f38a567)
-* adjust data generator (a007b7634f29)
-* add missing dev requirement (89ed0c612696)
+- **fix**: Adjust data generator
+  ([`a007b76`](https://github.com/anaticulae/tablero/commit/a007b7634f292be68caa9329e34356814b49ef3b))
+
+- **requirements**: Add missing dev requirement
+  ([`89ed0c6`](https://github.com/anaticulae/tablero/commit/89ed0c6126961eb458ebe78d842e7ace6aaeb761))
+
+- **resources**: Adjust worker count
+  ([`b4ca1f3`](https://github.com/anaticulae/tablero/commit/b4ca1f38a567f69a1c80ae37258ef2df2b7f35c6))
+
 
 ## v0.10.1 (2022-09-29)
 
-### Fix
+### Bug Fixes
 
-* catch internal exception (7b447929ee90)
+- **camelot**: Catch internal exception
+  ([`7b44792`](https://github.com/anaticulae/tablero/commit/7b447929ee90d99dee0b6236598ee21daa088d2f))
 
-### Chore
+### Chores
 
-* upgrade requirements.txt (39c4f67d20f2)
+- **requirements**: Upgrade requirements.txt
+  ([`39c4f67`](https://github.com/anaticulae/tablero/commit/39c4f67d20f248ac8715a4c271415f2bbc8e9b7a))
+
 
 ## v0.10.0 (2022-09-28)
 
-### Feature
+### Bug Fixes
 
-* patch backend (f68bcb71ba4f)
+- **patch**: Adjust interface
+  ([`d2db25a`](https://github.com/anaticulae/tablero/commit/d2db25ac54b0088f5ad4cecfb4cf706106cb9627))
 
-### Fix
+### Chores
 
-* adjust interface (d2db25ac54b0)
+- **ci**: Add Jenkinsfile
+  ([`515562b`](https://github.com/anaticulae/tablero/commit/515562bbe96556ae8d72d1a1545de7a83ee7d7c2))
 
-### Chore
+- **Jenkinsfile**: Add separate generator step
+  ([`cfffe94`](https://github.com/anaticulae/tablero/commit/cfffe94c02aaeb19efb592d42b860f9c69459e51))
 
-* add separate generator step (cfffe94c02aa)
-* use more cores on CI (8a55227da8f5)
-* upgrade requirements.txt (fb16148e4f1f)
-* add PyCryptoDome to decrypt pdf (4964fcfed3d8)
-* upgrade requirements.txt (89ee9688f5b5)
-* add missing resource (2a3237b10ce8)
-* add Jenkinsfile (515562bbe965)
-* upgrade requirements.txt (0037a6d1bbd2)
+- **requirements**: Add missing resource
+  ([`2a3237b`](https://github.com/anaticulae/tablero/commit/2a3237b10ce88cbb8a2638ad400b43e5f7709409))
 
-## v0.9.4
+- **requirements**: Add PyCryptoDome to decrypt pdf
+  ([`4964fcf`](https://github.com/anaticulae/tablero/commit/4964fcfed3d8882c67bf217c4c508db826165fa6))
 
-### Fix
+- **requirements**: Upgrade requirements.txt
+  ([`fb16148`](https://github.com/anaticulae/tablero/commit/fb16148e4f1f427e9f64b09e3f13d8521e776321))
 
-* add missing page number (06a3919f6710)
+- **requirements**: Upgrade requirements.txt
+  ([`89ee968`](https://github.com/anaticulae/tablero/commit/89ee9688f5b59ef524395330b23b99c6f92d05a7))
 
-## v0.9.3
+- **requirements**: Upgrade requirements.txt
+  ([`0037a6d`](https://github.com/anaticulae/tablero/commit/0037a6d1bbd2dd6b426fd53c006c208430a4b3e7))
 
-### Feature
+- **resources**: Use more cores on CI
+  ([`8a55227`](https://github.com/anaticulae/tablero/commit/8a55227da8f53aeea6ead07771064b15dc138630))
 
-* do not detect peace of code as table (4bf277bd51f8)
-* extend logging information (280952831dac)
+### Code Style
 
-## v0.9.2
+- **changelog**: Adjust to automated release tool
+  ([`7f041db`](https://github.com/anaticulae/tablero/commit/7f041db7c1d4c119a399edf88ff78003fa360933))
 
-## v0.9.1
+### Features
 
-### Fix
+- **ghost**: Patch backend
+  ([`f68bcb7`](https://github.com/anaticulae/tablero/commit/f68bcb71ba4f07cf6e794acba54eb88d676616a2))
 
-* decouple clustering (fc0d893318c6)
+### Testing
 
-## v0.9.0
+- **adjust**: Adjust outdated behavior
+  ([`91bbed0`](https://github.com/anaticulae/tablero/commit/91bbed018fbe6d280605329de008116ec7ca8951))
 
-### Feature
+- **adjust**: Adjust unit test after upgrading camelot
+  ([`483c719`](https://github.com/anaticulae/tablero/commit/483c71972fca2d95fe0bcd2e9f702a2a2e961b5c))
 
-* add separate judger (eb438e20f54d)
-* increase debugging information (01ef818077c9)
-* increase possible header (3147aabdd824)
+- **adjust**: After upgrade, stderr is converted to warning
+  ([`50cdd25`](https://github.com/anaticulae/tablero/commit/50cdd259329866ab9255cadd77c79e0ecf22f359))
 
-### Fix
+- **dev**: Keep dev build fast
+  ([`08e6811`](https://github.com/anaticulae/tablero/commit/08e681181179ad75af89034cbe0ae2bf72a08978))
 
-* adjust page selector (4628f34f3e51)
+- **ghost**: Skip tests with ghost
+  ([`a523792`](https://github.com/anaticulae/tablero/commit/a52379216f8f6d9c4c5fd41df3a4e9962c05c5bd))
+
+- **refactor**: Use new fixture shortcuts
+  ([`34dee31`](https://github.com/anaticulae/tablero/commit/34dee313c673f0aef659d9f6711cada15193ba55))
+
+- **refactor**: Use utilatest
+  ([`4a189b6`](https://github.com/anaticulae/tablero/commit/4a189b643f0086c197175d1ef6cdd828d57c0d9c))
+
+- **skip**: Skip tests if ghost is not installed
+  ([`1ef212d`](https://github.com/anaticulae/tablero/commit/1ef212df4bfd9f3d6c51b45dfe56faeb95a34da2))
+
+
+## v0.9.4 (2022-06-15)
+
+### Bug Fixes
+
+- **word**: Add missing page number
+  ([`06a3919`](https://github.com/anaticulae/tablero/commit/06a3919f6710b4a1eaabb941bc48dda6d8f2b523))
+
+### Chores
+
+- **requirements**: Upgrade requirements.txt
+  ([`38e296e`](https://github.com/anaticulae/tablero/commit/38e296e9bd7e72981a09fdf88c89477b250a8e82))
+
+### Refactoring
+
+- **rename**: Adjust parameter name
+  ([`8aa85f1`](https://github.com/anaticulae/tablero/commit/8aa85f183b67e2178296b842305c35425ff7ad3c))
+
+
+## v0.9.3 (2022-04-25)
+
+### Chores
+
+- **resources**: Extend test data generator
+  ([`14016bc`](https://github.com/anaticulae/tablero/commit/14016bc2f54210e5e79263bf15cea326658863c3))
+
+- **test**: Keep dev build fast
+  ([`d0d9b25`](https://github.com/anaticulae/tablero/commit/d0d9b255f7959eb5bab8bc773493020d0d0e26ea))
+
+### Code Style
+
+- **spelling**: Fix spelling error
+  ([`a39421c`](https://github.com/anaticulae/tablero/commit/a39421c21d77a05b29b26ecf014fc22f3a6aa3ba))
+
+### Features
+
+- **utils**: Do not detect peace of code as table
+  ([`4bf277b`](https://github.com/anaticulae/tablero/commit/4bf277bd51f89369a70e70b1dc98df35b148df9b))
+
+- **utils**: Extend logging information
+  ([`2809528`](https://github.com/anaticulae/tablero/commit/280952831dac6ecbf21bedb9c392daf36c8f86ad))
+
+### Testing
+
+- **cleanup**: Remove unused code
+  ([`a3ad28a`](https://github.com/anaticulae/tablero/commit/a3ad28a7a4229e39b475628eee4410119cfb971e))
+
+- **fix**: Do not fail on empty table
+  ([`81b5dd3`](https://github.com/anaticulae/tablero/commit/81b5dd34bffbac3b3a87b238cb6b02bc54cc2ce6))
+
+- **notable**: Do not detect code as table
+  ([`4eea6f8`](https://github.com/anaticulae/tablero/commit/4eea6f8c5001e76f7985aae8cc993f77b1caca23))
+
+
+## v0.9.2 (2022-04-24)
+
+### Chores
+
+- **requirements**: Upgrade requirements.txt
+  ([`1e7a2d1`](https://github.com/anaticulae/tablero/commit/1e7a2d12c51e8515d9ebe61438356080dd2c82e5))
+
+- **resources**: Extend test data generator
+  ([`cd876ab`](https://github.com/anaticulae/tablero/commit/cd876ab79e78870e3695df9a4eade7deadf53a9d))
+
+- **resources**: Remove defaults
+  ([`008d3f0`](https://github.com/anaticulae/tablero/commit/008d3f0dd023ddd144a9f3bef67d38a1fe1a725f))
+
+### Refactoring
+
+- **naming**: Shorten naming
+  ([`0f2ac90`](https://github.com/anaticulae/tablero/commit/0f2ac903e92bd1b92ce5db8aaf34ed3ffc9c0227))
+
+- **rename**: Rename output step
+  ([`973375b`](https://github.com/anaticulae/tablero/commit/973375b512d75d5e870801675e31b8bc6b302abe))
+
+- **style**: Format code
+  ([`2450259`](https://github.com/anaticulae/tablero/commit/2450259e3b86ac30ac65aae8d0273a6f9a32cee7))
+
+### Testing
+
+- **notable**: Remove duplicated test, see validation
+  ([`e515f90`](https://github.com/anaticulae/tablero/commit/e515f90781c7eaa715adcca941d231b0a7c0f51e))
+
+- **notable**: Simplify test
+  ([`3104918`](https://github.com/anaticulae/tablero/commit/310491854b14cfed3f5919ed30cefc59069b1d69))
+
+- **notable**: Validate documents without table
+  ([`1963cb4`](https://github.com/anaticulae/tablero/commit/1963cb46831c25efd8e9405608cac1abb87c9fb1))
+
+- **style**: Adjust test documentation
+  ([`50c1f77`](https://github.com/anaticulae/tablero/commit/50c1f7797e218f28fd5b5c280d91e1b7be515deb))
+
+- **style**: Adjust test name
+  ([`3aed3e7`](https://github.com/anaticulae/tablero/commit/3aed3e7c6e7c300204cafbcc46c2d013a2c3de62))
+
+- **table**: Master075 contain a single table
+  ([`309fdb9`](https://github.com/anaticulae/tablero/commit/309fdb9d5e95a8564604fe1a0f5f54dedec9088b))
+
+- **table**: Validate bachelor051 page 30
+  ([`e06e6c0`](https://github.com/anaticulae/tablero/commit/e06e6c08f82a983a38fc115117784990fdf00142))
+
+- **table**: Validate bachelor090
+  ([`56d4b8f`](https://github.com/anaticulae/tablero/commit/56d4b8f53c8d0c6d743d8a076dda523c6ffdaf51))
+
+- **validate**: Move notable into separate directory
+  ([`b1b8c5b`](https://github.com/anaticulae/tablero/commit/b1b8c5b5bca15a0f0a62a9af9c3eafec3dc335f1))
+
+- **validate**: Render tables on failure
+  ([`4d3234c`](https://github.com/anaticulae/tablero/commit/4d3234cafb7d8a215c6f446b0313a485e71e984e))
+
+- **validate**: Validate a lot of documents
+  ([`b27c478`](https://github.com/anaticulae/tablero/commit/b27c478f226fc720c7a47c9d9ba892be8909ab2e))
+
+
+## v0.9.1 (2022-04-23)
+
+### Bug Fixes
+
+- **word**: Decouple clustering
+  ([`fc0d893`](https://github.com/anaticulae/tablero/commit/fc0d893318c6f0e21dd9368c01fb5c769ca5d899))
+
+### Chores
+
+- **requirements**: Upgrade requirements.txt
+  ([`0ad3c82`](https://github.com/anaticulae/tablero/commit/0ad3c82ea77f652c5a87e5e44de0459c219b18e4))
+
+### Code Style
+
+- **docs**: Format docs
+  ([`f131762`](https://github.com/anaticulae/tablero/commit/f1317629a82963dbf2f71d8ccd911ed9ffc826eb))
+
+### Testing
+
+- **cluster**: Validate table bounding
+  ([`a72e74c`](https://github.com/anaticulae/tablero/commit/a72e74c19ccc71f70c0552014796c750b9cadf5c))
+
+- **move**: Move table runner to tests
+  ([`87cb823`](https://github.com/anaticulae/tablero/commit/87cb82369f98a3c26b1d435c6cf99509ae27bd53))
+
+- **rename**: Shorten test names
+  ([`acadf91`](https://github.com/anaticulae/tablero/commit/acadf911132cf6005b2c8ff2f613a3074a77fb6a))
+
+
+## v0.9.0 (2022-02-26)
+
+### Bug Fixes
+
+- **camelox**: Adjust page selector
+  ([`4628f34`](https://github.com/anaticulae/tablero/commit/4628f34f3e51076e3df06da7a1f4e35be85359d1))
+
+### Chores
+
+- **requirements**: Upgrade requirements.txt
+  ([`35c3984`](https://github.com/anaticulae/tablero/commit/35c3984cdf4ae58a9ee5e620252b2e30a124c07e))
+
+- **requirements**: Upgrade requirements.txt
+  ([`a3c384a`](https://github.com/anaticulae/tablero/commit/a3c384aa07770dc4cb33a7e65d082ec305273c88))
+
+- **resources**: Extend test data generator
+  ([`42745e5`](https://github.com/anaticulae/tablero/commit/42745e5011f6cc1d372bba63c3c3a2d99e7c3d2d))
+
+- **resources**: Sort resources
+  ([`0b17923`](https://github.com/anaticulae/tablero/commit/0b179238225c072a06b4d1410a7cba3024dc8398))
+
+- **test**: Keep dev build fast
+  ([`10c436e`](https://github.com/anaticulae/tablero/commit/10c436e62e827e69dbf3fbf071d57627059396f5))
+
+- **test**: Keep dev run fast
+  ([`bc8c1b3`](https://github.com/anaticulae/tablero/commit/bc8c1b35ba90d42544399d2f49ec976fa47a0020))
+
+- **test**: Keep longrun fast
+  ([`5a22021`](https://github.com/anaticulae/tablero/commit/5a22021c74c0b193b456e5a4a5b578b212801eab))
+
+### Code Style
+
+- **docs**: Adjust modules
+  ([`ff938b2`](https://github.com/anaticulae/tablero/commit/ff938b2d11d7adf233485d4241a97cc0da9cff35))
 
 ### Documentation
 
-* Happy New Year! (55e7230ea662)
-* adjust modules path (31e8c3170606)
+- **copyright**: Happy New Year!
+  ([`55e7230`](https://github.com/anaticulae/tablero/commit/55e7230ea6627a10481b5fef18b4067c8d72725a))
 
-## v0.8.3
+- **fix**: Adjust modules path
+  ([`31e8c31`](https://github.com/anaticulae/tablero/commit/31e8c3170606f52eeeca18e86a22077f98ed047f))
 
-## v0.8.2
+### Features
 
-### Fix
+- **crossed**: Increase debugging information
+  ([`01ef818`](https://github.com/anaticulae/tablero/commit/01ef818077c9d6236bbff83c1bc86fd2129b51f9))
 
-* avoid magic variables (d0864e0de4c7)
+- **crossed**: Increase possible header
+  ([`3147aab`](https://github.com/anaticulae/tablero/commit/3147aabdd824105dd5ea23f2c55cb07929b9d001))
 
-## v0.8.1
+- **judge**: Add separate judger
+  ([`eb438e2`](https://github.com/anaticulae/tablero/commit/eb438e20f54d7506409830c21edcf8e0b10c3951))
 
-### Fix
+### Refactoring
 
-* fix percent definition (ce6af3904648)
+- **camelox**: Clarify code
+  ([`044a63d`](https://github.com/anaticulae/tablero/commit/044a63d7b8020dcf5fa378529a883676a8c67ffc))
 
-## v0.8.0
+- **camelox**: Introduce holy value to control worker count
+  ([`1225685`](https://github.com/anaticulae/tablero/commit/1225685286346609fe6e91d61e6cfee7864e105c))
 
-### Feature
+- **camelox**: Simplify code
+  ([`3af3194`](https://github.com/anaticulae/tablero/commit/3af31949aa09c51c9dfda947d0eea6f3624da458))
 
-* skip potential table with too height header (e4c0460d4e70)
-* render detected lines (f1216030f711)
-* increase required lines (d9fe375b54ff)
-* skip very short lines (fcc9b3b4d952)
+- **configo**: Clarify naming
+  ([`79a8874`](https://github.com/anaticulae/tablero/commit/79a8874f92621b847e49a11f533f859d84fac7ae))
 
-## v0.7.1
+- **configo**: Use real holy values
+  ([`e84fae5`](https://github.com/anaticulae/tablero/commit/e84fae5768898d7aa23ba3fd6d7084ec071ec14a))
 
-### Fix
+- **crossed**: Simplify code
+  ([`1786813`](https://github.com/anaticulae/tablero/commit/1786813fc825e2c053617ad12a598a9e1c13c6a2))
 
-* single lines can not build a table (c2624ca6ee0e)
-* skip tablero row height check (b8334012162b)
+- **dev**: Clarify debug message
+  ([`e01d9fd`](https://github.com/anaticulae/tablero/commit/e01d9fd5df0a669f61b57fc214bedcd977087579))
 
-## v0.7.0
+- **remove**: Remove duplicated code
+  ([`7c96ead`](https://github.com/anaticulae/tablero/commit/7c96ead90fc1380239a24f3567cfe749bd3a011e))
 
-### Feature
+- **word**: Increase code re usability
+  ([`fd73a80`](https://github.com/anaticulae/tablero/commit/fd73a801c9aede56b8ad54b10e60e59270e12924))
 
-* skip potential table with too many columns (a0b21b056019)
-* skip tables with to small table mean row (8388dd7716f6)
-* skip groups with too many horizontal lines (e268f746dec4)
-* convert cluster earlier (e41e8c189ab7)
+- **word**: Replace with more general code
+  ([`2775dd1`](https://github.com/anaticulae/tablero/commit/2775dd16ea027e7a7567acbfc27473402f040f6d))
 
-## v0.6.1
+### Testing
 
-### Fix
+- **table**: Validate master099
+  ([`3140bb8`](https://github.com/anaticulae/tablero/commit/3140bb8eb951defd2971b9fab4805e980854b08f))
 
-* make failing camelot less strict (d1ba965580c4)
-* use default area if no area is given (be5a5f756cce)
-* catch internal camelot error (489b9ead4701)
+- **tablero**: Validate bachelor056
+  ([`e372515`](https://github.com/anaticulae/tablero/commit/e37251548891ef47b9fdefc1492c164c9884e6c3))
 
-## v0.6.0
 
-### Feature
+## v0.8.3 (2021-12-07)
 
-* skip non-line pages (445f20db8a17)
-* improve invalid table check (0cdbc4d1a21f)
+### Chores
 
-### Fix
+- **requirements**: Upgrade requirements.txt
+  ([`b89dc26`](https://github.com/anaticulae/tablero/commit/b89dc2668ccdb6bccb8e0f5f16cfaf553ffc54ab))
 
-* suppress camelot logging (68cd24ab407e)
 
-## v0.5.0
+## v0.8.2 (2021-11-10)
 
-### Feature
+### Bug Fixes
 
-* replace with ughost code (a71c1b888653)
-* replace static file with parameter (8940f0e3a3ed)
+- **cli**: Avoid magic variables
+  ([`d0864e0`](https://github.com/anaticulae/tablero/commit/d0864e0de4c72f31167639d6e9880b9093ddc07b))
 
-## v0.4.1
+### Chores
 
-### Fix
+- **config**: Add missing test plugin
+  ([`a7b5657`](https://github.com/anaticulae/tablero/commit/a7b56578858e12e69c7f4617a948ba3391964b65))
 
-* add missing import (274c5110b3e7)
-* reduce verbosity (2dcaafc0d5a5)
+- **config**: Move config
+  ([`7ac4c27`](https://github.com/anaticulae/tablero/commit/7ac4c279a2fbb8177d4fdb58624a580039f4ab63))
 
-## v0.4.0
+- **requirements**: Upgrade requirements.txt
+  ([`bd5353b`](https://github.com/anaticulae/tablero/commit/bd5353b62ea4f7dd331e10a1098a335642ba5f76))
 
-### Feature
 
-* enable camelox decider (576dd54aad0b)
-* use parsing report to improve parsing result (15aed98fc349)
-* add error logger (3ed6366324ca)
-* fill non content area with white (8a2c060515ef)
-* shrink extraction to ptcn area (9f50bf5517b6)
-* use contentbox to improve extraction result (9a34681a3986)
+## v0.8.1 (2021-10-17)
 
-### Fix
+### Bug Fixes
 
-* skip stream flavour (e62d4c2c83b7)
-* handle empty parsing correctly (53c400032692)
-* skip empty item to avoid parsing error (b01d35d87842)
+- **word**: Fix percent definition
+  ([`ce6af39`](https://github.com/anaticulae/tablero/commit/ce6af3904648aff0fa3989bf4aa1337fa61e77a6))
 
-## v0.3.0
+### Chores
 
-### Feature
+- **requirements**: Upgrade requirements.txt
+  ([`42d0745`](https://github.com/anaticulae/tablero/commit/42d0745e51d241c8f06531e6850dc1c41d2c27e8))
 
-* skip potential table with too height header (3714275448ee)
-* do not render no table pdf (8713eab3cecc)
-* improve horizontal table strategy (34980300d604)
-* add option to render detected table (8b987bc7eb72)
-* skip non content horizontal lines (9693655a6643)
-* use ptcn to skip page border area (b76642e7e49b)
-* do not divide after improving clustering (91264bc170df)
+### Refactoring
 
-### Fix
+- **hv**: Remove .value access
+  ([`fe4acd0`](https://github.com/anaticulae/tablero/commit/fe4acd03e4d0cdbdcdb25d0980651500534dbfc9))
 
-* skip too small header (275c5d134f0c)
-* merge tables again, cause grouper does not work properly (8e42b67cf156)
-* do not return cluster in result (88348ca5a09b)
+- **hv**: Replace with holy values
+  ([`377df58`](https://github.com/anaticulae/tablero/commit/377df5845153c0164a661f215ceefa3c8a7e970a))
+
+
+## v0.8.0 (2021-10-11)
+
+### Chores
+
+- **requirements**: Upgrade requirements.txt
+  ([`65e69d5`](https://github.com/anaticulae/tablero/commit/65e69d504cc05716b6a8fadaedb8f90364960758))
+
+- **resources**: Disable cleanup
+  ([`93795a3`](https://github.com/anaticulae/tablero/commit/93795a30752e4dd3ddd46bff91018d99ba58ae2d))
+
+- **resources**: Extend test data generator
+  ([`1053b01`](https://github.com/anaticulae/tablero/commit/1053b01e9d315d9e3f164fb3f9b4a8549d294976))
+
+### Features
+
+- **display**: Render detected lines
+  ([`f121603`](https://github.com/anaticulae/tablero/commit/f1216030f711bb7a7513d020994a20e1cf9583d1))
+
+- **utils**: Skip very short lines
+  ([`fcc9b3b`](https://github.com/anaticulae/tablero/commit/fcc9b3b4d952551a645ab69aa2c843c2b3fa5523))
+
+- **word**: Increase required lines
+  ([`d9fe375`](https://github.com/anaticulae/tablero/commit/d9fe375b54ff14e7c8b7d2d70b357401a80d69e2))
+
+- **word**: Skip potential table with too height header
+  ([`e4c0460`](https://github.com/anaticulae/tablero/commit/e4c0460d4e70a31543a9ec7a8656642b1f90ef0a))
+
+### Refactoring
+
+- **test**: Unify code
+  ([`d29ae00`](https://github.com/anaticulae/tablero/commit/d29ae00fc0b2bcb3826b56447344228e4b684a1c))
+
+### Testing
+
+- **camelot**: Verify master110 tables
+  ([`bff4a88`](https://github.com/anaticulae/tablero/commit/bff4a8899f5165a08f5b80aa86d83c7416008aec))
+
+- **display**: Ease using display method
+  ([`d815a59`](https://github.com/anaticulae/tablero/commit/d815a593136250682260dfd7913c8cc50c314117))
+
+- **notable**: Do not detect figures as table
+  ([`113a7ff`](https://github.com/anaticulae/tablero/commit/113a7ff9cccab43a23a7be258f064a48b5f3a433))
+
+- **skip**: Skip non generated tests
+  ([`002c0d3`](https://github.com/anaticulae/tablero/commit/002c0d38d976bca8119ab8897c4f558b66b1ca53))
+
+
+## v0.7.1 (2021-10-02)
+
+### Bug Fixes
+
+- **crossed**: Single lines can not build a table
+  ([`c2624ca`](https://github.com/anaticulae/tablero/commit/c2624ca6ee0e9fce6bd86127e589427a4ba0d824))
+
+- **crossed**: Skip tablero row height check
+  ([`b833401`](https://github.com/anaticulae/tablero/commit/b8334012162b00794349fdf047ae9afd7ecab4cc))
+
+### Chores
+
+- **requirements**: Upgrade requirements.txt
+  ([`649400e`](https://github.com/anaticulae/tablero/commit/649400e0b4c75174b6f103ab9a5c1f43e0acc934))
+
+- **resources**: Extend test data generator
+  ([`c50e608`](https://github.com/anaticulae/tablero/commit/c50e60802d4072a207bda5257d6388707cfa8afe))
+
+### Testing
+
+- **refactor**: Simplify test code
+  ([`fc0f2db`](https://github.com/anaticulae/tablero/commit/fc0f2db2b2fb6a1062ec0449da907db2e8eb00fb))
+
+
+## v0.7.0 (2021-09-28)
+
+### Chores
+
+- **requirements**: Upgrade requirements.txt
+  ([`3d4e159`](https://github.com/anaticulae/tablero/commit/3d4e1595f30f218f51fa0093a8df8493936d5eda))
+
+- **resources**: Extend test data generator
+  ([`e260f6d`](https://github.com/anaticulae/tablero/commit/e260f6dd2c2a26b1cbc986d05728fb5328a324a4))
+
+### Code Style
+
+- **docs**: Fix spelling error
+  ([`b5ca3e1`](https://github.com/anaticulae/tablero/commit/b5ca3e1e37f7e864913ff89d649944ddd65fd0d1))
+
+### Features
+
+- **crossed**: Skip potential table with too many columns
+  ([`a0b21b0`](https://github.com/anaticulae/tablero/commit/a0b21b05601906ad4d3e2982f9700be57198e863))
+
+- **crossed**: Skip tables with to small table mean row
+  ([`8388dd7`](https://github.com/anaticulae/tablero/commit/8388dd7716f6fe2f9bab203b85055fbdacffb63c))
+
+- **horizontal**: Skip groups with too many horizontal lines
+  ([`e268f74`](https://github.com/anaticulae/tablero/commit/e268f746dec4858ab33031e6ac4f97849414cfdf))
+
+- **word**: Convert cluster earlier
+  ([`e41e8c1`](https://github.com/anaticulae/tablero/commit/e41e8c189ab7d1b52d288a0cfa4dab6556228be9))
+
+### Testing
+
+- **refactor**: Increase test re usability
+  ([`51231f7`](https://github.com/anaticulae/tablero/commit/51231f7a6f84e9fff27f75d55f14db4a7e45ff41))
+
+- **resources**: Shrink data generator
+  ([`d825665`](https://github.com/anaticulae/tablero/commit/d82566573fa5a0b38c0d6ef3e6529d17b233371c))
+
+
+## v0.6.1 (2021-09-18)
+
+### Bug Fixes
+
+- **camelot**: Catch internal camelot error
+  ([`489b9ea`](https://github.com/anaticulae/tablero/commit/489b9ead47012ca11b0d2f1dcea2e5437d995000))
+
+- **camelox**: Make failing camelot less strict
+  ([`d1ba965`](https://github.com/anaticulae/tablero/commit/d1ba965580c47d6c0dd349510321ff16c9805093))
+
+- **camelox**: Use default area if no area is given
+  ([`be5a5f7`](https://github.com/anaticulae/tablero/commit/be5a5f756cce150e7eb42632412f991fdc4cf119))
+
+### Chores
+
+- **requirements**: Upgrade requirements.txt
+  ([`e3fb140`](https://github.com/anaticulae/tablero/commit/e3fb1409a0790e194307105a969bb96cad524507))
+
+- **resources**: Extend test data generator
+  ([`877230f`](https://github.com/anaticulae/tablero/commit/877230fd6370ff2ecc95fd5b6cd43cea31d69163))
+
+### Code Style
+
+- **imports**: Organize imports
+  ([`417e22e`](https://github.com/anaticulae/tablero/commit/417e22e027cda5866612176206a8c1daa8f6ff44))
+
+### Testing
+
+- **cli**: Add test to verify internal camelot error
+  ([`a1d463f`](https://github.com/anaticulae/tablero/commit/a1d463f64dd56f9eb87f360e9fee50bbedeeb85c))
+
+- **xfail**: Enable xfailing test
+  ([`868c409`](https://github.com/anaticulae/tablero/commit/868c409245e133f06e7cc4e4de7d56eda38f6b43))
+
+
+## v0.6.0 (2021-08-15)
+
+### Bug Fixes
+
+- **camelot**: Suppress camelot logging
+  ([`68cd24a`](https://github.com/anaticulae/tablero/commit/68cd24ab407eb90d9ef745b06d9e1a4491c7a555))
+
+### Chores
+
+- **requirements**: Upgrade requirements.txt
+  ([`3edcc94`](https://github.com/anaticulae/tablero/commit/3edcc94c6b2e277fec944864654e0395fc734f9b))
+
+- **resources**: Adjust naming
+  ([`8ec4616`](https://github.com/anaticulae/tablero/commit/8ec461654fd5bf279c56949c744e02f1dcf26a4a))
+
+- **resources**: Improve generation order
+  ([`523379e`](https://github.com/anaticulae/tablero/commit/523379e7e9e0b12da87375c657c2bd99578216e7))
+
+### Features
+
+- **camelox**: Improve invalid table check
+  ([`0cdbc4d`](https://github.com/anaticulae/tablero/commit/0cdbc4d1a21f44913b14c600cbc6fa75687dc76b))
+
+- **camelox**: Skip non-line pages
+  ([`445f20d`](https://github.com/anaticulae/tablero/commit/445f20db8a170199c1f0c46a92d35762da202d2d))
+
+### Refactoring
+
+- **resources**: Improve code style
+  ([`7727d6f`](https://github.com/anaticulae/tablero/commit/7727d6ff79e311f4965a4700c90a8549c9128e7b))
+
+### Testing
+
+- **camelot**: Enable image tables
+  ([`e9a8ca0`](https://github.com/anaticulae/tablero/commit/e9a8ca0001ddfd022944966160edc9aecddae708))
+
+
+## v0.5.0 (2021-08-01)
+
+### Chores
+
+- **requirements**: Add ghost
+  ([`60a5a72`](https://github.com/anaticulae/tablero/commit/60a5a72a3d44a336422d5598efbef869d4ed02da))
+
+- **requirements**: Upgrade requirements.txt
+  ([`12de5fe`](https://github.com/anaticulae/tablero/commit/12de5fe77ca426e5d76e6c0455eabc95b7f79e44))
+
+- **test**: Keep longrun fast
+  ([`f6b6011`](https://github.com/anaticulae/tablero/commit/f6b60114097ad0ba3c7bc846fc559146889706fd))
+
+### Code Style
+
+- **test**: Format code
+  ([`bef03b1`](https://github.com/anaticulae/tablero/commit/bef03b11ea28b8552585b12876d288b65465fe98))
+
+### Features
+
+- **camelox**: Replace static file with parameter
+  ([`8940f0e`](https://github.com/anaticulae/tablero/commit/8940f0e3a3ed5f2d4fc4c270ed53fccf7f7f198a))
+
+- **replace**: Replace with ghost code
+  ([`a71c1b8`](https://github.com/anaticulae/tablero/commit/a71c1b8886530e90ecb5271986c282a00f37cd11))
+
+
+## v0.4.1 (2021-07-19)
+
+### Bug Fixes
+
+- **horizontal**: Reduce verbosity
+  ([`2dcaafc`](https://github.com/anaticulae/tablero/commit/2dcaafc0d5a5b1000f55951cd4c7d15547c24bab))
+
+- **import**: Add missing import
+  ([`274c511`](https://github.com/anaticulae/tablero/commit/274c5110b3e7ea2cce13db7b94f9367a5be8a318))
+
+
+## v0.4.0 (2021-07-18)
+
+### Bug Fixes
+
+- **camelox**: Skip stream flavour
+  ([`e62d4c2`](https://github.com/anaticulae/tablero/commit/e62d4c2c83b7eddc740faee27b4b04a02bf12e15))
+
+- **fork**: Handle empty parsing correctly
+  ([`53c4000`](https://github.com/anaticulae/tablero/commit/53c40003269221bb3a29770573a8b7c809d5ef89))
+
+- **fork**: Skip empty item to avoid parsing error
+  ([`b01d35d`](https://github.com/anaticulae/tablero/commit/b01d35d87842ac6accfdd8fc8b5cd37897529536))
+
+### Chores
+
+- **requirements**: Ensure minimal groupme version
+  ([`1f2df8f`](https://github.com/anaticulae/tablero/commit/1f2df8fab2faa37df8261548ee4de3ec9149b6de))
+
+- **requirements**: Upgrade requirements.txt
+  ([`35535b1`](https://github.com/anaticulae/tablero/commit/35535b1ebe84446888d2020780328a6d1c9161a1))
+
+- **resources**: Add missing groupme content step
+  ([`0fc72bf`](https://github.com/anaticulae/tablero/commit/0fc72bf0cfd5d9f2b4e2522272ee03ca2a08560b))
+
+- **test**: Keep longrun fast
+  ([`2e56376`](https://github.com/anaticulae/tablero/commit/2e56376ccad60283707d7825260708a7f03b2ebf))
+
+### Features
+
+- **camelox**: Add error logger
+  ([`3ed6366`](https://github.com/anaticulae/tablero/commit/3ed6366324ca10e42259c2311987d6531dae901b))
+
+- **camelox**: Fill non content area with white
+  ([`8a2c060`](https://github.com/anaticulae/tablero/commit/8a2c060515ef918d0a63e78e1873c668297f6998))
+
+- **camelox**: Shrink extraction to ptcn area
+  ([`9f50bf5`](https://github.com/anaticulae/tablero/commit/9f50bf5517b66c7952c5e566251fa2e33c23bb8c))
+
+- **camelox**: Use parsing report to improve parsing result
+  ([`15aed98`](https://github.com/anaticulae/tablero/commit/15aed98fc349683b504c503ac883b23853e7b460))
+
+- **cli**: Use contentbox to improve extraction result
+  ([`9a34681`](https://github.com/anaticulae/tablero/commit/9a34681a3986132fbddebb2d2ecf6a3a1b0040ba))
+
+- **decide**: Enable camelox decider
+  ([`576dd54`](https://github.com/anaticulae/tablero/commit/576dd54aad0b46611bb975129041b64c017fdece))
+
+### Refactoring
+
+- **horizontal**: Replace with new content box concept
+  ([`7eb1e27`](https://github.com/anaticulae/tablero/commit/7eb1e27ad0b0e9bb3c09060087eda77a91474353))
+
+
+## v0.3.0 (2021-07-17)
+
+### Bug Fixes
+
+- **crossed**: Merge tables again, cause grouper does not work properly
+  ([`8e42b67`](https://github.com/anaticulae/tablero/commit/8e42b67cf15607abac699b90144e209349267471))
+
+- **horizontal**: Skip too small header
+  ([`275c5d1`](https://github.com/anaticulae/tablero/commit/275c5d134f0c3d0a255f4f5d2599c82d5f5ea5ae))
+
+- **word**: Do not return cluster in result
+  ([`88348ca`](https://github.com/anaticulae/tablero/commit/88348ca5a09b1ae52a1ed470f6753e0e0c0595e3))
+
+### Chores
+
+- **requirements**: Upgrade requirements.txt
+  ([`be2585d`](https://github.com/anaticulae/tablero/commit/be2585d4bcf65107c34c2559e24138b4310c839f))
+
+- **resources**: Extend test data generator
+  ([`1eab997`](https://github.com/anaticulae/tablero/commit/1eab997d280c8028c0a9ef3443df21909d64c87e))
+
+- **resources**: Generate footer and header
+  ([`161b164`](https://github.com/anaticulae/tablero/commit/161b1649c087745900a616fcb810e3632370c09d))
+
+- **resources**: Generate notable examples
+  ([`ca717f6`](https://github.com/anaticulae/tablero/commit/ca717f65c3a9e6e4a4eddec5e0c52c2d32381840))
+
+### Code Style
+
+- **format**: Format code
+  ([`4578c54`](https://github.com/anaticulae/tablero/commit/4578c54d29c0ca56402553f96558610d9d0b6ab7))
 
 ### Documentation
 
-* extend interface documentation (86fcc01e961c)
+- **utils**: Extend interface documentation
+  ([`86fcc01`](https://github.com/anaticulae/tablero/commit/86fcc01e961c488000faa1f2fa3794271fe2fdef))
 
-## v0.2.0
+### Features
 
-### Feature
+- **display**: Add option to render detected table
+  ([`8b987bc`](https://github.com/anaticulae/tablero/commit/8b987bc7eb720946b1572f93e5ba7d9a11d77e9b))
 
-* add separate extraction step (bd72db3b1c1b)
+- **display**: Do not render no table pdf
+  ([`8713eab`](https://github.com/anaticulae/tablero/commit/8713eab3cecc76ccdc512f83317da7e46b5b112f))
 
-## v0.1.0
+- **horizontal**: Skip non content horizontal lines
+  ([`9693655`](https://github.com/anaticulae/tablero/commit/9693655a66435c2e1bd8717256f92a310a4f8aca))
 
-### Feature
+- **horizontal**: Skip potential table with too height header
+  ([`3714275`](https://github.com/anaticulae/tablero/commit/3714275448ee7e8393e5ec107825ef2021f2380c))
 
-* add cli (fd75f1859977)
-* move code from rawmaker (8005eba77979)
+- **horizontal**: Use ptcn to skip page border area
+  ([`b76642e`](https://github.com/anaticulae/tablero/commit/b76642e7e49b7ec5648b1a4357ac7f46353b6715))
 
-## v0.0.0 Initial release
+- **table**: Improve horizontal table strategy
+  ([`3498030`](https://github.com/anaticulae/tablero/commit/34980300d6042669e6b3b2768252b8544adad25f))
+
+- **word**: Do not divide after improving clustering
+  ([`91264bc`](https://github.com/anaticulae/tablero/commit/91264bc170df6f3a32d2f67d942e09995acc8bc5))
+
+### Refactoring
+
+- **horizontal**: Reduce complexity
+  ([`1be36a7`](https://github.com/anaticulae/tablero/commit/1be36a782d5c07cdfb72b66c1f8967e670e9e799))
+
+- **word**: Replace cluster with utila code
+  ([`f97fc10`](https://github.com/anaticulae/tablero/commit/f97fc1014e82365eab9ff513c2e76b367c3d6675))
+
+### Testing
+
+- **adjust**: Enable xpassed test
+  ([`fad12b7`](https://github.com/anaticulae/tablero/commit/fad12b711c5eca74254fdbd6410394591a2e745e))
+
+- **copy**: Add option to use with folder
+  ([`4b15bc0`](https://github.com/anaticulae/tablero/commit/4b15bc0bb1660beb36bc2b331c0b7a59e64140df))
+
+- **horizontal**: Verify bachelor90 page 77 tables
+  ([`1fa3a8f`](https://github.com/anaticulae/tablero/commit/1fa3a8f766693878d4b77e8fac85d2497f6172bf))
+
+- **notable**: Extend no table validator
+  ([`3c97275`](https://github.com/anaticulae/tablero/commit/3c97275caee76e18792f70662f590e282acab7e4))
+
+- **refactor**: Simplify code
+  ([`1469db9`](https://github.com/anaticulae/tablero/commit/1469db96fbc1ebbd183db01eef79d4b7af684508))
+
+- **scope**: Change/clarify scope of forked test
+  ([`a0ba8ca`](https://github.com/anaticulae/tablero/commit/a0ba8caeabd536a2d46e6325e0f721fe49dff891))
+
+- **tab**: Validate bachelor56 tables
+  ([`c27d5fc`](https://github.com/anaticulae/tablero/commit/c27d5fc1387aebdcd4e987377bea46c5151f795f))
+
+- **validate**: Validate order050 tables
+  ([`03f3dce`](https://github.com/anaticulae/tablero/commit/03f3dcee238256eb8c9fe741b49edebd7a04bc83))
+
+
+## v0.2.0 (2021-07-15)
+
+### Features
+
+- **camelox**: Add separate extraction step
+  ([`bd72db3`](https://github.com/anaticulae/tablero/commit/bd72db3b1c1b764fa424bc2205fd5d30bef2e86b))
+
+### Refactoring
+
+- **move**: Move HV to config, move limit lines to utils
+  ([`30e4dc2`](https://github.com/anaticulae/tablero/commit/30e4dc2b8b2411b500907bd3500e7e1306d03c03))
+
+- **move**: Reduce project complexity
+  ([`72c27d5`](https://github.com/anaticulae/tablero/commit/72c27d5a68f04dbc681fd8f77e102a20bbf1243c))
+
+- **replace**: Replace with utila code
+  ([`1cea8a7`](https://github.com/anaticulae/tablero/commit/1cea8a7007f703b9c65b4c510d853fb9652ddf36))
+
+- **split**: Split strategy into multiple features
+  ([`7d87244`](https://github.com/anaticulae/tablero/commit/7d872443759bfc8df9cf8ffb5d9647e8f333d04c))
+
+### Testing
+
+- **refactor**: Remove duplicated code
+  ([`d453714`](https://github.com/anaticulae/tablero/commit/d4537142a6af4cb1a96b8094a950abf85b641dad))
+
+- **refactor**: Simplify test code
+  ([`a0d9617`](https://github.com/anaticulae/tablero/commit/a0d9617a68a985446be59e3d6c6e9dd8d5220d00))
+
+- **refactor**: Split feature test into different test files
+  ([`57ab78d`](https://github.com/anaticulae/tablero/commit/57ab78de3cfbe400b1e4b88bb7258e7d4358d05e))
+
+- **remove**: Remove figure test
+  ([`46494b6`](https://github.com/anaticulae/tablero/commit/46494b69bb3120a055770aa6c446d579d0521ebd))
+
+- **rename**: Rename after split
+  ([`71e1a4d`](https://github.com/anaticulae/tablero/commit/71e1a4df1267c97e8c05587f02f249f6d8336651))
+
+
+## v0.1.0 (2021-07-14)
+
+### Chores
+
+- **requirements**: Add some packages
+  ([`a9e1158`](https://github.com/anaticulae/tablero/commit/a9e11585ec28d0f20ec238a8b8d57d499b70cdf5))
+
+- **resources**: Add test data generator
+  ([`e57c943`](https://github.com/anaticulae/tablero/commit/e57c9433964b91606c0b410c8b3441b7884ee7ab))
+
+- **test**: Keep quick build quick
+  ([`3147dce`](https://github.com/anaticulae/tablero/commit/3147dce90f6972d1932e1288ba4c5bcc48c1ec8a))
+
+### Features
+
+- **chore**: Add cli
+  ([`fd75f18`](https://github.com/anaticulae/tablero/commit/fd75f185997764dd62d150d625a712842a104e00))
+
+- **tablero**: Move code from rawmaker
+  ([`8005eba`](https://github.com/anaticulae/tablero/commit/8005eba77979b900daeb7e44aafabb61ef50aabf))
+
+### Testing
+
+- **fix**: Make missing resource more clear
+  ([`08c3e02`](https://github.com/anaticulae/tablero/commit/08c3e02623094bea6c0cc5f9438fc7b71a1572d6))
+
+
+## v0.0.0 (2021-07-14)
+
+- Initial Release
