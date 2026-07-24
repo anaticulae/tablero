@@ -104,5 +104,7 @@ class Evaluate(utilotest.BaseLiner):
 
 def rawline(page: int, table) -> str:
     pages = str(page).zfill(3)
-    table = str(table.bounding)
+    # TODO: USE ROUNDME AFTER UPGRADING UTILO
+    # use int's for a more robust verification.
+    table = str(tuple(int(item) for item in table.bounding))
     return f'{pages} {table}'
