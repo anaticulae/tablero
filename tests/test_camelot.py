@@ -102,8 +102,11 @@ def test_camelot_internal_error(capsys):
     """Before upgrading camelot, camelot produces an error cause it was
     not able to extract table.
 
-    After upgrading this error does not occur
-    anymore.
+    After upgrading this error does not occur anymore.
+
+    Hint: The error is produced by text-extraction-flag of the pdf. This
+    raises an error if camelot reads text data via playa lib. We skip this
+    check.
     """
     source = hoverpower.BACHELOR109_PDF
     parsed = tablero.features.camelox.run(source)

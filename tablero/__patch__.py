@@ -14,13 +14,12 @@ import camelot.handlers
 import camelot.parsers.lattice
 import PIL
 import PIL.ImageDraw
+import playa.security
 import utilo
-
 
 # BEFORE = camelot.parsers.lattice.Lattice._generate_table_bbox  # pylint:disable=W0212
 
 TODO = None
-
 
 # def _generate_table_bbox(self):
 #     BEFORE(self)
@@ -37,7 +36,6 @@ TODO = None
 #         draw.rectangle((0, 0, width, top), fill='white')
 #         draw.rectangle((0, bottom, width, height), fill='white')
 #         image.save(self.imagename)
-
 
 # camelot.parsers.lattice.Lattice._generate_table_bbox = _generate_table_bbox  # pylint:disable=W0212
 
@@ -62,3 +60,11 @@ def convert(self, pdf_path, png_path, resolution=300):
 
 
 camelot.backends.ghostscript_backend.GhostscriptBackend.convert = convert
+
+
+@property
+def is_extractable(self):
+    return True
+
+
+playa.security.PDFStandardSecurityHandler.is_extractable = is_extractable
