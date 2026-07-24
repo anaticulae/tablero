@@ -40,8 +40,8 @@ import tests
     pytest.param(
         hoverpower.BACHELOR056_PDF,
         '15,18',
-        [1],
-        id='bachelor56p15',
+        [1, 1],
+        id='bachelor56p15p18',
     ),
     pytest.param(
         hoverpower.BACHELOR056_PDF,

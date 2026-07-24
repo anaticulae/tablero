@@ -17,20 +17,6 @@ import PIL.ImageDraw
 import utilo
 
 
-def __init__(self, filepath, pages="1", password=None):
-    self.filepath = filepath
-    if password is None:
-        self.password = ""  # nosec
-    else:
-        self.password = password
-        if sys.version_info[0] < 3:
-            self.password = self.password.encode("ascii")
-    self.pages = self._get_pages(pages)  # pylint:disable=W0212
-
-
-# disable path check, we know what we do.
-camelot.handlers.PDFHandler.__init__ = __init__
-
 BEFORE = camelot.parsers.lattice.Lattice._generate_table_bbox  # pylint:disable=W0212
 
 TODO = None
