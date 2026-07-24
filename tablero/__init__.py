@@ -7,14 +7,15 @@
 # be prosecuted under federal law. Its content is company confidential.
 #==============================================================================
 
+import importlib.metadata
 import os
 
 import tablero.__patch__
 
-__version__ = '0.10.4'
+PROCESS = 'tablero'
+__version__ = importlib.metadata.version(PROCESS)
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-PROCESS = 'tablero'
 
 DESCRIPTION = """\
 tablero converts a bunch of lines to the following possible features:
