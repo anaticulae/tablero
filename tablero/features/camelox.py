@@ -10,8 +10,6 @@
 import collections
 import warnings
 
-import camelot
-import camelot.core
 import configos
 import iamraw
 import pdflog
@@ -113,7 +111,8 @@ def parse_page(
     catch_warnings = warnings.catch_warnings if verbose else utilo.nothing
     try:
         with catch_warnings():
-            parsed: camelot.core.TableList = camelot.read_pdf(
+            import camelot
+            parsed: 'camelot.core.TableList' = camelot.read_pdf(
                 filepath=pdffile,
                 pages=page,
             )
