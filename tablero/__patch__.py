@@ -7,7 +7,6 @@
 # be prosecuted under federal law. Its content is company confidential.
 # =============================================================================
 
-import camelot.backends.ghostscript_backend
 import playa.security
 import utilo
 
@@ -53,7 +52,12 @@ def convert(self, pdf_path, png_path, resolution=300):
     utilo.run(cmd)
 
 
-camelot.backends.ghostscript_backend.GhostscriptBackend.convert = convert
+try:
+    import camelot.backends.ghostscript_backend
+    camelot.backends.ghostscript_backend.GhostscriptBackend.convert = convert
+except ImportError as msg:
+    utilo.error('could not import camelot')
+    utilo.error(msg)
 
 
 @property
