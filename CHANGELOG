@@ -1,6 +1,22 @@
 # CHANGELOG
 
 
+## v1.0.1 (2026-07-26)
+
+### Bug Fixes
+
+- **patch**: Do not fail on missing OpenGL
+  ([`5bed52c`](https://github.com/anaticulae/tablero/commit/5bed52c8b774b7ce298a5d9bfa9e3f3ae116651c))
+
+### Chores
+
+- **docker**: Install opencv
+  ([`831889f`](https://github.com/anaticulae/tablero/commit/831889fc455afa1de09fd43698b006d7a4e60516))
+
+- **github**: Add missing security key
+  ([`c69dd4c`](https://github.com/anaticulae/tablero/commit/c69dd4c052e97bae4fecd57cbaaacaf004bf68c6))
+
+
 ## v1.0.0 (2026-07-24)
 
 ### Bug Fixes
